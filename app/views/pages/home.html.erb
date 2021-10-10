@@ -1,4 +1,27 @@
+<select name="pulldown1">
+<option value="">年度を選択</option>
+<option value="/pages/home/R3">R3</option>
+<option value="/pages/home/R2">R2</option>
+</select>
+<input type="button" id="location" value="移動">
+
 <h1><%= @year.year %></h1>
 <p><%= @user.name %></p>
 <p><%= @department.name %></p>
 <p><%= @work.name %></p>
+
+<p>
+<%= link_to logout_path, method: :delete do %>
+ログアウト
+<% end %>
+</p>
+
+<script>
+$(function () {
+$('#location').click(function() {
+    if ($(this).val() != '') {
+      window.location.href = $('select[name=pulldown1]').val();
+    }
+  });
+});
+</script>
