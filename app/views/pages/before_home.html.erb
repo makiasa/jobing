@@ -1,0 +1,6 @@
+<h1>業務管理システム</h1>
+<% if logged_in? %>
+  <%= render 'pages/home' %>
+<% else %>
+  <%= render 'sessions#new' %>
+<% end %>
