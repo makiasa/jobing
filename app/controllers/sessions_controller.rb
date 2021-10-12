@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(id: params[:session][:id])
+    user = User.find_by(id: params[:session][:staff_id])
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to pages_home_path, success: 'ログインに成功しました'
