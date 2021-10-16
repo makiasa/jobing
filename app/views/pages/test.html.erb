@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="slider">
+    <%= image_tag 'pic-1' %>
+    <%= image_tag 'pic-2' %>
+    <%= image_tag 'pic-3' %>
+    <%= image_tag 'IMG_1186' %>
+  </div>
+  
+  <script>
+  $(function() {
+    $('.slider').slick({
+      slidesToShow:3,
+      prevArrow: '<i class="fas fa-arrow-alt-circle-left"></i>',
+      nextArrow: '<i class="fas fa-arrow-alt-circle-right"></i>'
+    })
+  });
+  </script>
+
+</div>

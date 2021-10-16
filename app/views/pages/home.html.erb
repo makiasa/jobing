@@ -48,7 +48,7 @@
   
   <div class="row">
     <div class="col-3" style="height:600px;">
-      <div class="row mb-3">
+      <div class="row mb-4">
         <div class="col-12">
           <div class="border border-dark" style="height:350px;">ToDo一覧</div>
         </div>
@@ -60,20 +60,21 @@
       </div>
     </div>
     <div class="col-9" style="height:600px;">
-      <div class="row mb-3">
-        <div class="col-4">
-          <div class="border border-dark" style="height:250px;">スケジュール</div>
+      
+      <div class="row mb-5">
+        <div class="col-8" >
+          <div class="container">
+            <div class="slider">
+              <%= image_tag 'pic-1', height: '10px' %>
+              <%= image_tag 'pic-2' %>
+              <%= image_tag 'pic-3' %>
+              <%= image_tag 'IMG_1186' %>
+            </div>
+          </div>
         </div>
+      
         <div class="col-4">
-          <div class="border border-dark" style="height:250px;">スケジュール</div>
-        </div>
-        <div class="col-4">
-          <div class="border border-dark" style="height:250px;">スケジュール</div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-12">
-          <div class="border border-dark" style="height:150px;">不定期業務</div>
+          <div class="border border-dark" style="height:390px;">不定期業務</div>
         </div>
       </div>
       <div class="row">
@@ -97,4 +98,14 @@
   });
   </script>
 
+  <script>
+  $(function() {
+    $('.slider').slick({
+      slidesToShow:1,
+      prevArrow: '<i class="fas fa-arrow-alt-circle-left"></i>',
+      nextArrow: '<i class="fas fa-arrow-alt-circle-right"></i>'
+    })
+  });
+  </script>
+  
 </div>
