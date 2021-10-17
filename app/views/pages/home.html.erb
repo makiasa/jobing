@@ -53,38 +53,51 @@
           <div class="border border-dark" style="height:350px;">ToDo一覧&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm" role="button">追加</a></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
           <div class="border border-dark" style="height:250px;">ToDo一覧（期限超過）</div>
-        </div>
-      </div>
     </div>
+    
     <div class="col-9" style="height:600px;">
-      
       <div class="row mb-5">
-        <div class="col-8" >
-          
-          <div class="container">
+        <div class="col-8 pl-5" >
             <div class="slider">
-              <div class="border border-dark pl-0" style="height:390px;">スケジュールＡ月</div>
-              <div class="border border-dark pl-0" style="height:390px;">スケジュールＢ月</div>
-              <div class="border border-dark pl-0" style="height:390px;">スケジュールＣ月</div>
+              <div class="border border-dark pl-0" style="height:390px;">
+                スケジュール（9月）
+                <% @works.where(period:9).each do |september_work| %>
+                  <p><%= september_work.name %></p>
+                <% end %>
+              </div>
+              <div class="border border-dark pl-0" style="height:390px;">
+                スケジュール（10月）
+                <% @works.where(period:10).each do |october_work| %>
+                  <p><%= october_work.name %></p>
+                <% end %>
+              </div>
+              <div class="border border-dark pl-0" style="height:390px;">
+                スケジュール（11月）
+                <% @works.where(period:11).each do |november_work| %>
+                  <p><%= november_work.name %></p>
+                <% end %>
+              </div>
             </div>
+        </div>
+        <div class="col-4 pr-4">
+          <div class="border border-dark" style="height:390px;">
+            不定期業務
+            <% @works.where(period: nil).each do |irregular_work| %>
+              <p><%= irregular_work.name %></p>
+            <% end %>
           </div>
         </div>
-      
-        <div class="col-4">
-          <div class="border border-dark" style="height:390px;">不定期業務</div>
-        </div>
       </div>
-      <div class="row ml-1">
-        <div class="col-12">
+      
+        <div class="pl-5 pr-3">
           <div class="border border-dark" style="height:183px;">
             担当業務一覧
-            <p><%= @work.name %></p>
+            <% @works.each do |work| %>
+              <p><%= work.name %></p>
+            <% end %>
           </div>
          </div>
-      </div>
     </div>
   </div>
 

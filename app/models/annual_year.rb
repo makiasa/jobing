@@ -1,0 +1,2 @@
+class AnnualYear < ApplicationRecord
+end

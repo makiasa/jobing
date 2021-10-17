@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
   def home
-    @year = Year.find(1)
+    @annual_year = AnnualYear.find(1)
     @user = User.find(current_user.id)
-    @department = Department.find(current_user.department_id)
-    @work = Work.find_by(user_id: current_user.id)
+    @department = current_user.department
+    @works = current_user.works
   end
   
   def index

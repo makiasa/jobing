@@ -5,7 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Year.create( year: "R3")
-Department.create( name: "衛生環境課")
-Work.create( name: "犬の登録業務")
-User.create( name: "田中 太郎")

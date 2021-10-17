@@ -1,3 +1,4 @@
+# まだ作成途中で未完成
 class TodosController < ApplicationController
   def new
     @todo = Todo.new
