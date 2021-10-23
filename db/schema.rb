@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_17_114707) do
+ActiveRecord::Schema.define(version: 2021_10_20_131557) do
 
   create_table "annual_years", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "year"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_10_17_114707) do
     t.integer "user_id"
     t.integer "department_id"
     t.integer "firstworkid"
+    t.integer "annualyear_id"
   end
 
 end

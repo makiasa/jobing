@@ -1,0 +1,16 @@
+<select name="pulldown1">
+  <option value="">年度を選択</option>
+  <option value="/annual_years/1/works/">R3</option>
+  <option value="/annual_years/2/works/">R2</option>
+</select>
+<input type="button" id="location" value="移動">
+
+<script>
+$(function () {
+$('#location').click(function() {
+    if ($(this).val() != '') {
+      window.location.href = $('select[name=pulldown1]').val();
+    }
+  });
+});
+</script>
