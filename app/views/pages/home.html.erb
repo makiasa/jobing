@@ -14,42 +14,49 @@
   </div>
   
   <div class="row">
-    <div class="col-3" style="height:600px;">
+    <div class="col-3">
       <div class="row mb-4">
         <div class="col-12">
-          <div class="border border-dark" style="height:350px;">ToDo一覧&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm" role="button">追加</a></div>
+          ToDo一覧&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm" role="button">追加</a>
+          <div class="border border-dark" style="height:300px;">
+          </div>
         </div>
       </div>
-          <div class="border border-dark" style="height:250px;">ToDo一覧（期限超過）</div>
+          ToDo一覧（期限超過）
+          <div class="border border-dark" style="height:200px;">
+          </div>
     </div>
     
-    <div class="col-9" style="height:600px;">
-      <div class="row mb-4">
+    <div class="col-9">
+      <div class="row" style="height:350px;">
         <div class="col-8 pl-5" >
             <div class="slider">
-              <div class="border border-dark pl-0" style="height:390px;">
-                スケジュール（9月）
-                <% @september_works.each do |september_work| %>
-                  <p><%= september_work.name %></p>
-                <% end %>
+              <div>スケジュール（9月)
+                <div class="border border-dark pl-0" style="height:300px;">
+                  <% @september_works.each do |september_work| %>
+                    <p><%= september_work.name %></p>
+                  <% end %>
+                </div>
               </div>
-              <div class="border border-dark pl-0" style="height:390px;">
-                スケジュール（10月）
-                <% @october_works.each do |october_work| %>
-                  <p><%= october_work.name %></p>
-                <% end %>
+              <div>スケジュール（10月）
+                <div class="border border-dark pl-0" style="height:300px;">
+                  <% @october_works.each do |october_work| %>
+                    <p><%= october_work.name %></p>
+                  <% end %>
+                </div>
               </div>
-              <div class="border border-dark pl-0" style="height:390px;">
-                スケジュール（11月）
-                <% @november_works.each do |november_work| %>
-                  <p><%= november_work.name %></p>
-                <% end %>
+              <div>スケジュール（11月）
+                <div class="border border-dark pl-0" style="height:300px;">
+                  <% @november_works.each do |november_work| %>
+                    <p><%= november_work.name %></p>
+                  <% end %>
+                </div>
               </div>
             </div>
         </div>
         <div class="col-4 pr-4">
-          <div class="border border-dark" style="height:390px;">
-            不定期業務
+          不定期業務
+          <div class="border border-dark" style="height:300px;">
             <%= render partial: "irregular_work", collection: @irregular_works %>
           </div>
         </div>
@@ -57,8 +64,8 @@
       
         <div class="pl-5 pr-3 mb-3">
           <div class="overflow-auto">
+            担当業務一覧
             <div class="border border-dark">
-              担当業務一覧
               <% @works.each do |work| %>
                 <p><%= link_to work.name ,"/departments/#{@department.id}/works/#{work.firstid}" %></p>
               <% end %>
