@@ -41,7 +41,7 @@
               <div>スケジュール（10月）
                 <div class="border border-dark pl-0" style="height:300px;">
                   <% @october_works.each do |october_work| %>
-                    <p><%= october_work.name %></p>
+                    <p><%= link_to october_work.name ,"/departments/#{@department.id}/works/#{october_work.firstid}" %></p>
                   <% end %>
                 </div>
               </div>
