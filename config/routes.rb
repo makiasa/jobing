@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'pages/test'
   
-  resources :annual_years do
+  resources :departments do
     resources :works
   end
   

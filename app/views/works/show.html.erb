@@ -1,10 +1,11 @@
 <select name="pulldown1">
   <option value="">年度を選択</option>
-  <option value="/annual_years/1/works/">R3</option>
-  <option value="/annual_years/2/works/">R2</option>
+  <option value=<%= "/departments/#{@departments.find_by(annual_year:2021).id}/works/#{@work.firstid}" %>>R3</option>
+  <option value=<%= "/departments/#{@departments.find_by(annual_year:2020).id}/works/#{@work.firstid}" %>>R2</option>
 </select>
 <input type="button" id="location" value="移動">
 
+<p><%= @department.name %></p>
 <p><%= @work.name %></p>
 
 <script>

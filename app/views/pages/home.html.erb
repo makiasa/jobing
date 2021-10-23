@@ -93,7 +93,7 @@
             <div class="border border-dark">
               担当業務一覧
               <% @works.each do |work| %>
-                <p><%= link_to work.name ,"/annual_years/#{@annual_year.id}/works/#{work.id}" %></p>
+                <p><%= link_to work.name ,"/departments/#{@department.id}/works/#{work.firstid}" %></p>
               <% end %>
             </div>
           </div>

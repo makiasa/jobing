@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_20_131557) do
+ActiveRecord::Schema.define(version: 2021_10_23_070118) do
 
   create_table "annual_years", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "year"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2021_10_20_131557) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "number"
+    t.integer "annual_year"
+    t.integer "firstid"
   end
 
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -50,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_131557) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "department_id"
-    t.integer "firstworkid"
+    t.integer "firstid"
     t.integer "annualyear_id"
   end
 
