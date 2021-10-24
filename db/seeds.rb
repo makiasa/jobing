@@ -5,21 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Workflow.create!(
-  [
-    {
-        work_id: 6,
-        content: "R3年度の集合注射会場の選定",
-        note: "前回（R2年度）における会場別の注射頭数を確認したうえ、会場の統廃合も検討すること",
-        filepath: "https://drive.google.com/drive/folders/1xyXOqfa4zIw1JzbC80NZ_6Db3gnOkzMt",
-        order:1
-      },
-    {
-      work_id: 6,
-      content: "選定したR3年度会場の予約",
-      note: "会場へは電話連絡。予約時間帯については、余裕をもって20分前から予約しておくこと",
-      filepath: "https://drive.google.com/drive/folders/1xyXOqfa4zIw1JzbC80NZ_6Db3gnOkzMt",
-      order:2
-    }
-  ]
-)
+1.upto(12) do |month|
+Work.create!(
+              name: "#{month}月の●●に関する業務",
+              summary: "#{month}月の●●に関する業務の概要",
+              period: month,
+              user_id: 1,
+              department_id:2,
+              firstid: 7 + month,
+              task: "#{month}月の●●に関する業務の課題"
+            )
+end

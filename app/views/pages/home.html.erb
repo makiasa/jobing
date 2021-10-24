@@ -41,7 +41,7 @@
               <div>スケジュール（10月）
                 <div class="border border-dark pl-0" style="height:300px;">
                   <% @october_works.each do |october_work| %>
-                    <p><%= link_to october_work.name ,"/departments/#{@department.id}/works/#{october_work.firstid}" %></p>
+                    <p><%= link_to october_work.name ,department_work_path(@department.id, october_work.firstid) %></p>
                   <% end %>
                 </div>
               </div>
@@ -63,11 +63,11 @@
       </div>
       
         <div class="pl-5 pr-3 mb-3">
-          <div class="overflow-auto">
-            担当業務一覧
-            <div class="border border-dark">
+          担当業務一覧
+          <div class="border border-dark">
+          <div class="overflow-auto" style="height:200px;">
               <% @works.each do |work| %>
-                <p><%= link_to work.name ,"/departments/#{@department.id}/works/#{work.firstid}" %></p>
+                <p><%= link_to work.name ,department_work_path(@department.id, work.firstid) %></p>
               <% end %>
             </div>
           </div>
