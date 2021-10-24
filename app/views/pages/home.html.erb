@@ -42,7 +42,7 @@
               </div>
               <% end %>
               
-              <% 1.upto(@current_month - 1) do |month| %>
+              <% 1.upto(@last_month) do |month| %>
               <div>スケジュール（<%= month %>月）
                 <div class="border border-dark pl-0" style="height:300px;">
                   <% @works.where(period: month).each do |work| %>

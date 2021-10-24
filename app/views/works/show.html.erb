@@ -32,28 +32,48 @@
 
 <div class="row mt-3">
   <div class="col-11 ml-5 mr-5">
-  本業務の課題
+    本業務の課題
   <div class="border border-dark" style="height:50px;">
   </div>
   </div>
 </div>
 
-<div class="row mt-5">
-  <div class="col-6 ml-5">
-  <p class="text-center">業務フロー</p>
+<div class="row justify-content-center mt-5">
+  <div class="col-1">
+    <p class="text-center">業務フロー</p>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-6 ml-5">
-      <% @workflows.each do |workflow| %>
-        <p><%= workflow.number %>：<%= workflow.content %></p>
-      <% end %>
+<% i = 1 %>
+<% @workflows.each do |workflow| %>
+  <div class="row">
+    <div class="col-6 ml-5">
+      手順<%= workflow.number %>
+    </div>
   </div>
-  <div class="col-5 mr-5">
-  〔
+  
+  <div class="row">
+      <div class="col-5 ml-5">
+          <div class="border border-dark">
+            <div class="overflow-auto" style="height:110px;">
+              <%= workflow.content %>
+            </div>
+          </div>
+      </div>
+      <div class="col-6 mr-5">
+        <p>備考：<%= workflow.note %></p>
+        <p>ファイルパス：<%= link_to workflow.filepath, "#{workflow.filepath}" %></p>
+      </div>
   </div>
-</div>
+  
+  <div class="row justify-content-center">
+    <div class="col-1">
+      <% if i < @workflows.size %>
+        <i class="fas fa-arrow-down fa-2x"></i>
+      <% i += 1 end %>
+    </div>
+  </div>
+<% end %>
 
 <script>
 $(function () {
