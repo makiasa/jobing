@@ -46,7 +46,9 @@
 
 <div class="row">
   <div class="col-6 ml-5">
-  ①
+      <% @workflows.each do |workflow| %>
+        <p><%= workflow.order %>：<%= workflow.content %></p>
+      <% end %>
   </div>
   <div class="col-5 mr-5">
   〔

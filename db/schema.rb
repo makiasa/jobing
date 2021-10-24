@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_23_070118) do
+ActiveRecord::Schema.define(version: 2021_10_24_005243) do
 
   create_table "annual_years", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "year"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 2021_10_23_070118) do
     t.integer "number"
   end
 
+  create_table "workflows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "work_id"
+    t.text "content"
+    t.text "note"
+    t.text "filepath"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order"
+  end
+
   create_table "works", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "summary"
@@ -54,6 +64,7 @@ ActiveRecord::Schema.define(version: 2021_10_23_070118) do
     t.integer "department_id"
     t.integer "firstid"
     t.integer "annualyear_id"
+    t.text "task"
   end
 
 end
