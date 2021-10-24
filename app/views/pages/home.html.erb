@@ -31,27 +31,27 @@
       <div class="row" style="height:350px;">
         <div class="col-8 pl-5" >
             <div class="slider">
-              <div>スケジュール（9月)
+              
+              <% @current_month.upto(12) do |month| %>
+              <div>スケジュール（<%= month %>月）
                 <div class="border border-dark pl-0" style="height:300px;">
-                  <% @september_works.each do |september_work| %>
-                    <p><%= september_work.name %></p>
+                  <% @works.where(period: month).each do |work| %>
+                    <p><%= link_to work.name ,department_work_path(@department.id, work.firstid) %></p>
                   <% end %>
                 </div>
               </div>
-              <div>スケジュール（10月）
+              <% end %>
+              
+              <% 1.upto(@current_month - 1) do |month| %>
+              <div>スケジュール（<%= month %>月）
                 <div class="border border-dark pl-0" style="height:300px;">
-                  <% @october_works.each do |october_work| %>
-                    <p><%= link_to october_work.name ,department_work_path(@department.id, october_work.firstid) %></p>
+                  <% @works.where(period: month).each do |work| %>
+                    <p><%= link_to work.name ,department_work_path(@department.id, work.firstid) %></p>
                   <% end %>
                 </div>
               </div>
-              <div>スケジュール（11月）
-                <div class="border border-dark pl-0" style="height:300px;">
-                  <% @november_works.each do |november_work| %>
-                    <p><%= november_work.name %></p>
-                  <% end %>
-                </div>
-              </div>
+              <% end %>
+              
             </div>
         </div>
         <div class="col-4 pr-4">
