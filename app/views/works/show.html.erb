@@ -24,7 +24,9 @@
     ・業務時期：<%= @work.period %>月
   </div>
   <div class="col-1"> 
-    <a href="#" class="btn btn-secondary btn-sm" role="button">編集</a>
+    <%= link_to edit_department_work_path(@department.id, @work.firstid) do %>
+    <button type="button" class="btn btn-secondary">編集</button>
+    <% end %>
   </div>
 </div>
 
