@@ -19,6 +19,12 @@
         <div class="col-12">
           ToDo一覧&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm" role="button">追加</a>
           <div class="border border-dark" style="height:300px;">
+            <% @todos.each do |todo| %>
+            <%= todo.deadline %>
+            <%= todo.work.name %>
+            <%= todo.content %>
+            <%= todo.status %>
+            <% end %>
           </div>
         </div>
       </div>

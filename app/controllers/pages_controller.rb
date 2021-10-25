@@ -7,6 +7,7 @@ class PagesController < ApplicationController
     @current_month = Date.today.month
     @last_month = @current_month - 1
     @current_month_works = @works.where(period: @current_month)
+    @todos = current_user.todos
     
     @september_works = @works.where(period:9)
     @october_works = @works.where(period:10)

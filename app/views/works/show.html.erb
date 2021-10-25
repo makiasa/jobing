@@ -6,6 +6,15 @@
       <option value=<%= "/departments/#{@departments.find_by(annual_year:2020).id}/works/#{@work.firstid}" %>>R2</option>
     </select>
     <input type="button" id="location" value="移動">
+    <script>
+      $(function () {
+      $('#location').click(function() {
+          if ($(this).val() != '') {
+            window.location.href = $('select[name=pulldown1]').val();
+          }
+        });
+      });
+      </script>
   </div>
   
   <div class="col-4"> 
@@ -74,13 +83,3 @@
     </div>
   </div>
 <% end %>
-
-<script>
-$(function () {
-$('#location').click(function() {
-    if ($(this).val() != '') {
-      window.location.href = $('select[name=pulldown1]').val();
-    }
-  });
-});
-</script>
