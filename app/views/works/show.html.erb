@@ -2,8 +2,8 @@
   <div class="col-2">    
     <select name="pulldown1">
       <option value="">年度を選択</option>
-      <option value=<%= "/departments/#{@departments.find_by(annual_year:2021).id}/works/#{@work.firstid}" %>>R3</option>
-      <option value=<%= "/departments/#{@departments.find_by(annual_year:2020).id}/works/#{@work.firstid}" %>>R2</option>
+      <option value=<%= "/works/#{@works.find_by(fiscalyear: 2021).id}" %>>R3</option>
+      <option value=<%= "/works/#{@works.find_by(fiscalyear: 2020).id}" %>>R2</option>
     </select>
     <input type="button" id="location" value="移動">
     <script>
@@ -24,7 +24,7 @@
     ・業務時期：<%= @work.period %>月
   </div>
   <div class="col-1"> 
-    <%= link_to edit_department_work_path(@department.id, @work.firstid) do %>
+    <%= link_to edit_work_path(@work.id) do %>
     <button type="button" class="btn btn-secondary">編集</button>
     <% end %>
   </div>
@@ -50,7 +50,7 @@
 </div>
 
 <div class="row justify-content-center mt-5">
-  <div class="col-1">
+  <div class="col-2">
     <p class="text-center">業務フロー</p>
   </div>
 </div>
@@ -60,6 +60,8 @@
   <div class="row">
     <div class="col-6 ml-5">
       手順<%= workflow.number %>
+      &nbsp;&nbsp;<a href="#" class="btn btn-secondary btn-sm" role="button">編集</a>
+      &nbsp;&nbsp;<a href="#" class="btn btn-secondary btn-sm" role="button">削除</a>
     </div>
   </div>
   
@@ -77,10 +79,10 @@
       </div>
   </div>
   
-  <div class="row justify-content-center">
-    <div class="col-1">
+  <div class="row justify-content-center offset-1">
+    <div class="col-2">
       <% if i < @workflows.size %>
-        <i class="fas fa-arrow-down fa-2x"></i>
+        <i class="fas fa-arrow-down fa-2x">&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm" role="button">追加</a></i>
       <% i += 1 end %>
     </div>
   </div>

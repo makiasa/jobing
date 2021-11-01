@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_042108) do
+ActiveRecord::Schema.define(version: 2021_10_30_140810) do
 
-  create_table "annual_years", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "year"
+  create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "fiscalyear"
+    t.integer "subject"
+    t.integer "amount"
+    t.integer "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -23,8 +26,15 @@ ActiveRecord::Schema.define(version: 2021_10_25_042108) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "number"
-    t.integer "annual_year"
+    t.date "startdate"
     t.integer "firstid"
+    t.date "enddate"
+  end
+
+  create_table "fiscalyears", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -65,7 +75,7 @@ ActiveRecord::Schema.define(version: 2021_10_25_042108) do
     t.integer "user_id"
     t.integer "department_id"
     t.integer "firstid"
-    t.integer "annualyear_id"
+    t.integer "fiscalyear"
     t.text "task"
   end
 

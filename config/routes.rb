@@ -3,10 +3,11 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'pages/test'
   
-  resources :departments do
-    resources :works
-  end
+  resources :works 
+  resources :workflows
   
+  
+  resources :budgets
   resources :todos
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get    '/login',   to: 'sessions#new'

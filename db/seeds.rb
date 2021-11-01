@@ -5,10 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Todo.create(
-  user_id:1,
-  work_id:6,
-  deadline: "2021-10-30",
-  content: "集合注射会場の予約連絡",
-  status:1
+Budget.create(
+  fiscalyear: 2021,
+  subject: nil,
+  amount: nil,
+  department_id:2
   )

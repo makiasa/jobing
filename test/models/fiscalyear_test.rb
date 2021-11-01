@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AnnualYearTest < ActiveSupport::TestCase
+class FiscalyearTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

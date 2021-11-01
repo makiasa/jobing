@@ -42,7 +42,7 @@
               <div>スケジュール（<%= month %>月）
                 <div class="border border-dark pl-0" style="height:300px;">
                   <% @works.where(period: month).each do |work| %>
-                    <p><%= link_to work.name ,department_work_path(@department.id, work.firstid) %></p>
+                    <p><%= link_to work.name ,work_path(work.id) %></p>
                   <% end %>
                 </div>
               </div>
@@ -52,7 +52,7 @@
               <div>スケジュール（<%= month %>月）
                 <div class="border border-dark pl-0" style="height:300px;">
                   <% @works.where(period: month).each do |work| %>
-                    <p><%= link_to work.name ,department_work_path(@department.id, work.firstid) %></p>
+                    <p><%= link_to work.name ,work_path(work.id) %></p>
                   <% end %>
                 </div>
               </div>
@@ -73,7 +73,7 @@
           <div class="border border-dark">
           <div class="overflow-auto" style="height:200px;">
               <% @works.each do |work| %>
-                <p><%= link_to work.name ,department_work_path(@department.id, work.firstid) %></p>
+                <p><%= link_to work.name ,work_path(work.id) %></p>
               <% end %>
             </div>
           </div>
