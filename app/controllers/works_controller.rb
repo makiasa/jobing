@@ -24,7 +24,9 @@ class WorksController < ApplicationController
   end
   
   def update
-    Work.find(params[:id]).update(work_params)
+    @work = Work.find(params[:id])
+    @work.update(work_params)
+    
     redirect_to  work_path(params[:id])
   end
   
