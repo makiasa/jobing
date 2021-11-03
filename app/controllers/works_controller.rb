@@ -1,32 +1,36 @@
 class WorksController < ApplicationController
   def new
     @work = Work.new
-    @workflow = Workflow.new
+    @workflows = @work.workflows.build
+  end
+  
+  def create
+    @work = Work.new(work_params)
+    if @work.save
+      redirect_to work_path(@work.id)
+    else
+      render :new
+    end
   end
   
   def show
-    @work = current_user.works.find(params[:id])
+    @work = Work.find(params[:id])
     @works = Work.where(firstid: @work.firstid)
-    @workflows = @work.workflows
+    @workflows = @work.workflows.order(:number)
   end
   
   def edit
     @work = Work.find(params[:id])
-    @workflows = @work.workflows 
   end
   
   def update
-    @department = Department.find(params[:department_id])
-    @work = @department.works.find_by(firstid: params[:id]).update(work_params)
-    @workflows = @work.workflows 
+    Work.find(params[:id]).update(work_params)
+    redirect_to  work_path(params[:id])
   end
   
   private
   def work_params
-    params.require(:work).permit(:summary,:task)
-  end
-  
-  def workflow_params
-    params.require(:workflow).permit(:work_id,:content,:deadline,:status).merge(user_id: current_user.id)
+    params.require(:work).permit(:name,:period,:summary,:task,
+                                workflows_attributes: [:id,:number,:content,:note,:filepath,:_destroy])
   end
 end

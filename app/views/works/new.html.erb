@@ -7,7 +7,6 @@
   </div>
 </div>
 
-
 <div class="work-post">
   <%= form_with(model: @work, local: true) do |f| %>
   <div class="row">
@@ -30,17 +29,13 @@
     <%= f.text_area :task %>
   </div>
 
-
-
   <div class="workflows">
-    <div class="mx-auto">
     <%= f.fields_for :workflows do |t| %>
       <%= render "/works/workflow_fields", f: t %>
     <% end %>
-    </div>
-    
+  
     <div id="detail-association-insertion-point"></div>
-    
+  
     <div class="col-10 mx-auto mt-2">
     <%= link_to_add_association "+フローを追加", f, :workflows,
       class: "btn btn-secondary btn-block",
@@ -49,7 +44,6 @@
       association_insertion_method: 'after'
       }%>
     </div>
-  
   </div>
   
   <div class="row">
