@@ -17,7 +17,7 @@
     <div class="col-4">
       <div class="row mb-4">
         <div class="col-12">
-          ToDo一覧&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm" role="button">追加</a>
+          ToDo一覧&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm py-0 mb-0" role="button">追加</a>
           <div class="border border-dark">
             <div class="overflow-auto" style="height:300px;">
             <% @todos.each do |todo| %>
@@ -55,7 +55,7 @@
               <% 1.upto(12) do |month| %>
               <div>スケジュール（<%= month %>月）
                 <div class="border border-dark pl-0">
-                  <div class="overflow-auto" style="height:305px;">
+                  <div class="overflow-auto" style="height:300px;">
                   <% @works.where(period: month).each do |work| %>
                     <p><%= link_to work.name ,work_path(work.id) %></p>
                   <% end %>
@@ -69,7 +69,7 @@
         <div class="col-4 pr-4">
           不定期業務
           <div class="border border-dark">
-            <div class="overflow-auto" style="height:305px;">
+            <div class="overflow-auto" style="height:300px;">
             <%= render partial: "irregular_work", collection: @irregular_works %>
             </div>
           </div>
