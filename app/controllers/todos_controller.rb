@@ -1,5 +1,9 @@
 # まだ作成途中で未完成（作成後のメッセージなど）
 class TodosController < ApplicationController
+  def index
+    @todos = current_user.todos.all
+  end
+  
   def new
     @todo = Todo.new
     @myworks = current_user.works.where(department_id: current_user.department_id)
