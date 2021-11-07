@@ -1,25 +1,13 @@
 <div class="row">
-  <div class="col-2">    
-    <select name="pulldown1">
-      <option value="">年度を選択</option>
-      <% @fiscalyears.each do |key,val| %>
-        <% if @works.find_by(fiscalyear: val) != nil %>
-        <option value=<%= "/works/#{@works.find_by(fiscalyear: val).id}" %>><%= "#{key}" %></option>
-        <% end %>
-      <% end %>
-    </select>
-    <input type="button" id="location" value="移動">
-    <script>
-      $(function () {
-      $('#location').click(function() {
-          if ($(this).val() != '') {
-            window.location.href = $('select[name=pulldown1]').val();
-          }
-        });
-      });
-      </script>
+  <div class="col-2">
+    <%= form_with url: works_move_path do |f| %>
+      <%= f.hidden_field :id, :value => @work.id %>
+      <%= f.select :fiscalyear, @fiscalyear, {include_blank: "年度を選択"} %>
+      <%= f.submit "選択" %>
+    <% end %>
   </div>
-  
+
+
   <div class="col-4"> 
     ・業務名：<%= @work.name %>
   </div>

@@ -15,9 +15,26 @@ class WorksController < ApplicationController
   
   def show
     @work = Work.find(params[:id])
-    @works = Work.where(firstid: @work.firstid)
     @workflows = @work.workflows.order(:number)
-    @fiscalyears = {"R3":2021, "R2":2020, "R1/H31":2019, "H30":2018, "H29":2017}
+    
+    @all_fiscalyears = {"R3":2021, "R2":2020, "R1/H31":2019, "H30":2018, "H29":2017}
+    @works = Work.where(firstid: @work.firstid)
+    
+      @fiscalyear = Hash.new
+      @all_fiscalyears.each do |key,val|
+        if @works.find_by(fiscalyear: val) != nil
+           @fiscalyear[:"#{key}"] = val
+        end
+      end
+  end
+  
+  def move
+    @work = Work.where(firstid: Work.find(params[:id]).firstid).find_by(fiscalyear: params[:fiscalyear])
+    if @work
+      redirect_to work_path(@work.id)
+    else
+      render :show
+    end
   end
   
   def edit

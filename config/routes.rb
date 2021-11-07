@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'pages/test'
   
+  post 'works/move'
+  get 'works/none'
+  
   resources :works 
   resources :workflows
   
