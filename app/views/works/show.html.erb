@@ -2,8 +2,11 @@
   <div class="col-2">    
     <select name="pulldown1">
       <option value="">年度を選択</option>
-      <option value=<%= "/works/#{@works.find_by(fiscalyear: 2021).id}" %>>R3</option>
-      <option value=<%= "/works/#{@works.find_by(fiscalyear: 2020).id}" %>>R2</option>
+      <% @fiscalyears.each do |key,val| %>
+        <% if @works.find_by(fiscalyear: val) != nil %>
+        <option value=<%= "/works/#{@works.find_by(fiscalyear: val).id}" %>><%= "#{key}" %></option>
+        <% end %>
+      <% end %>
     </select>
     <input type="button" id="location" value="移動">
     <script>
@@ -69,7 +72,7 @@
   <div class="row">
       <div class="col-5 ml-5">
           <div class="border border-dark">
-            <div class="overflow-auto" style="height:110px;">
+            <div class="overflow-auto" style="height:80px;">
               <%= workflow.content %>
             </div>
           </div>

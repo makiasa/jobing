@@ -17,6 +17,7 @@ class WorksController < ApplicationController
     @work = Work.find(params[:id])
     @works = Work.where(firstid: @work.firstid)
     @workflows = @work.workflows.order(:number)
+    @fiscalyears = {"R3":2021, "R2":2020, "R1/H31":2019, "H30":2018, "H29":2017}
   end
   
   def edit

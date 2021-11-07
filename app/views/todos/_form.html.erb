@@ -1,0 +1,38 @@
+<%= form_with model: @todo do |f| %>
+<div class="row">
+  <div class="col-4">
+    <h3>業務名</h3>
+      <%= f.collection_select :work_id, @myworks,:id, :name, prompt: "業務を選択してください"%>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-7">
+    <h3><%= f.label "内容" %></h3>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="col-5">
+    <h3><%= f.label "作業期限" %></h3>
+        <%= f.date_field :deadline %>
+      <div class="row mt-5 ml-5">
+        <!-- 【statusについて】→　0:未着手、1:対応中、2:完了 -->
+        <div>
+        <%= f.radio_button :status, 0 %>
+        <%= f.label :status, "未着手",　value: 0 %>
+        </div>
+        <div>
+        <%= f.radio_button :status, 1 %>
+        <%= f.label :status, "対応中", value: 1 %>
+        </div>
+        <div>
+        <%= f.radio_button :status, 2 %>
+        <%= f.label :status, "完了", value: 2 %>
+        </div>
+      </div>
+      <div class="row mt-5 ml-5">
+        <%= f.submit "追加" %>
+      </div>
+  </div>
+</div>
+<% end %>

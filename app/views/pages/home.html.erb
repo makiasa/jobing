@@ -14,36 +14,52 @@
   </div>
   
   <div class="row">
-    <div class="col-3">
+    <div class="col-4">
       <div class="row mb-4">
         <div class="col-12">
           ToDo一覧&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm" role="button">追加</a>
-          <div class="border border-dark" style="height:300px;">
+          <div class="border border-dark">
+            <div class="overflow-auto" style="height:300px;">
             <% @todos.each do |todo| %>
-            <%= todo.deadline %>
-            <%= todo.work.name %>
-            <%= todo.content %>
-            <%= todo.status %>
+              <% if todo.status == 0 || todo.status == 1 %>
+                <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
+                <%= "業務名：" + todo.work.name %><br>
+                <%= "作業内容：" + todo.content %><br>
+                <%= "作業状況：" + todo.statuschange %><br><br>
+              <% end %>
             <% end %>
+            </div>
           </div>
         </div>
       </div>
           ToDo一覧（期限超過）
-          <div class="border border-dark" style="height:200px;">
+          <div class="border border-dark">
+            <div class="overflow-auto" style="height:250px;">
+            <% @over_todos.each do |todo| %>
+              <% if todo.status == 0 || todo.status == 1 %>
+                <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
+                <%= "業務名：" + todo.work.name %><br>
+                <%= "作業内容：" + todo.content %><br>
+                <%= "作業状況：" + todo.statuschange %><br><br>
+              <% end %>
+            <% end %>
+            </div>
           </div>
     </div>
     
-    <div class="col-9">
+    <div class="col-8">
       <div class="row" style="height:350px;">
         <div class="col-8 pl-5" >
             <div class="slider">
               
               <% 1.upto(12) do |month| %>
               <div>スケジュール（<%= month %>月）
-                <div class="border border-dark pl-0" style="height:300px;">
+                <div class="border border-dark pl-0">
+                  <div class="overflow-auto" style="height:305px;">
                   <% @works.where(period: month).each do |work| %>
                     <p><%= link_to work.name ,work_path(work.id) %></p>
                   <% end %>
+                  </div>
                 </div>
               </div>
               <% end %>
@@ -52,8 +68,10 @@
         </div>
         <div class="col-4 pr-4">
           不定期業務
-          <div class="border border-dark" style="height:300px;">
+          <div class="border border-dark">
+            <div class="overflow-auto" style="height:305px;">
             <%= render partial: "irregular_work", collection: @irregular_works %>
+            </div>
           </div>
         </div>
       </div>
@@ -61,7 +79,7 @@
         <div class="pl-5 pr-3 mb-3">
           担当業務一覧
           <div class="border border-dark">
-          <div class="overflow-auto" style="height:200px;">
+          <div class="overflow-auto" style="height:250px;">
               <% @works.each do |work| %>
                 <p><%= link_to work.name ,work_path(work.id) %></p>
               <% end %>

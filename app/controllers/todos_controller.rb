@@ -15,11 +15,15 @@ class TodosController < ApplicationController
   end
   
   def edit
-  @todo = Todo.find(params[:id])
+    @todo = Todo.find(params[:id])
+    @myworks = current_user.works.where(department_id: current_user.department_id)
   end
   
   def update
-    Todo.find(params[:id]).update(todo_params)
+    @todo = Todo.find(params[:id])
+    @todo.update(todo_params)
+    
+    redirect_to  pages_home_path
   end
   
   private

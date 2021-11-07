@@ -13,7 +13,8 @@ class PagesController < ApplicationController
     @current_month = Date.today.month
     @current_month_works = @works.where(period: @current_month)
     
-    @todos = current_user.todos
+    @todos = current_user.todos.where("deadline >= ?", Date.today).order(:deadline)
+    @over_todos = current_user.todos.where("deadline < ?", Date.today).order(:deadline)
     @irregular_works = @works.where(period: nil)
   end
   
