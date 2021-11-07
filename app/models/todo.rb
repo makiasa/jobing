@@ -7,6 +7,7 @@ class Todo < ApplicationRecord
     return self.deadline.strftime("%Y年%m月%d日")
   end
   
+  #（11/14_13:00〆の宿題）：以下のコードを1行で書くこと。
   def statuschange
     if self.status == 0
       return "未着手"

@@ -2,6 +2,9 @@
 class TodosController < ApplicationController
   def index
     @todos = current_user.todos.all
+    @not_start_todos = @todos.where(status: 0).order(:deadline)
+    @progress_todos = @todos.where(status: 1).order(:deadline)
+    @finished_todos = @todos.where(status: 2).order(:deadline)
   end
   
   def new

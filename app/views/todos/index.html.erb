@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-4">
+    <h5>ToDo一覧（ステータス別）</h5>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-4">
+    未対応
+    <div class="border border-dark">
+      <div class="overflow-auto" style="height:600px;">
+        <% @not_start_todos.each do |not_start_todo| %>
+          <%= link_to "作業期限：" + not_start_todo.datechange, edit_todo_path(not_start_todo.id) %><br>
+          <%= "業務名：" + not_start_todo.work.name %><br>
+          <%= "作業内容：" + not_start_todo.content %><br><br>
+        <% end %>
+      </div>
+    </div>
+  </div>  
+
+
+  <div class="col-4">
+    対応中
+    <div class="border border-dark">
+      <div class="overflow-auto" style="height:600px;">
+        <% @progress_todos.each do |progress_todo| %>
+          <%= link_to "作業期限：" + progress_todo.datechange, edit_todo_path(progress_todo.id) %><br>
+          <%= "業務名：" + progress_todo.work.name %><br>
+          <%= "作業内容：" + progress_todo.content %><br><br>
+        <% end %>
+      </div>
+    </div>
+  </div>  
+
+  <div class="col-4">
+    完了
+    <div class="border border-dark">
+      <div class="overflow-auto" style="height:600px;">
+        <% @finished_todos.each do |finished_todo| %>
+          <%= link_to "作業期限：" + finished_todo.datechange, edit_todo_path(finished_todo.id) %><br>
+          <%= "業務名：" + finished_todo.work.name %><br>
+          <%= "作業内容：" + finished_todo.content %><br><br>
+        <% end %>
+      </div>
+    </div>
+  </div>  
+</div>
