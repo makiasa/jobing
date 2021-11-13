@@ -25,7 +25,7 @@
                 <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
                 <%= "業務名：" + todo.work.name %><br>
                 <%= "作業内容：" + todo.content %><br>
-                <%= "作業状況：" + todo.statuschange %><br><br>
+                <%= "作業状況：" + todo.statuschange(todo.status) %><br><br>
               <% end %>
             <% end %>
             </div>
@@ -40,7 +40,7 @@
                 <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
                 <%= "業務名：" + todo.work.name %><br>
                 <%= "作業内容：" + todo.content %><br>
-                <%= "作業状況：" + todo.statuschange %><br><br>
+                <%= "作業状況：" + todo.statuschange(todo.status) %><br><br>
               <% end %>
             <% end %>
             </div>
