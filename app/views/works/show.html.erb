@@ -2,7 +2,7 @@
   <div class="col-2">
     <%= form_with url: works_move_path do |f| %>
       <%= f.hidden_field :id, :value => @work.id %>
-      <%= f.select :fiscalyear, @fiscalyear, {include_blank: "年度を選択"} %>
+      <%= f.select :fiscalyear, @fiscalyears, {include_blank: "年度を選択"} %>
       <%= f.submit "選択" %>
     <% end %>
   </div>

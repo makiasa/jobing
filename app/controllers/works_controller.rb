@@ -1,4 +1,6 @@
 class WorksController < ApplicationController
+  include Constant
+  
   def new
     @work = Work.new
     @workflows = @work.workflows.build
@@ -17,15 +19,8 @@ class WorksController < ApplicationController
     @work = Work.find(params[:id])
     @workflows = @work.workflows.order(:number)
     
-    @all_fiscalyears = {"R3":2021, "R2":2020, "R1/H31":2019, "H30":2018, "H29":2017}
-    @works = Work.where(firstid: @work.firstid)
-    
-      @fiscalyear = Hash.new
-      @all_fiscalyears.each do |key,val|
-        if @works.find_by(fiscalyear: val) != nil
-           @fiscalyear[:"#{key}"] = val
-        end
-      end
+    @works = Work.where(firstid: @work.firstid).order(fiscalyear: "DESC")
+    @fiscalyears = @works.map{|work| [Constant::FISCAL_YEARS[work.fiscalyear] , work.fiscalyear] }
   end
   
   def move
