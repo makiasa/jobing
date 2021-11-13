@@ -1,34 +1,30 @@
 class SessionsController < ApplicationController
+  skip_before_action :login_required
+  
   def new
   end
 
   def create
-    user = User.find_by(id: params[:session][:staff_id])
-    if user && user.authenticate(params[:session][:password])
-      log_in user
-      redirect_to pages_home_path, success: 'ログインに成功しました'
+    user = User.find_by(number: session_params[:number])
+    
+    if user&.authenticate(session_params[:password])
+      log_in(user)
+      redirect_to pages_home_path, notice: "ログインしました"
     else
-      flash.now[:danger] = 'ログインに失敗しました'
       render :new
     end
   end
 
   def destroy
     log_out
-    redirect_to root_path, info: 'ログアウトしました'
+    redirect_to root_path
   end
+
 
   private
-  def log_in(user)
-    session[:user_id] = user.id
-  end
-
-  def log_out
-    session.delete(:user_id)
-    @current_user = nil
+  
+  def session_params
+    params.require(:session).permit(:number, :password)
   end
   
-  def logged_in?
-    !current_user.nil?
-  end
 end

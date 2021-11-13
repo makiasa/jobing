@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_07_020520) do
+ActiveRecord::Schema.define(version: 2021_11_11_121351) do
 
   create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "fiscalyear"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2021_11_07_020520) do
     t.integer "department_id"
     t.integer "number"
     t.string "email"
+    t.boolean "admin", default: false, null: false
   end
 
   create_table "workflows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

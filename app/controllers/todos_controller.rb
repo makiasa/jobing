@@ -1,4 +1,4 @@
-# まだ作成途中で未完成（作成後のメッセージなど）
+# まだ作成途中で未完成（作成後のメッセージ、"current_user.todos.new"の整理など）
 class TodosController < ApplicationController
   def index
     @todos = current_user.todos.all
@@ -30,6 +30,12 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
     @todo.update(todo_params)
     
+    redirect_to  pages_home_path
+  end
+  
+  def destroy
+    @todo = Todo.find(params[:id])
+    @todo.destroy
     redirect_to  pages_home_path
   end
   
