@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
+    get 'pages/home'
     resources :users
+    resources :works
   end
   
   root 'sessions#new'
