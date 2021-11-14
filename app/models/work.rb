@@ -1,4 +1,6 @@
 class Work < ApplicationRecord
+  validates :name, uniqueness: { scope: :fiscalyear }
+  
   belongs_to :department , optional: true
   belongs_to :user, optional: true
   has_many :todos
