@@ -11,12 +11,13 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'pages/test'
   
-  post 'works/move'
+  post 'works/move_show'
+  post 'works/move_index'
+  get 'works/index/:id',  to: 'works#move_index'
   get 'works/none'
   
   resources :works 
   resources :workflows
-  
   
   resources :budgets
   resources :todos

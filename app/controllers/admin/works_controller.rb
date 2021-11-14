@@ -15,7 +15,11 @@ class Admin::WorksController < ApplicationController
   end
   
   def copied
-    Work.where(department_id: params[:department_id], fiscalyear: params[:copied_fiscalyear]).deep_dup.update(fiscalyear: params[:new_copy_fiscalyear], user_id: nil)
+    @works_in_department = Work.where(department_id: params[:department_id], fiscalyear: params[:copied_fiscalyear])
+    
+    @works_in_department.each do |work_in_department|
+      work_in_department.deep_dup.update(fiscalyear: params[:new_copy_fiscalyear], user_id: nil)
+    end
   end
 
   def edit

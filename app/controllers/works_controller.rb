@@ -1,6 +1,26 @@
 class WorksController < ApplicationController
   include Constant
   
+  def index
+    if  4 <= Date.today.month && Date.today.month <= 12
+      @current_fiscalyear = Date.today.year
+    else
+      @current_fiscalyear = Date.today.year - 1
+    end
+    
+    @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: @current_fiscalyear)
+  end
+  
+  def move_index
+    if request.post? && params[:fiscalyear] != ""
+      redirect_to "/works/index/#{params[:fiscalyear]}"
+    elsif request.post? && params[:fiscalyear] == ""
+      render :move_index
+    else
+      @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: params[:id])
+    end
+  end
+  
   def new
     @work = Work.new
     @workflows = @work.workflows.build
@@ -20,10 +40,10 @@ class WorksController < ApplicationController
     @workflows = @work.workflows.order(:number)
     
     @works = Work.where(firstid: @work.firstid).order(fiscalyear: "DESC")
-    @fiscalyears = @works.map{|work| [Constant::FISCAL_YEARS[work.fiscalyear] , work.fiscalyear] }
+    @fiscalyears = @works.map{|work| [FISCAL_YEARS[work.fiscalyear] , work.fiscalyear] }
   end
   
-  def move
+  def move_show
     @work = Work.where(firstid: Work.find(params[:id]).firstid).find_by(fiscalyear: params[:fiscalyear])
     if @work
       redirect_to work_path(@work.id)
