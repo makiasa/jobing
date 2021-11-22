@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post 'works/move_index'
   get 'works/index/:id',  to: 'works#move_index'
   get 'works/none'
+  get 'works/copy'
+  post 'works/copied'
   
   resources :works 
   resources :workflows

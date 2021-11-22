@@ -1,0 +1,35 @@
+<H4>業務コピー</H4>
+
+<%= form_with url: works_copied_path do |f| %>
+<div class="row mt-5">
+  <div class="col-3 ml-5">
+    コピーする部署：<%= @department.name %>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-3 ml-5">
+    コピーする年度
+      <%= f.select :copied_fiscalyear, Constant::FISCAL_YEARS.invert , {include_blank: "年度を選択"}, {class: "form-control"} %> 
+      <!-- invertメソッド：ハッシュのキーと値を入れ替える -->
+  </div>
+  
+  <div class="col-1">
+    <i class="fas fa-arrow-right fa-2x"></i>
+  </div>
+  
+  <div class="col-3">
+    コピーさせる年度
+      <%= f.select :new_copy_fiscalyear, Constant::FISCAL_YEARS.invert , {include_blank: "年度を選択"}, {class: "form-control"} %> 
+      <!-- invertメソッド：ハッシュのキーと値を入れ替える -->
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="row mt-3">
+    <div class="col-4 ml-5">
+      <%= f.submit "コピーする" , data: { confirm: "業務をコピーします。本当によろしいですか？" }, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+<% end %>

@@ -1,18 +1,26 @@
-<div class="row">
-  <div class="col-4"> 
-    ・業務名：<%= @work.name %>
-  </div>
-</div>
-
-
 <div class="work-post">
   <%= form_with(model: @work, local: true) do |f| %>
   
   <div class="row">
+    <div class="col-2"> 
+      ・年度：<%= Constant::FISCAL_YEARS[@work.fiscalyear] %>
+    </div>
+    
+    <div class="col-4"> 
+      ・業務名：<%= @work.name %>
+    </div>
+
     <div class="col-2">
     <%= f.label "・業務時期" %>
     <%= f.select :period, [1,2,3,4,5,6,7,8,9,10,11,12]%>
     月
+    </div>
+  
+    <div class="col-3">
+      <% if current_user.position == 0 %>
+      <%= f.label "・担当者" %>
+      <%= f.collection_select :user_id, @staffs_in_department,:id, :name, {prompt: "職員を選択してください"} %>
+      <% end %>
     </div>
   </div>
   
@@ -76,5 +84,11 @@
   </div>
   
   <% end %>
+
+<% if current_user.position == 0 %>  
+  <div class="row justify-content-end mt-5 mr-3 mb-3">
+    <%= link_to "業務の削除", work_path(@work.id), method: :delete, data: { confirm: "#{@work.name}を削除します。本当によろしいですか？" }, class: "btn btn-danger" %>
+  </div>
+<% end %>
   
 </div>

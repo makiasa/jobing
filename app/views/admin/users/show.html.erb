@@ -15,6 +15,14 @@
       <td><%= @user.email %></td>
     </tr>
     <tr>
+      <th><%= User.human_attribute_name(:department_id) %></th>
+      <td><%= @user.department_change(@user.department_id) %></td>
+    </tr>
+    <tr>
+      <th><%= User.human_attribute_name(:position) %></th>
+      <td><%= @user.position_change(@user.position) %></td>
+    </tr>
+    <tr>
       <th><%= User.human_attribute_name(:admin) %></th>
       <td><%= @user.admin? ? "あり" : "なし" %></td>
     </tr>

@@ -12,6 +12,8 @@ ja:
         id: ID
         name: 名前
         email: メールアドレス
+        department_id: 所属部署
+        position: 役職
         admin: 管理者権限
         password: パスワード
         password_confirmation: パスワード（確認）

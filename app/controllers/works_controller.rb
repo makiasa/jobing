@@ -18,12 +18,14 @@ class WorksController < ApplicationController
       render :move_index
     else
       @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: params[:id])
+      @current_fiscalyear = params[:id]
     end
   end
   
   def new
     @work = Work.new
     @workflows = @work.workflows.build
+    @staffs_in_department = User.where(department_id: current_user.department.id)
   end
   
   def create
@@ -54,6 +56,7 @@ class WorksController < ApplicationController
   
   def edit
     @work = Work.find(params[:id])
+    @staffs_in_department = User.where(department_id: current_user.department.id)
   end
   
   def update
@@ -63,9 +66,25 @@ class WorksController < ApplicationController
     redirect_to  work_path(params[:id])
   end
   
+  #以下、業務のコピー
+  def copy
+    @department = current_user.department
+  end
+  
+  def copied
+    @department = current_user.department
+    @works_in_department = Work.where(department_id: @department.id, fiscalyear: params[:copied_fiscalyear])
+    
+    @works_in_department.each do |work_in_department|
+      work_in_department.deep_dup.update(fiscalyear: params[:new_copy_fiscalyear], user_id: nil)
+    end
+    
+    redirect_to "/works/index/#{params[:new_copy_fiscalyear]}"
+  end
+  
   private
   def work_params
-    params.require(:work).permit(:name,:period,:summary,:task,
+    params.require(:work).permit(:name,:period,:summary,:task,:user_id,
                                 workflows_attributes: [:id,:number,:content,:note,:filepath,:_destroy])
   end
 end

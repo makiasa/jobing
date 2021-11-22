@@ -1,7 +1,7 @@
 <h4>業務一覧（所属部署内）</h4>
 
 <div class="row mt-3">
-  <div class="col-2">
+  <div class="col-3">
     <%= form_with url: works_move_index_path do |f| %>
       <%= f.select :fiscalyear, Constant::FISCAL_YEARS.invert, {include_blank: "年度を選択"} %>
       <%= f.submit "選択" %>
@@ -9,15 +9,31 @@
   </div>
 </div>
 
+<!-- このあたりに現在表示している年度の表示が必要 -->
+<div class="row mt-3">
+  <div class="col-3">
+    年度：<%= Constant::FISCAL_YEARS[@current_fiscalyear.to_i] %>
+  </div>
+</div>
+
+
 <div class="row mt-3">
   <div class="col-10 ml-5">
     所属部署全体の業務
     <div class="border border-dark">
       <div class="overflow-auto" style="height:300px;">
         <% @works_in_department.each do |work_in_department| %>
-          <p><%= work_in_department.name %></p>
+          <p><%= link_to work_in_department.name ,work_path(work_in_department.id) %></p>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<% if current_user.position == 0 %>
+<div class="row mt-5 mr-5 mb-3">
+  <div class="col-4">
+    <a href="/works/copy" class="btn btn-secondary btn" role="button">業務をコピーする</a>
+  </div>
+</div>
+<% end %>

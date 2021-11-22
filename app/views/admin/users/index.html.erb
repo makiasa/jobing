@@ -8,6 +8,8 @@
       <tr>
         <th><%= User.human_attribute_name(:name) %></th>
         <th><%= User.human_attribute_name(:email) %></th>
+        <th><%= User.human_attribute_name(:department_id) %></th>
+        <th><%= User.human_attribute_name(:position) %></th>
         <th><%= User.human_attribute_name(:admin) %></th>
         <th><%= User.human_attribute_name(:created_at)%></th>
         <th><%= User.human_attribute_name(:updated_at)%></th>
@@ -17,7 +19,9 @@
         <% @users.each do |user| %>
         <tr>
           <td><%= link_to user.name, [:admin,user] %></td>
-          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.department_change(user.department_id) %></td>
+          <td><%= user.position_change(user.position) %></td>
           <td><%= user.admin? ? "あり" : "なし" %></td>
           <td><%= user.created_at %></td>
           <td><%= user.updated_at %></td>

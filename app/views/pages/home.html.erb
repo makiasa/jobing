@@ -1,13 +1,4 @@
   <div class="row">
-    <div class="col-2">
-      <select name="pulldown1">
-        <option value="">年度を選択</option>
-        <option value="/pages/home/R3">R3</option>
-        <option value="/pages/home/R2">R2</option>
-      </select>
-      <input type="button" id="location" value="移動">
-    </div>
-    
     <div class="col-4">
       <p>氏名：<%= @user.name %>　　所属：<%= @department.name %></p>
     </div>
@@ -49,7 +40,7 @@
     
     <div class="col-8">
       <div class="row" style="height:350px;">
-        <div class="col-8 pl-5" >
+        <div class="col-7 pl-5" >
             <div class="slider">
               
               <% 1.upto(12) do |month| %>
@@ -66,7 +57,7 @@
               
             </div>
         </div>
-        <div class="col-4 pr-4">
+        <div class="col-5 pr-4">
           不定期業務
           <div class="border border-dark">
             <div class="overflow-auto" style="height:300px;">
@@ -88,16 +79,6 @@
         </div>
     </div>
   </div>
-
-  <script>
-  $(function () {
-  $('#location').click(function() {
-      if ($(this).val() != '') {
-        window.location.href = $('select[name=pulldown1]').val();
-      }
-    });
-  });
-  </script>
 
   <script>
   $(function() {
