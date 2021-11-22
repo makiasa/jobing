@@ -16,6 +16,6 @@
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require activestorage
-//  require turbolinks <= "="を削除し、turbolinksを無効にした。（理由：slickがリロードしないと機能しなかったため）
+//= require turbolinks 
 //= require_tree .
 //= require cocoon
