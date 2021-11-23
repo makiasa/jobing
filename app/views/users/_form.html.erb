@@ -1,0 +1,12 @@
+<!-- パスワード変更機能が未実装 -->
+<%= form_with model: @user do |f| %>
+
+  <%= f.label :password, "パスワード" %>
+  <%= f.password_field :password, class: "form-control" %>
+  
+  <%= f.label :password_confirmation, "パスワード（確認用）" %>
+  <%= f.password_field :password_confirmation, class: "form-control" %>
+  
+  <%= f.submit "更新" %>
+
+<% end %>

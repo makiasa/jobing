@@ -20,11 +20,14 @@ Rails.application.routes.draw do
   post 'works/add_flow'
   post 'works/remove_flow'
   
+  resources :users
   resources :works 
   resources :workflows
   
   resources :budgets
   resources :todos
+  get 'todos/new/:id',  to: 'todos#new_todo'
+  post 'todos/new',  to: 'todos#new_todo_create'
  
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

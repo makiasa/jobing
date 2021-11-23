@@ -12,7 +12,7 @@
   </div>
 
   <div class="col-4"> 
-    ・業務名：<%= @work.name %>
+    ・業務名：<%= link_to @work.name, work_path(@work.id) %>
   </div>
   <div class="col-3"> 
     ・業務時期：<%= @work.period %>月
@@ -44,6 +44,9 @@
 <div class="row mt-3">
   <div class="col-5 ml-5">
     ToDo
+      <%= link_to "/todos/new/#{@work.id}" do %>
+      <button type="button" class="btn btn-secondary btn-sm py-0 mb-0">追加</button>
+      <% end %>
     <div class="border border-dark">
       <div class="overflow-auto" style="height:100px;">
         <% @todos.each do |todo| %>

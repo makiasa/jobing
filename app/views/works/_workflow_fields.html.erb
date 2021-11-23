@@ -1,12 +1,17 @@
 <div class="nested-fields">
-  <div class="row mx-auto">
-    <div class="col-1"><%= f.select :number, 1..100, class: "form-control", placeholder: "手順番号" %></div>
-    <div class="col-2"><%= f.text_field :content, class: "form-control", placeholder: "内容" %></div>
-    <div class="col-2"><%= f.text_field :note, class: "form-control", placeholder: "備考" %></div>
-    <div class="col-2"><%= f.text_field :filepath, class: "form-control", placeholder: "ファイルパス" %></div>
-    <div class="offset-1 col-1 px-0 w-auto">
-      <%= link_to "削除" , {controller: "works", action: "remove_flow", id: @work.id, number: i - 1}, method: :post %>
+  <div class="row mt-1 ml-2">
+    <div class="col-1">手順<%= f.select :number, 1..99, class: "form-control", placeholder: "手順番号" %></div>
+    <div class="col-6"><%= f.text_area :content, class: "form-control", placeholder: "内容" %></div>
+    <div class="col-4"><%= f.text_area :note, class: "form-control", placeholder: "備考" %></div>
+    <div class="col-1 mt-4">
+      <%= link_to "削除" , {controller: "works", action: "remove_flow", id: @work.id, number: i - 1}, method: :post,
+          data: { confirm: "編集中のものはリセットされ、削除したものは元に戻せませんが、よろしいですか？リセットしたくなければ一度更新ください" },
+          class: "btn btn-danger btn-sm" %>
     </div>
+  </div>
+  
+  <div class="row mt-1 ml-2">
+    <div class="offset-1 col-10"><%= f.text_field :filepath, class: "form-control", placeholder: "ファイルパス" %></div>
   </div>
 </div>
 

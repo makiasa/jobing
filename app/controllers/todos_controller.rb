@@ -12,6 +12,20 @@ class TodosController < ApplicationController
     @myworks = current_user.works.where(department_id: current_user.department_id)
   end
   
+  def new_todo
+    @todo = Todo.new(work_id: params[:id])
+    @work = Work.find(params[:id])
+  end
+  
+  def new_todo_create
+    @todo = current_user.todos.new(new_todo_params)
+    if @todo.save
+      redirect_to  work_path(params[:work_id])
+    else
+      render :new_todo
+    end
+  end
+  
   def create
     @todo = current_user.todos.new(todo_params)
     if @todo.save
@@ -42,5 +56,9 @@ class TodosController < ApplicationController
   private
   def todo_params
     params.require(:todo).permit(:work_id,:content,:deadline,:status).merge(user_id: current_user.id)
+  end
+  
+  def new_todo_params
+    params.permit(:work_id,:content,:deadline,:status).merge(user_id: current_user.id)
   end
 end

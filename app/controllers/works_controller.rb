@@ -40,8 +40,8 @@ class WorksController < ApplicationController
   def show
     @work = Work.find(params[:id])
     @workflows = @work.workflows.order(:number)
-    @todos = @work.todos.where("deadline >= ?", Date.today).order(:deadline)
-    @over_todos = @work.todos.where("deadline < ?", Date.today).order(:deadline)
+    @todos = @work.todos.where(user_id: current_user.id).where("deadline >= ?", Date.today).order(:deadline)
+    @over_todos = @work.todos.where(user_id: current_user.id).where("deadline < ?", Date.today).order(:deadline)
     
     @works = Work.where(firstid: @work.firstid).order(fiscalyear: "DESC")
     @fiscalyears = @works.map{|work| [FISCAL_YEARS[work.fiscalyear] , work.fiscalyear] }
@@ -96,8 +96,7 @@ class WorksController < ApplicationController
     end
     
     Workflow.create(work_id: @work.id, number: params[:number].to_i)
-    
-    render :edit
+    redirect_to edit_work_path(@work.id)
   end
   
   def remove_flow
@@ -113,7 +112,7 @@ class WorksController < ApplicationController
         workflow.save
       end
     end
-    render :edit
+    redirect_to edit_work_path(@work.id)
   end
   
   private

@@ -1,13 +1,19 @@
 <div class="work-post">
   <%= form_with(model: @work, local: true) do |f| %>
   
+  <div class="row justify-content-end">
+    <div class="col-1">
+      <%= f.submit "更新" %>
+    </div>
+  </div>
+  
   <div class="row">
-    <div class="col-2"> 
+    <div class="col-1 ml-3"> 
       ・年度：<%= Constant::FISCAL_YEARS[@work.fiscalyear] %>
     </div>
     
-    <div class="col-4"> 
-      ・業務名：<%= @work.name %>
+    <div class="col-auto"> 
+      ・業務名：<%= link_to @work.name, work_path(@work.id) %>
     </div>
 
     <div class="col-2">
@@ -16,62 +22,69 @@
     月
     </div>
   
-    <div class="col-3">
-      <% if current_user.position == 0 %>
-      <%= f.label "・担当者" %>
-      <%= f.collection_select :user_id, @staffs_in_department,:id, :name, {prompt: "職員を選択してください"} %>
-      <% end %>
-    </div>
+    <% if current_user.position == 0 %>
+      <div class="col-3">
+        <%= f.label "・担当者" %>
+        <%= f.collection_select :user_id, @staffs_in_department,:id, :name, {prompt: "職員を選択してください"} %>
+      </div>
+    <% end %>
   </div>
   
   <div class="row mt-3">
     <div class="col-5 ml-3">
       ・業務概要
-      <%= f.text_area :summary, :cols => 70, :rows => 5 %>
+      <%= f.text_area :summary, :cols => 70, :rows => 4 %>
     </div>
   
     <div class="col-5 ml-5">
       ・本業務の課題
-      <%= f.text_area :task, :cols => 70, :rows => 5 %>
+      <%= f.text_area :task, :cols => 70, :rows => 4 %>
     </div>
   </div>
 
-<div class="row mt-5">
-  <div class="col-2 ml-3">
-    ・業務フロー
+  <div class="row mt-5 mb-3">
+    <div class="col-2 ml-3">
+      ・業務フロー
+    </div>
   </div>
-</div>
-
 
   <div class="workflows">
-    
-    
-    
-    <div class="col-10 mx-auto mt-2">
-    <%= link_to "フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: 1}, method: :post %>
+    <div class="row justify-content-md-center mt-2 mb-2">
+      <div class="col-8">
+        <%= link_to "フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: 1}, method: :post,
+            data: { confirm: "編集中のものはリセットされますが、よろしいですか？リセットしたくなければ一度更新ください" },
+            class: "btn btn-secondary btn-sm btn-block" %>
+      </div>
+    </div>
     
     <% i = 2 %>
     <%= f.fields_for :workflows do |t| %>
+
       <%= render "workflow_fields", {f: t, i: i} %>
-    <%= link_to "フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: i}, method: :post %>
-    <% i += 1 %>
+      
+      <div class="row justify-content-md-center mt-2 mb-2">
+        <div class="col-8">
+        <%= link_to "フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: i}, method: :post,
+            data: { confirm: "編集中のものはリセットされますが、よろしいですか？リセットしたくなければ一度更新ください" },
+            class: "btn btn-secondary btn-sm btn-block" %>
+        </div>
+      </div>
+      <% i += 1 %>
     <% end %>
-    </div>
-    
-    
-  
   </div>
   
-  <div class="row justify-content-end mt-5 mr-3 mb-3">
-    <%= f.submit "更新" %>
+  <div class="row justify-content-end mt-3 mb-3">
+    <div class="col-1">
+      <%= f.submit "更新" %>
+    </div>
   </div>
   
   <% end %>
 
-<% if current_user.position == 0 %>  
-  <div class="row justify-content-end mt-5 mr-3 mb-3">
-    <%= link_to "業務の削除", work_path(@work.id), method: :delete, data: { confirm: "#{@work.name}を削除します。本当によろしいですか？" }, class: "btn btn-danger" %>
-  </div>
-<% end %>
+  <% if current_user.position == 0 %>  
+    <div class="row justify-content-end mt-5 mr-3 mb-3">
+      <%= link_to "業務の削除", work_path(@work.id), method: :delete, data: { confirm: "#{@work.name}を削除します。本当によろしいですか？" }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
   
 </div>
