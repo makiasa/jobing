@@ -10,12 +10,8 @@ class User < ApplicationRecord
   
   POSITION_LIST = {0 =>"課長", 1 =>"係長", 2 =>"係員"}
   
-  def position_change(number)
-    POSITION_LIST[number]
-  end
-  
-  def department_change(number)
-    Department::DEPARTMENT_LIST[number]
+  def position_change
+    POSITION_LIST[self.position]
   end
   
 end

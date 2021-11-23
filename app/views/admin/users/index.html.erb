@@ -20,8 +20,8 @@
         <tr>
           <td><%= link_to user.name, [:admin,user] %></td>
           <td><%= user.email %></td>
-          <td><%= user.department_change(user.department_id) %></td>
-          <td><%= user.position_change(user.position) %></td>
+          <td><%= user.department&.name %></td>
+          <td><%= user.position_change %></td>
           <td><%= user.admin? ? "あり" : "なし" %></td>
           <td><%= user.created_at %></td>
           <td><%= user.updated_at %></td>

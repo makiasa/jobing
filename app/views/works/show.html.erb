@@ -41,6 +41,38 @@
   </div>
 </div>
 
+<div class="row mt-3">
+  <div class="col-5 ml-5">
+    ToDo
+    <div class="border border-dark">
+      <div class="overflow-auto" style="height:100px;">
+        <% @todos.each do |todo| %>
+          <% if todo.status == 0 || todo.status == 1 %>
+            <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
+            <%= "作業内容：" + todo.content %><br>
+            <%= "作業状況：" + todo.statuschange(todo.status) %><br><br>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-5 ml-5">
+    ToDo(期限超過)
+    <div class="border border-dark">
+      <div class="overflow-auto" style="height:100px;">
+        <% @over_todos.each do |todo| %>
+          <% if todo.status == 0 || todo.status == 1 %>
+            <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
+            <%= "作業内容：" + todo.content %><br>
+            <%= "作業状況：" + todo.statuschange(todo.status) %><br><br>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row justify-content-center mt-5">
   <div class="col-2">
     <p class="text-center">業務フロー</p>

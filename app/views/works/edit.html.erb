@@ -45,32 +45,15 @@
 
   <div class="workflows">
     
-    <div id="detail-association-insertion-point"></div>
+    
     
     <div class="col-10 mx-auto mt-2">
-    <%= link_to_add_association "+フローを追加", f, :workflows,
-      class: "btn btn-secondary btn-block",
-      data: {
-      association_insertion_node: '#detail-association-insertion-point',
-      association_insertion_method: 'before'
-      }%>
-    </div>
+    <%= link_to "フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: 1}, method: :post %>
     
-    <div class="mx-auto">
-    <% i = 1 %>
+    <% i = 2 %>
     <%= f.fields_for :workflows do |t| %>
-      <%= render "/works/workflow_fields", f: t %>
-    
-    <div id=<%= "detail-association-insertion-point-#{i}" %>></div>
-    
-    <div class="col-10 mx-auto mt-2">
-    <%= link_to_add_association "+フローを追加", f, :workflows,
-      class: "btn btn-secondary btn-block",
-      data: {
-      association_insertion_node: "#detail-association-insertion-point-#{i}",
-      association_insertion_method: 'before'
-      }%>
-    </div>
+      <%= render "workflow_fields", {f: t, i: i} %>
+    <%= link_to "フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: i}, method: :post %>
     <% i += 1 %>
     <% end %>
     </div>

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'works/none'
   get 'works/copy'
   post 'works/copied'
+  post 'works/add_flow'
+  post 'works/remove_flow'
   
   resources :works 
   resources :workflows

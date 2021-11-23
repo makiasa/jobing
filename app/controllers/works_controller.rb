@@ -40,6 +40,8 @@ class WorksController < ApplicationController
   def show
     @work = Work.find(params[:id])
     @workflows = @work.workflows.order(:number)
+    @todos = @work.todos.where("deadline >= ?", Date.today).order(:deadline)
+    @over_todos = @work.todos.where("deadline < ?", Date.today).order(:deadline)
     
     @works = Work.where(firstid: @work.firstid).order(fiscalyear: "DESC")
     @fiscalyears = @works.map{|work| [FISCAL_YEARS[work.fiscalyear] , work.fiscalyear] }
@@ -80,6 +82,38 @@ class WorksController < ApplicationController
     end
     
     redirect_to "/works/index/#{params[:new_copy_fiscalyear]}"
+  end
+  
+  def add_flow
+    @work = Work.find(params[:id])
+    @workflows = @work.workflows.order(:number)
+    
+    @workflows.each do |workflow|
+      if workflow.number >= params[:number].to_i
+        workflow.number += 1
+        workflow.save
+      end
+    end
+    
+    Workflow.create(work_id: @work.id, number: params[:number].to_i)
+    
+    render :edit
+  end
+  
+  def remove_flow
+    @work = Work.find(params[:id])
+    @workflow = @work.workflows.find_by(number: params[:number].to_i)
+    @workflow.destroy
+    
+    @workflows = @work.workflows.order(:number)
+    
+    @workflows.each do |workflow|
+      if workflow.number >= params[:number].to_i
+        workflow.number -= 1
+        workflow.save
+      end
+    end
+    render :edit
   end
   
   private
