@@ -6,8 +6,11 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-    @user.save
-    redirect_to pages_home_path
+    if @user.save
+      redirect_to pages_home_path
+    else
+      render :new
+    end
   end
   
   def edit
@@ -16,12 +19,14 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    @user.password = params[:password]
-    @user.save
-    redirect_to pages_home_path
+    if @user.update(user_params)
+      redirect_to pages_home_path
+    else
+      render :edit
+    end
   end
   
   def user_params
-    params.require(:user).permit(:password).merge(id: current_user.id)
+    params.require(:user).permit(:password,:password_confirmation).merge(id: current_user.id)
   end
 end

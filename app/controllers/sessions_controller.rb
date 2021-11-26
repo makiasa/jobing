@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       log_in(user)
       redirect_to pages_home_path #, notice: "ログインしました"
     else
+      flash.now[:danger] = "ログインに失敗しました"
       render :new
     end
   end

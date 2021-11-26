@@ -1,6 +1,6 @@
 <H4>業務コピー</H4>
 
-<%= form_with url: works_copied_path do |f| %>
+<%= form_with(url: works_copied_path, local: true) do |f| %>
 <div class="row mt-5">
   <div class="col-3 ml-5">
     コピーする部署：<%= @department.name %>

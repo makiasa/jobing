@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-2">
-    <%= form_with url: works_move_show_path do |f| %>
+    <%= form_with(url: works_move_show_path, local: true) do |f| %>
       <%= f.hidden_field :id, :value => @work.id %>
       <%= f.select :fiscalyear, @fiscalyears, {include_blank: "年度を選択"} %>
       <%= f.submit "選択" %>
@@ -15,7 +15,12 @@
     ・業務名：<%= link_to @work.name, work_path(@work.id) %>
   </div>
   <div class="col-3"> 
-    ・業務時期：<%= @work.period %>月
+    ・業務時期：
+    <% if @work.period %>
+      <%= @work.period %>月
+    <% else %>
+      不定期
+    <% end %>
   </div>
   <div class="col-1"> 
     <%= link_to edit_work_path(@work.id) do %>

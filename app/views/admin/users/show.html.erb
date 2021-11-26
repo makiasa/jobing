@@ -16,11 +16,11 @@
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:department_id) %></th>
-      <td><%= @user.department_change(@user.department_id) %></td>
+      <td><%= @user.department&.name %></td>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:position) %></th>
-      <td><%= @user.position_change(@user.position) %></td>
+      <td><%= @user.position_change %></td>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:admin) %></th>

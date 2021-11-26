@@ -18,7 +18,7 @@
 
     <div class="col-2">
     <%= f.label "・業務時期" %>
-    <%= f.select :period, [1,2,3,4,5,6,7,8,9,10,11,12]%>
+    <%= f.select :period, {1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12,"不定期"=>nil} %>
     月
     </div>
   
@@ -51,8 +51,8 @@
   <div class="workflows">
     <div class="row justify-content-md-center mt-2 mb-2">
       <div class="col-8">
-        <%= link_to "フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: 1}, method: :post,
-            data: { confirm: "編集中のものはリセットされますが、よろしいですか？リセットしたくなければ一度更新ください" },
+        <%= link_to "＋フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: 1}, method: :post,
+            data: { confirm: "編集中のものはリセットされますが、よろしいですか？よろしくなければ一度更新をしてください" },
             class: "btn btn-secondary btn-sm btn-block" %>
       </div>
     </div>
@@ -64,8 +64,8 @@
       
       <div class="row justify-content-md-center mt-2 mb-2">
         <div class="col-8">
-        <%= link_to "フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: i}, method: :post,
-            data: { confirm: "編集中のものはリセットされますが、よろしいですか？リセットしたくなければ一度更新ください" },
+        <%= link_to "＋フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: i}, method: :post,
+            data: { confirm: "編集中のものはリセットされますが、よろしいですか？よろしくなければ一度更新をしてください" },
             class: "btn btn-secondary btn-sm btn-block" %>
         </div>
       </div>
