@@ -1,5 +1,5 @@
 class Work < ApplicationRecord
-  validates :name, uniqueness: { scope: :fiscalyear }
+  validates :name, presence: true, uniqueness: { scope: :fiscalyear } #scopeの意味：同年度においての:nameにおけるバリデーション
   
   belongs_to :department , optional: true
   validates :fiscalyear, presence: true

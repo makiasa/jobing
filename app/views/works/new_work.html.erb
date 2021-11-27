@@ -1,4 +1,3 @@
-<!-- 作成途中で未完成 -->
 <% if @work.errors.present? %>
   <ul id="error_explanation">
     <% @work.errors.full_messages.each do |message| %>
@@ -8,7 +7,7 @@
 <% end %>
 
 <div class="work-post">
-  <%= form_with(model: @work, local: true) do |f| %>
+  <%= form_with(url: works_new_path, local: true) do |f| %>
   
   <div class="row justify-content-end">
     <div class="col-1">
@@ -18,7 +17,8 @@
   
   <div class="row">
     <div class="col-auto ml-3"> 
-      ・年度：<%= f.select :fiscalyear, Constant::FISCAL_YEARS.invert, {include_blank: ""} %>
+      ・年度：<%= Constant::FISCAL_YEARS[@fiscalyear] %>
+      <%= f.hidden_field :fiscalyear, :value => @fiscalyear %>
     </div>
   </div>
     

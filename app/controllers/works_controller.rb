@@ -18,15 +18,14 @@ class WorksController < ApplicationController
     elsif request.post? && params[:fiscalyear] == ""
       render :move_index
     else
-      @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: params[:id])
+      @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: params[:id].to_i)
       @myworks = @works_in_department.where(user_id: current_user.id)
-      @current_fiscalyear = params[:id]
+      @current_fiscalyear = params[:id].to_i
     end
   end
   
   def new
     @work = Work.new
-    @workflows = @work.workflows.build
     @staffs_in_department = User.where(department_id: current_user.department.id)
   end
   
@@ -40,6 +39,25 @@ class WorksController < ApplicationController
       render :new
     end
   end
+  
+  def new_work
+    @work = Work.new
+    @fiscalyear = params[:fiscalyear].to_i
+    @staffs_in_department = User.where(department_id: current_user.department.id)
+  end
+  
+  def new_work_create
+    @work = Work.new(new_work_params)
+    @fiscalyear = params[:fiscalyear].to_i
+    @staffs_in_department = User.where(department_id: current_user.department.id)
+    if @work.save
+      @work.update(firstid: @work.id)
+      redirect_to  "/works/index/#{@fiscalyear}"
+    else
+      render :new_work
+    end
+  end
+  
   
   def show
     @work = Work.find(params[:id])
@@ -119,9 +137,20 @@ class WorksController < ApplicationController
     redirect_to edit_work_path(@work.id)
   end
   
+  def destroy
+    @work = Work.find(params[:id])
+    @fiscalyear = @work.fiscalyear
+    @work.destroy
+    redirect_to  "/works/index/#{@fiscalyear}"
+  end
+  
   private
   def work_params
     params.require(:work).permit(:name,:period,:summary,:task,:user_id,:fiscalyear,:department_id,:firstid,
                                 workflows_attributes: [:id,:number,:content,:note,:filepath,:_destroy])
+  end
+  
+  def new_work_params
+    params.permit(:name,:period,:summary,:task,:user_id,:fiscalyear,:department_id,:firstid)
   end
 end

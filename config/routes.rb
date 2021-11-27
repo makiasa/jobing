@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   post 'works/remove_flow'
   
   resources :users
+  
   resources :works 
+  get 'works/new/:fiscalyear', to: 'works#new_work'
+  post 'works/new', to: 'works#new_work_create'
+  
   resources :workflows
   
   resources :budgets
