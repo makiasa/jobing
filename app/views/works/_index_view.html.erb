@@ -1,4 +1,4 @@
-<h4>業務一覧（所属部署内）</h4>
+<h4>業務一覧</h4>
 
 <div class="row mt-3">
   <div class="col-3">
@@ -24,6 +24,19 @@
       <div class="overflow-auto" style="height:300px;">
         <% @works_in_department.each do |work_in_department| %>
           <p><%= link_to work_in_department.name ,work_path(work_in_department.id) %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-10 ml-5">
+    担当業務
+    <div class="border border-dark">
+      <div class="overflow-auto" style="height:300px;">
+        <% @myworks.each do |mywork| %>
+          <p><%= link_to mywork.name ,work_path(mywork.id) %></p>
         <% end %>
       </div>
     </div>

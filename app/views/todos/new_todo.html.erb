@@ -4,6 +4,14 @@
   </div>
 </div>
 
+<% if @todo.errors.present? %>
+  <ul id="error_explanation">
+    <% @todo.errors.full_messages.each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with(url: todos_new_path, local: true) do |f| %>
 <div class="row">
   <div class="col-auto ml-5">

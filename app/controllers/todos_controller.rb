@@ -19,6 +19,7 @@ class TodosController < ApplicationController
   
   def new_todo_create
     @todo = current_user.todos.new(new_todo_params)
+    @work = Work.find(params[:work_id])
     if @todo.save
       redirect_to  work_path(params[:work_id])
     else
@@ -28,6 +29,7 @@ class TodosController < ApplicationController
   
   def create
     @todo = current_user.todos.new(todo_params)
+    @myworks = current_user.works.where(department_id: current_user.department_id)
     if @todo.save
       redirect_to  pages_home_path
     else
@@ -42,9 +44,13 @@ class TodosController < ApplicationController
   
   def update
     @todo = Todo.find(params[:id])
-    @todo.update(todo_params)
+    @myworks = current_user.works.where(department_id: current_user.department_id)
     
-    redirect_to  pages_home_path
+    if @todo.update(todo_params)
+      redirect_to  pages_home_path
+    else
+      render :edit
+    end
   end
   
   def destroy

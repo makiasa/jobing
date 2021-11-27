@@ -7,6 +7,11 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      user: 職員
+      work: 業務
+      todo: ToDo
+      workflow: 業務フロー
     attributes:
       user:
         id: ID
@@ -19,6 +24,13 @@ ja:
         password_confirmation: パスワード（確認）
         created_at: 登録日時
         updated_at: 更新日時
+      todo:
+        work: 業務名
+        deadline: 作業期限
+        content: 作業内容
+        status: 作業状況
+      work:
+        name: 業務名
   date:
     abbr_day_names:
     - 日

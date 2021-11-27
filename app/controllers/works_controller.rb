@@ -9,6 +9,7 @@ class WorksController < ApplicationController
     end
     
     @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: @current_fiscalyear)
+    @myworks = @works_in_department.where(user_id: current_user.id)
   end
   
   def move_index
@@ -18,6 +19,7 @@ class WorksController < ApplicationController
       render :move_index
     else
       @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: params[:id])
+      @myworks = @works_in_department.where(user_id: current_user.id)
       @current_fiscalyear = params[:id]
     end
   end

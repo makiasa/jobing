@@ -61,7 +61,9 @@
           不定期業務
           <div class="border border-dark">
             <div class="overflow-auto" style="height:300px;">
-            <%= render partial: "irregular_work", collection: @irregular_works %>
+              <% @irregular_works.each do |irregular_work| %>
+                <p><%= link_to irregular_work.name ,work_path(irregular_work.id) %></p>
+              <% end %>
             </div>
           </div>
         </div>

@@ -2,6 +2,10 @@ class Todo < ApplicationRecord
   belongs_to :work
   belongs_to :user
   
+  validates :deadline, presence: true
+  validates :content, presence: true
+  validates :status, presence: true
+  
   def datechange
     self.deadline.strftime("%Y年%m月%d日")
   end
