@@ -19,7 +19,10 @@
 
 <div class="row mt-3">
   <div class="col-10 ml-5">
-    所属部署全体の業務
+    所属部署全体の業務&nbsp;&nbsp;&nbsp;&nbsp;
+      <% if current_user.position == 0 %>
+        <a href="/works/new" class="btn btn-secondary btn-sm py-0 mb-0" role="button">業務追加</a>
+      <% end %>
     <div class="border border-dark">
       <div class="overflow-auto" style="height:300px;">
         <% @works_in_department.each do |work_in_department| %>

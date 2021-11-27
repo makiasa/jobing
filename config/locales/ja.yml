@@ -31,6 +31,7 @@ ja:
         status: 作業状況
       work:
         name: 業務名
+        fiscalyear: 年度
   date:
     abbr_day_names:
     - 日

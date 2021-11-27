@@ -2,6 +2,8 @@ class Work < ApplicationRecord
   validates :name, uniqueness: { scope: :fiscalyear }
   
   belongs_to :department , optional: true
+  validates :fiscalyear, presence: true
+  
   belongs_to :user, optional: true
   has_many :todos
   has_many :workflows, dependent: :destroy

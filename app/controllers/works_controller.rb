@@ -32,7 +32,9 @@ class WorksController < ApplicationController
   
   def create
     @work = Work.new(work_params)
+    @staffs_in_department = User.where(department_id: current_user.department.id)
     if @work.save
+      @work.update(firstid: @work.id)
       redirect_to work_path(@work.id)
     else
       render :new
@@ -66,7 +68,7 @@ class WorksController < ApplicationController
   def update
     @work = Work.find(params[:id])
     @work.update(work_params)
-    
+    @staffs_in_department = User.where(department_id: current_user.department.id)
     redirect_to  work_path(params[:id])
   end
   
@@ -119,7 +121,7 @@ class WorksController < ApplicationController
   
   private
   def work_params
-    params.require(:work).permit(:name,:period,:summary,:task,:user_id,
+    params.require(:work).permit(:name,:period,:summary,:task,:user_id,:fiscalyear,:department_id,:firstid,
                                 workflows_attributes: [:id,:number,:content,:note,:filepath,:_destroy])
   end
 end
