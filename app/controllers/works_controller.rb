@@ -70,11 +70,12 @@ class WorksController < ApplicationController
   end
   
   def move_show
-    @work = Work.where(firstid: Work.find(params[:id]).firstid).find_by(fiscalyear: params[:fiscalyear])
-    if @work
+    if params[:fiscalyear].blank?
+      @work = Work.find(params[:id])
       redirect_to work_path(@work.id)
     else
-      render :show
+      @work = Work.where(firstid: Work.find(params[:id]).firstid).find_by(fiscalyear: params[:fiscalyear])
+      redirect_to work_path(@work.id)
     end
   end
   
