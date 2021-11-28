@@ -16,7 +16,7 @@ class WorksController < ApplicationController
     if request.post? && params[:fiscalyear] != ""
       redirect_to "/works/index/#{params[:fiscalyear]}"
     elsif request.post? && params[:fiscalyear] == ""
-      render :move_index
+      redirect_to works_path
     else
       @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: params[:id].to_i)
       @myworks = @works_in_department.where(user_id: current_user.id)
@@ -95,7 +95,7 @@ class WorksController < ApplicationController
     @department = current_user.department
   end
   
-  def copied
+  def copied #業務フローのコピーが未実装
     @department = current_user.department
     @works_in_department = Work.where(department_id: @department.id, fiscalyear: params[:copied_fiscalyear])
     
@@ -106,7 +106,14 @@ class WorksController < ApplicationController
       begin
         ActiveRecord::Base.transaction do
           @works_in_department.each do |work_in_department|
-            work_in_department.deep_dup.update!(fiscalyear: params[:new_copy_fiscalyear], user_id: nil)
+            @copy_work_in_department = Work.create!(name: work_in_department.name, summary: work_in_department.summary, 
+                                                   period: work_in_department.period, user_id: nil, department_id: work_in_department.department_id,
+                                                   firstid: work_in_department.firstid, fiscalyear: params[:new_copy_fiscalyear],
+                                                   task: work_in_department.task)
+              work_in_department.workflows.order(:number).each do |workflow|
+                @copy_workflow = Workflow.create!(work_id: @copy_work_in_department.id, content: workflow.content, note: workflow.note,
+                                                 filepath: workflow.filepath, number: workflow.number)
+              end
           end
         end
           flash[:success] = "コピーに成功しました"
