@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   
   validates :name, presence: true
-  validates :number, uniqueness: true
+  validates :number, presence: true, uniqueness: true
 
   belongs_to :department, optional: true
   has_many :works

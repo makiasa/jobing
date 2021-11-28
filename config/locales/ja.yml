@@ -16,6 +16,7 @@ ja:
       user:
         id: ID
         name: 名前
+        number: 職員番号
         email: メールアドレス
         department_id: 所属部署
         position: 役職
