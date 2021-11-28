@@ -9,7 +9,7 @@
 
 <div class="row mt-5">
   <div class="col-3 ml-5">
-    コピーする年度
+    コピー元の年度
       <%= f.select :copied_fiscalyear, Constant::FISCAL_YEARS.invert , {include_blank: "年度を選択"}, {class: "form-control"} %> 
       <!-- invertメソッド：ハッシュのキーと値を入れ替える -->
   </div>
@@ -19,7 +19,7 @@
   </div>
   
   <div class="col-3">
-    コピーさせる年度
+    コピー先の年度
       <%= f.select :new_copy_fiscalyear, Constant::FISCAL_YEARS.invert , {include_blank: "年度を選択"}, {class: "form-control"} %> 
       <!-- invertメソッド：ハッシュのキーと値を入れ替える -->
   </div>

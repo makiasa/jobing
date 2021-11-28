@@ -99,11 +99,23 @@ class WorksController < ApplicationController
     @department = current_user.department
     @works_in_department = Work.where(department_id: @department.id, fiscalyear: params[:copied_fiscalyear])
     
-    @works_in_department.each do |work_in_department|
-      work_in_department.deep_dup.update(fiscalyear: params[:new_copy_fiscalyear], user_id: nil)
+    if params[:copied_fiscalyear].blank? || params[:new_copy_fiscalyear].blank?
+      flash.now[:danger] = "「コピー元の年度」及び「コピー先の年度」を全て選択してください"
+      render :copy
+    else
+      begin
+        ActiveRecord::Base.transaction do
+          @works_in_department.each do |work_in_department|
+            work_in_department.deep_dup.update!(fiscalyear: params[:new_copy_fiscalyear], user_id: nil)
+          end
+        end
+          flash[:success] = "コピーに成功しました"
+          redirect_to "/works/index/#{params[:new_copy_fiscalyear]}"
+        rescue ActiveRecord::RecordInvalid => e
+          flash.now[:danger] = "コピーに失敗しました。理由：#{e.message}"
+          render :copy
+      end
     end
-    
-    redirect_to "/works/index/#{params[:new_copy_fiscalyear]}"
   end
   
   def add_flow
