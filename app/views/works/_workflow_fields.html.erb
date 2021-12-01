@@ -4,8 +4,8 @@
     <div class="col-6"><%= f.text_area :content, class: "form-control", placeholder: "内容" %></div>
     <div class="col-4"><%= f.text_area :note, class: "form-control", placeholder: "備考" %></div>
     <div class="col-1 mt-4">
-      <%= link_to "削除" , {controller: "works", action: "remove_flow", id: @work.id, number: i - 1}, method: :post,
-          data: { confirm: "・編集中のものはリセットされます。\n・削除したものは元に戻せません。\nそれでもよろしいですか？\nよろしくなければ一度更新をしてください" },
+      <%= f.submit "削除#{i - 1}" ,
+          data: { confirm: "フローを削除してよろしいですか？" },
           class: "btn btn-danger btn-sm" %>
     </div>
   </div>

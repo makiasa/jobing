@@ -51,8 +51,8 @@
   <div class="workflows">
     <div class="row justify-content-md-center mt-2 mb-2">
       <div class="col-8">
-        <%= link_to "＋フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: 1}, method: :post,
-            data: { confirm: "編集中のものはリセットされますが、よろしいですか？よろしくなければ一度更新をしてください" },
+        <%= f.submit "＋フロー追加 1",
+            data: { confirm: "フローを追加してよろしいですか？" },
             class: "btn btn-secondary btn-sm btn-block" %>
       </div>
     </div>
@@ -64,8 +64,8 @@
       
       <div class="row justify-content-md-center mt-2 mb-2">
         <div class="col-8">
-        <%= link_to "＋フロー追加", {controller: "works", action: "add_flow", id: @work.id, number: i}, method: :post,
-            data: { confirm: "編集中のものはリセットされますが、よろしいですか？よろしくなければ一度更新をしてください" },
+        <%= f.submit "＋フロー追加 #{i}",
+            data: { confirm: "フローを追加してよろしいですか？" },
             class: "btn btn-secondary btn-sm btn-block" %>
         </div>
       </div>

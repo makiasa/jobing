@@ -85,10 +85,42 @@ class WorksController < ApplicationController
   end
   
   def update
-    @work = Work.find(params[:id])
-    @work.update(work_params)
-    @staffs_in_department = User.where(department_id: current_user.department.id)
-    redirect_to  work_path(params[:id])
+    if params[:commit] == "更新"
+      @work = Work.find(params[:id])
+      @work.update(work_params)
+      @staffs_in_department = User.where(department_id: current_user.department.id)
+      redirect_to  work_path(params[:id])
+    elsif params[:commit].include?("フロー追加")
+      number = params[:commit].gsub(/[^\d]/, "").to_i
+      @work = Work.find(params[:id])
+      @work.update(work_params)
+      @workflows = @work.workflows.order(number)
+      
+      @workflows.each do |workflow|
+        if workflow.number >= number
+          workflow.number += 1
+          workflow.save
+        end
+      end
+      Workflow.create(work_id: @work.id, number: number)
+      redirect_to edit_work_path(@work.id)
+    elsif params[:commit].include?("削除")
+      number = params[:commit].gsub(/[^\d]/, "").to_i
+      @work = Work.find(params[:id])
+      @work.update(work_params)
+      @workflow = @work.workflows.find_by(number: number)
+      @workflow.destroy
+      
+      @workflows = @work.workflows.order(number)
+      
+      @workflows.each do |workflow|
+        if workflow.number >= number
+          workflow.number -= 1
+          workflow.save
+        end
+      end
+      redirect_to edit_work_path(@work.id)
+    end
   end
   
   #以下、業務のコピー
@@ -124,37 +156,6 @@ class WorksController < ApplicationController
           render :copy
       end
     end
-  end
-  
-  def add_flow
-    @work = Work.find(params[:id])
-    @workflows = @work.workflows.order(:number)
-    
-    @workflows.each do |workflow|
-      if workflow.number >= params[:number].to_i
-        workflow.number += 1
-        workflow.save
-      end
-    end
-    
-    Workflow.create(work_id: @work.id, number: params[:number].to_i)
-    redirect_to edit_work_path(@work.id)
-  end
-  
-  def remove_flow
-    @work = Work.find(params[:id])
-    @workflow = @work.workflows.find_by(number: params[:number].to_i)
-    @workflow.destroy
-    
-    @workflows = @work.workflows.order(:number)
-    
-    @workflows.each do |workflow|
-      if workflow.number >= params[:number].to_i
-        workflow.number -= 1
-        workflow.save
-      end
-    end
-    redirect_to edit_work_path(@work.id)
   end
   
   def destroy
