@@ -40,7 +40,7 @@ class WorksController < ApplicationController
     end
   end
   
-  def new_work
+  def new_work # 業務年度を紐づけるため（params[:fiscalyear]を与えるため）newアクションではなく、new_workアクションを定義
     @work = Work.new
     @fiscalyear = params[:fiscalyear].to_i
     @staffs_in_department = User.where(department_id: current_user.department.id)
@@ -72,11 +72,10 @@ class WorksController < ApplicationController
   def move_show
     if params[:fiscalyear].blank?
       @work = Work.find(params[:id])
-      redirect_to work_path(@work.id)
     else
       @work = Work.where(firstid: Work.find(params[:id]).firstid).find_by(fiscalyear: params[:fiscalyear])
-      redirect_to work_path(@work.id)
     end
+    redirect_to work_path(@work.id)
   end
   
   def edit
@@ -96,11 +95,9 @@ class WorksController < ApplicationController
       @work.update(work_params)
       @workflows = @work.workflows.order(number)
       
-      @workflows.each do |workflow|
-        if workflow.number >= number
-          workflow.number += 1
-          workflow.save
-        end
+      @workflows.where("number >= ?", number).each do |workflow|
+        workflow.number += 1
+        workflow.save
       end
       Workflow.create(work_id: @work.id, number: number)
       redirect_to edit_work_path(@work.id)
@@ -113,11 +110,9 @@ class WorksController < ApplicationController
       
       @workflows = @work.workflows.order(number)
       
-      @workflows.each do |workflow|
-        if workflow.number >= number
-          workflow.number -= 1
-          workflow.save
-        end
+      @workflows.where("number >= ?", number).each do |workflow|
+        workflow.number -= 1
+        workflow.save
       end
       redirect_to edit_work_path(@work.id)
     end
