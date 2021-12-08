@@ -26,10 +26,12 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
       todo:
-        work: 業務名
+        work_id: 業務名
         deadline: 作業期限
         content: 作業内容
         status: 作業状況
+        created_at: 登録日時
+        updated_at: 更新日時
       work:
         name: 業務名
         fiscalyear: 年度
@@ -227,7 +229,7 @@ ja:
   time:
     am: 午前
     formats:
-      default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      default: "%Y/%m/%d %H:%M:%S"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後

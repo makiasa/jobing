@@ -1,41 +1,49 @@
-<h4>職員情報</h4>
+<h4>登録内容の確認（職員情報）</h4>
+以下の内容で登録してよろしいですか？
+
+<%= form_with model: [:admin, @user], local: true do |f|  %>
 
 <table class="table table-hover">
   <tbody>
     <tr>
       <th><%= User.human_attribute_name(:number) %></th>
       <td><%= @user.number %></td>
+      <%= f.hidden_field :number %>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:name) %></th>
       <td><%= @user.name %></td>
+      <%= f.hidden_field :name %>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:email) %></th>
       <td><%= @user.email %></td>
+      <%= f.hidden_field :email %>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:department_id) %></th>
       <td><%= @user.department&.name %></td>
+      <%= f.hidden_field :department_id %>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:position) %></th>
       <td><%= @user.position_change %></td>
+      <%= f.hidden_field :position %>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:admin) %></th>
       <td><%= @user.admin? ? "あり" : "なし" %></td>
+      <%= f.hidden_field :admin %>
     </tr>
     <tr>
-      <th><%= User.human_attribute_name(:created_at) %></th>
-      <td><%= @user.created_at %></td>
-    </tr>
-    <tr>
-      <th><%= User.human_attribute_name(:updated_at) %></th>
-      <td><%= @user.updated_at %></td>
+      <th><%= User.human_attribute_name(:password) %></th>
+      <td>非表示</td>
+      <%= f.hidden_field :password %>
     </tr>
   </tbody>
 </table>
 
-<%= link_to "編集" , edit_admin_user_path, class: "btn btn-primary-mr-3" %>
-<%= link_to "削除" , [:admin, @user], method: :delete, data: { confirm: "ユーザー「#{@user.name}」を削除します。よろしいですか？" },class: "btn btn-danger" %>
+<%= f.submit "戻る", name: "back", class: "btn btn-secondary mr-3" %>
+<%= f.submit "登録", class: "btn btn-primary" %>
+
+<% end %>

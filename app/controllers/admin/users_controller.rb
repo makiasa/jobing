@@ -12,6 +12,11 @@ class Admin::UsersController < ApplicationController
   def new
     @user = User.new
   end
+  
+  def confirm_new
+    @user = User.new(user_params)
+    render :new unless @user.valid?
+  end
 
   def edit
     @user = User.find(params[:id])
@@ -19,6 +24,11 @@ class Admin::UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    
+    if params[:back].present?
+      render :new
+      return
+    end
     
     if @user.save
       redirect_to admin_user_url(@user), notice: "ユーザー「#{@user.name}」を登録しました"

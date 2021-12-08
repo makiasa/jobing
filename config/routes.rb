@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   namespace :admin do
     get 'pages/home'
-    get 'works/copy'
-    post 'works/copied'
-    resources :users
     resources :works
+    
+    resources :users do
+      post :confirm, action: :confirm_new, on: :new
+    end
   end
   
   root 'sessions#new'

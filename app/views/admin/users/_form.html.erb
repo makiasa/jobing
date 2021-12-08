@@ -6,7 +6,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: [:admin, @user], local: true do |f|  %>
+<%= form_with model: [:admin, @user], local: true, url: confirm_new_admin_user_path do |f|  %>
 
 <div class="form-group">
   <div class="row">
@@ -83,7 +83,7 @@
 <div class="form-group">
   <div class="row">
     <div class="col-4">
-      <%= f.submit "登録する" , class: "btn btn-primary" %>
+      <%= f.submit "確認" , class: "btn btn-primary" %>
     </div>
   </div>
 </div>
