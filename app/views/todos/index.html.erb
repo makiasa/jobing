@@ -1,88 +1,14 @@
 <div class="row mb-3">
   <div class="col-4">
     <h5>ToDo一覧（作業状況別）</h5>
-    <h6>ステータス：<a href="#link-to-not_start">未着手</a>、<a href="#link-to-progress">対応中</a>、<a href="#link-to-finished">完了</a></h6>
-    
   </div>
 </div>
 
-<p id="link-to-not_start">【未着手】</p>
 <div class="row mb-3">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col" style="width: 12%"><%= Todo.human_attribute_name(:deadline) %></th>
-        <th scope="col" style="width: 30%"><%= Todo.human_attribute_name(:work_id) %></th>
-        <th scope="col" style="width: 40%"><%= Todo.human_attribute_name(:content) %></th>
-        <th scope="col"></th>
-      </tr> 
-      <tbody>
-        <% @not_start_todos.each do |not_start_todo| %>
-        <tr>
-          <td><%= link_to not_start_todo.datechange, edit_todo_path(not_start_todo.id) %></td>
-          <td><%= not_start_todo.work.name %></td>
-          <td><%= not_start_todo.content %></td>
-          <td class="text-right">
-            <%= link_to "編集" , edit_todo_path(not_start_todo.id), class: "btn btn-primary-mr-3" %>
-            <%= link_to "ToDo削除", todo_path(not_start_todo.id), method: :delete, data: { confirm: "ToDoを削除します。よろしいですか？" }, class: "btn btn-danger" %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </thead>
-  </table>
+  <div class="col-3">
+    <%= form_with(url: todos_move_index_path, local: true) do |f| %>
+      <%= f.select :status, {"未着手": 0, "対応中": 1, "完了": 2}, {include_blank: "作業状況を選択"} %>
+      <%= f.submit "選択" %>
+    <% end %>
+  </div>
 </div>
-
-<p id="link-to-progress">【対応中】</p>
-<div class="row mb-3">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col" style="width: 12%"><%= Todo.human_attribute_name(:deadline) %></th>
-        <th scope="col" style="width: 30%"><%= Todo.human_attribute_name(:work_id) %></th>
-        <th scope="col" style="width: 40%"><%= Todo.human_attribute_name(:content) %></th>
-        <th scope="col"></th>
-      </tr> 
-      <tbody>
-        <% @progress_todos.each do |progress_todo| %>
-        <tr>
-          <td><%= link_to progress_todo.datechange, edit_todo_path(progress_todo.id) %></td>
-          <td><%= progress_todo.work.name %></td>
-          <td><%= progress_todo.content %></td>
-          <td class="text-right">
-            <%= link_to "編集" , edit_todo_path(progress_todo.id), class: "btn btn-primary-mr-3" %>
-            <%= link_to "ToDo削除", todo_path(progress_todo.id), method: :delete, data: { confirm: "ToDoを削除します。よろしいですか？" }, class: "btn btn-danger" %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </thead>
-  </table>
-</div> 
-
-<p id="link-to-finished">【完了】</p>
-  <div class="row mb-3">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col" style="width: 12%"><%= Todo.human_attribute_name(:deadline) %></th>
-        <th scope="col" style="width: 30%"><%= Todo.human_attribute_name(:work_id) %></th>
-        <th scope="col" style="width: 40%"><%= Todo.human_attribute_name(:content) %></th>
-        <th scope="col"></th>
-      </tr> 
-      <tbody>
-        <% @finished_todos.each do |finished_todo| %>
-        <tr>
-          <td><%= link_to finished_todo.datechange, edit_todo_path(finished_todo.id) %></td>
-          <td><%= finished_todo.work.name %></td>
-          <td><%= finished_todo.content %></td>
-          <td class="text-right">
-            <%= link_to "編集" , edit_todo_path(finished_todo.id), class: "btn btn-primary-mr-3" %>
-            <%= link_to "ToDo削除", todo_path(finished_todo.id), method: :delete, data: { confirm: "ToDoを削除します。よろしいですか？" }, class: "btn btn-danger" %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </thead>
-  </table>
-</div> 

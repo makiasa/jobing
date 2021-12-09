@@ -35,6 +35,8 @@ ja:
       work:
         name: 業務名
         fiscalyear: 年度
+      workflow:
+        file: ファイル
   date:
     abbr_day_names:
     - 日

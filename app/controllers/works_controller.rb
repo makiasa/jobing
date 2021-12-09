@@ -163,7 +163,7 @@ class WorksController < ApplicationController
   private
   def work_params
     params.require(:work).permit(:name,:period,:summary,:task,:user_id,:fiscalyear,:department_id,:firstid,
-                                workflows_attributes: [:id,:number,:content,:note,:filepath,:_destroy])
+                                workflows_attributes: [:id,:number,:content,:note,:filepath,:file,:_destroy])
   end
   
   def new_work_params

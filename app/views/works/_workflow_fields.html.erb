@@ -11,7 +11,8 @@
   </div>
   
   <div class="row mt-1 ml-2">
-    <div class="offset-1 col-10"><%= f.text_field :filepath, class: "form-control", placeholder: "ファイルパス" %></div>
+    <div class="offset-1 col-6"><%= f.text_field :filepath, class: "form-control", placeholder: "ファイルパス" %></div>
+    <div class="col-4"><%= f.file_field :file, class: "form-control" %></div>
   </div>
 </div>
 

@@ -107,7 +107,7 @@
   <div class="row">
       <div class="col-5 ml-5">
           <div class="border border-dark">
-            <div class="overflow-auto" style="height:80px;">
+            <div class="overflow-auto" style="height:100px;">
               <%= workflow.content %>
             </div>
           </div>
@@ -115,6 +115,9 @@
       <div class="col-6 mr-5">
         <p>備考：<%= workflow.note %></p>
         <p>ファイルパス：<%= link_to workflow.filepath, "#{workflow.filepath}" %></p>
+        <% if workflow.file.attached? %>
+        <p>添付ファイル：<%= link_to "#{workflow.file.filename}" ,rails_blob_path(workflow.file) %></p>
+        <% end %>
       </div>
   </div>
   

@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   resources :todos
   get 'todos/new/:id',  to: 'todos#new_todo'
   post 'todos/new',  to: 'todos#new_todo_create'
+  post 'todos/move_index'
+  get 'todos/index/:status',  to: 'todos#move_index'
  
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

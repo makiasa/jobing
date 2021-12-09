@@ -1,10 +1,18 @@
 # まだ作成途中で未完成（作成後のメッセージ、"current_user.todos.new"の整理など）
 class TodosController < ApplicationController
   def index
-    @todos = current_user.todos.all
-    @not_start_todos = @todos.where(status: 0).order(:deadline)
-    @progress_todos = @todos.where(status: 1).order(:deadline)
-    @finished_todos = @todos.where(status: 2).order(:deadline)
+  end
+  
+  def move_index
+    if request.post? && params[:status] != ""
+      redirect_to "/todos/index/#{params[:status]}"
+    elsif request.post? && params[:status] == ""
+      redirect_to todos_path
+      flash[:danger] = "作業状況を選択してください"
+    else
+      @todos = current_user.todos.where(status: params[:status]).order(:deadline)
+      @status = params[:status].to_i
+    end
   end
   
   def new
