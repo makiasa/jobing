@@ -10,7 +10,7 @@ class TodosController < ApplicationController
       redirect_to todos_path
       flash[:danger] = "作業状況を選択してください"
     else
-      @todos = current_user.todos.where(status: params[:status]).order(:deadline)
+      @todos = current_user.todos.where(status: params[:status]).order(:deadline).page(params[:page]).per(10)
       @status = params[:status].to_i
     end
   end

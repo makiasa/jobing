@@ -51,9 +51,7 @@
   <div class="workflows">
     <div class="row justify-content-md-center mt-2 mb-2">
       <div class="col-8">
-        <%= f.submit "＋フロー追加 1",
-            data: { confirm: "フローを追加してよろしいですか？" },
-            class: "btn btn-secondary btn-sm btn-block" %>
+        <%= f.submit "＋フロー追加 1", class: "btn btn-secondary btn-sm btn-block" %>
       </div>
     </div>
     
@@ -64,9 +62,7 @@
       
       <div class="row justify-content-md-center mt-2 mb-2">
         <div class="col-8">
-        <%= f.submit "＋フロー追加 #{i}",
-            data: { confirm: "フローを追加してよろしいですか？" },
-            class: "btn btn-secondary btn-sm btn-block" %>
+        <%= f.submit "＋フロー追加 #{i}", class: "btn btn-secondary btn-sm btn-block" %>
         </div>
       </div>
       <% i += 1 %>

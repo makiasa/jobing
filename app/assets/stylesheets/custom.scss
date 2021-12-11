@@ -135,6 +135,9 @@ h1, h2 {
 
 /*以下、bootstrap関係*/
 
+
+/*以下、fontawesome関係*/
+
 .fa-arrow-alt-circle-left {
   font-size: 25px;
   position: absolute;
@@ -163,5 +166,5 @@ h1, h2 {
 }
         
 .slick-track{
-  height: 45vh;
+  height: auto; /*スケジュールのborderが消える問題を"auto"にすることで解決*/
 }

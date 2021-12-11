@@ -6,9 +6,11 @@
   
   <div class="row">
     <div class="col-4">
-      <div class="row mb-4">
+      <div class="row" style="height:350px;">
         <div class="col-12">
-          ToDo一覧&nbsp;&nbsp;<a href="/todos/new" class="btn btn-secondary btn-sm py-0 mb-0" role="button">追加</a>
+          <!-- border最上部を合わせるため、以下のh6タグでstyle="display:inline"とした -->
+          <h6 style="display:inline">ToDo一覧&nbsp;&nbsp;<%= link_to "追加", new_todo_path, class: "btn btn-secondary py-0 mb-0" %></h6>
+          
           <div class="border border-dark">
             <div class="overflow-auto" style="height:300px;">
             <% @todos.each do |todo| %>
@@ -23,7 +25,7 @@
           </div>
         </div>
       </div>
-          ToDo一覧（期限超過）
+        <h6>ToDo一覧（期限超過）</h6>
           <div class="border border-dark">
             <div class="overflow-auto" style="height:250px;">
             <% @over_todos.each do |todo| %>
@@ -41,43 +43,44 @@
     <div class="col-8">
       <div class="row" style="height:350px;">
         <div class="col-7 pl-5" >
-            <div class="slider" style="height:300px;">
+            <div class="slider">
               
               <% 1.upto(12) do |month| %>
-              <div>スケジュール（<%= month %>月）
-                <div class="border border-dark pl-0">
-                  <div class="overflow-auto" style="height:300px;">
-                  <% @works.where(period: month).each do |work| %>
-                    <p><%= link_to work.name ,work_path(work.id) %></p>
-                  <% end %>
+              <div>
+                <h6>スケジュール（<%= month %>月）</h6>
+                  <div class="border border-dark pl-0">
+                    <div class="overflow-auto" style="height:300px;">
+                    <% @works.where(period: month).each do |work| %>
+                      <p><%= link_to work.name ,work_path(work.id) %></p>
+                    <% end %>
+                    </div>
                   </div>
-                </div>
               </div>
               <% end %>
               
             </div>
         </div>
         <div class="col-5 pr-4">
-          不定期業務
-          <div class="border border-dark">
-            <div class="overflow-auto" style="height:300px;">
-              <% @irregular_works.each do |irregular_work| %>
-                <p><%= link_to irregular_work.name ,work_path(irregular_work.id) %></p>
-              <% end %>
+          <h6>不定期業務</h6>
+            <div class="border border-dark">
+              <div class="overflow-auto" style="height:300px;">
+                <% @irregular_works.each do |irregular_work| %>
+                  <p><%= link_to irregular_work.name ,work_path(irregular_work.id) %></p>
+                <% end %>
+              </div>
             </div>
-          </div>
         </div>
       </div>
       
         <div class="pl-5 pr-3 mb-3">
-          担当業務一覧
-          <div class="border border-dark">
-          <div class="overflow-auto" style="height:250px;">
-              <% @works.each do |work| %>
-                <p><%= link_to work.name ,work_path(work.id) %></p>
-              <% end %>
+          <h6>担当業務一覧</h6>
+            <div class="border border-dark">
+            <div class="overflow-auto" style="height:250px;">
+                <% @works.each do |work| %>
+                  <p><%= link_to work.name ,work_path(work.id) %></p>
+                <% end %>
+              </div>
             </div>
-          </div>
         </div>
     </div>
   </div>
