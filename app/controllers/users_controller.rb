@@ -19,9 +19,7 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    
-    if @user&.authenticate(params[:current_password])
-      @user.update(user_params)
+    if @user&.authenticate(params[:user][:current_password]) && @user.update(user_params)
       redirect_to pages_home_path
     else
       flash.now[:danger] = "パスワードが変更できませんでした"

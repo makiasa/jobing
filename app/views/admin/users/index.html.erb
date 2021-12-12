@@ -6,25 +6,27 @@
   <table class="table table-hover">
     <thead class="thead-default">
       <tr>
+        <th><%= User.human_attribute_name(:number) %></th>
         <th><%= User.human_attribute_name(:name) %></th>
         <th><%= User.human_attribute_name(:email) %></th>
         <th><%= User.human_attribute_name(:department_id) %></th>
         <th><%= User.human_attribute_name(:position) %></th>
         <th><%= User.human_attribute_name(:admin) %></th>
-        <th><%= User.human_attribute_name(:created_at)%></th>
-        <th><%= User.human_attribute_name(:updated_at)%></th>
+        <th><%= User.human_attribute_name(:adopt_date)%></th>
+        <th><%= User.human_attribute_name(:retire_date)%></th>
         <th></th>
       </tr> 
       <tbody>
         <% @users.each do |user| %>
         <tr>
+          <td><%= user.number %></td>
           <td><%= link_to user.name, [:admin,user] %></td>
           <td><%= user.email %></td>
           <td><%= user.department&.name %></td>
           <td><%= user.position_change %></td>
           <td><%= user.admin? ? "あり" : "なし" %></td>
-          <td><%= create_time(user.created_at) %></td>
-          <td><%= update_time(user.updated_at) %></td>
+          <td><%= user&.adopt_date %></td>
+          <td><%= user&.retire_date %></td>
           <td>
             <%= link_to "編集" , edit_admin_user_path(user), class: "btn btn-primary-mr-3" %>
             <%= link_to "削除" , [:admin, user], method: :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？" },

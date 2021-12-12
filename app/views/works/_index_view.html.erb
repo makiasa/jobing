@@ -20,7 +20,7 @@
 <div class="row mt-3">
   <div class="col-10 ml-5">
     所属部署全体の業務&nbsp;&nbsp;&nbsp;&nbsp;
-      <% if current_user.position == 0 %>
+      <% if current_user.position == 4 %> <!-- 課室長級の場合 -->
         <%= link_to "/works/new/#{@current_fiscalyear}" do %>
           <button type="button" class="btn btn-secondary btn-sm py-0 mb-0">業務追加</button>
         <% end %>
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<% if current_user.position == 0 %>
+<% if current_user.position == 4 %> <!-- 課室長級の場合 -->
 <div class="row mt-5 mr-5 mb-3">
   <div class="col-4">
     <a href="/works/copy" class="btn btn-secondary btn" role="button">業務をコピーする</a>

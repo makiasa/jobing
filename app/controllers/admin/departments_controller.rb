@@ -2,7 +2,7 @@ class Admin::DepartmentsController < ApplicationController
   before_action :require_admin
   
   def index
-    @departments = Department.all
+    @departments = Department.all.order(:number)
   end
   
   def show

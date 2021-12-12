@@ -24,12 +24,12 @@
           <td></td>
           <td></td>
         <% elsif department.ancestry != nil && department.ancestry.exclude?("/") %> <!-- 子部署の場合 -->
-          <td></td>
+          <td><p class="text-black-50">(<%= department.parent.name %>)</p></td>
           <td><%= link_to department.name, [:admin,department] %></td>
           <td></td>
         <% elsif department.ancestry != nil && department.ancestry.include?("/") %> <!-- 孫部署の場合 -->
-          <td></td>
-          <td></td>
+          <td><p class="text-black-50">(<%= department.root.name %>)</p></td>
+          <td><p class="text-black-50">(<%= department.parent.name %>)</p></td>
           <td><%= link_to department.name, [:admin,department] %></td>
         <% end %>
           

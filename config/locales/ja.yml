@@ -21,6 +21,8 @@ ja:
         email: メールアドレス
         department_id: 所属部署
         position: 役職
+        adopt_date: 採用日
+        retire_date: 退職日
         admin: 管理者権限
         password: パスワード
         password_confirmation: パスワード（確認）
@@ -29,8 +31,8 @@ ja:
       department:
         name: 部署名
         number: 部署番号
-        startdate: 発足日時
-        enddate: 廃止日時
+        startdate: 発足日
+        enddate: 廃止日
         ancestry: 親部署
         firstid: 先祖部署
       todo:
