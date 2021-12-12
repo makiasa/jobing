@@ -23,8 +23,8 @@
           <td><%= user.department&.name %></td>
           <td><%= user.position_change %></td>
           <td><%= user.admin? ? "あり" : "なし" %></td>
-          <td><%= user.created_at %></td>
-          <td><%= user.updated_at %></td>
+          <td><%= create_time(user.created_at) %></td>
+          <td><%= update_time(user.updated_at) %></td>
           <td>
             <%= link_to "編集" , edit_admin_user_path(user), class: "btn btn-primary-mr-3" %>
             <%= link_to "削除" , [:admin, user], method: :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？" },

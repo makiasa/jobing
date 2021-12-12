@@ -1,2 +1,48 @@
-<h1>Admin::Departments#index</h1>
-<p>Find me in app/views/admin/departments/index.html.erb</p>
+<h4>部署一覧</h4>
+
+<%= link_to "新規登録", new_admin_department_path, class: "btn btn-primary" %>
+
+<div class="row mb-3">
+  <table class="table table-hover">
+    <thead class="thead-default">
+      <tr>
+        <th><%= Department.human_attribute_name(:number) %></th>
+        <th>部署名１(部局)</th>
+        <th>部署名２(課室)</th>
+        <th>部署名３(係)</th>
+        <th><%= Department.human_attribute_name(:startdate) %></th>
+        <th><%= Department.human_attribute_name(:enddate) %></th>
+        <th></th>
+      </tr> 
+      <tbody>
+        <% @departments.each do |department| %>
+        <tr>
+          <td><%= department.number %></td>
+          
+        <% if department.ancestry == nil %> <!-- 親部署の場合 -->
+          <td><%= link_to department.name, [:admin,department] %></td>
+          <td></td>
+          <td></td>
+        <% elsif department.ancestry != nil && department.ancestry.exclude?("/") %> <!-- 子部署の場合 -->
+          <td></td>
+          <td><%= link_to department.name, [:admin,department] %></td>
+          <td></td>
+        <% elsif department.ancestry != nil && department.ancestry.include?("/") %> <!-- 孫部署の場合 -->
+          <td></td>
+          <td></td>
+          <td><%= link_to department.name, [:admin,department] %></td>
+        <% end %>
+          
+          <td><%= department&.startdate_time(department.startdate) %></td>
+          <td><%= department&.enddate_time(department.enddate) %></td>
+          <td>
+            <%= link_to "編集" , edit_admin_department_path(department), class: "btn btn-primary-mr-3" %>
+            <%= link_to "削除" , [:admin, department], method: :delete, data: { confirm: "ユーザー「#{department.name}」を削除します。よろしいですか？" },
+                class: "btn btn-danger" %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </thead>
+  </table>
+</div>

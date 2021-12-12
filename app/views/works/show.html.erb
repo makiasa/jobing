@@ -120,7 +120,7 @@
       </div>
       <div class="col-6 mr-5">
         <p>備考：<%= workflow.note %></p>
-        <p>ファイルパス：<%= link_to workflow.filepath, "#{workflow.filepath}" %></p>
+        <p>ファイルパス：<%= link_to workflow.filepath, "file:///#{workflow.filepath}" %></p>
         <% if workflow.file.attached? %>
         <p>添付ファイル：<%= link_to workflow.file.filename ,rails_blob_path(workflow.file) %></p>
         <% end %>

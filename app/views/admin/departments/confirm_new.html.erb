@@ -1,25 +1,34 @@
-<h4>部署情報</h4>
+<h4>登録内容の確認（部署情報）</h4>
+以下の内容で登録してよろしいですか？
+
+<%= form_with model: [:admin, @department], local: true do |f|  %>
 
 <table class="table table-hover">
   <tbody>
     <tr>
       <th><%= Department.human_attribute_name(:number) %></th>
       <td><%= @department.number %></td>
+      <%= f.hidden_field :number %>
     </tr>
     <tr>
       <th><%= Department.human_attribute_name(:name) %></th>
       <td><%= @department.name %></td>
+      <%= f.hidden_field :name %>
     </tr>
     <tr>
       <th><%= Department.human_attribute_name(:startdate) %></th>
       <td><%= @department.startdate %></td>
+      <%= f.hidden_field :startdate %>
     </tr>
     <tr>
       <th><%= Department.human_attribute_name(:enddate) %></th>
       <td><%= @department.enddate %></td>
+      <%= f.hidden_field :enddate %>
     </tr>
   </tbody>
 </table>
 
-<%= link_to "編集" , edit_admin_department_path, class: "btn btn-primary-mr-3" %>
-<%= link_to "削除" , [:admin, @department], method: :delete, data: { confirm: "ユーザー「#{@department.name}」を削除します。よろしいですか？" },class: "btn btn-danger" %>
+<%= f.submit "戻る", name: "back", class: "btn btn-secondary mr-3" %>
+<%= f.submit "登録", class: "btn btn-primary" %>
+
+<% end %>
