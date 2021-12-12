@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   namespace :admin do
+    get 'departments/new'
+    get 'departments/edit'
+    get 'departments/show'
+    get 'departments/index'
+  end
+  namespace :admin do
     get 'pages/home'
     resources :works
+    resources :departments
     
     resources :users do
       post :confirm, action: :confirm_new, on: :new

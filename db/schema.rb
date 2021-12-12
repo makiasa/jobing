@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_135759) do
+ActiveRecord::Schema.define(version: 2021_12_12_031803) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_135759) do
     t.date "startdate"
     t.integer "firstid"
     t.date "enddate"
+    t.string "ancestry"
   end
 
   create_table "fiscalyears", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

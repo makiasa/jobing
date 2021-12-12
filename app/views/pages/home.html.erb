@@ -9,7 +9,7 @@
       <div class="row" style="height:350px;">
         <div class="col-12">
           <!-- border最上部を合わせるため、以下のh6タグでstyle="display:inline"とした -->
-          <h6 style="display:inline">ToDo一覧&nbsp;&nbsp;<%= link_to "追加", new_todo_path, class: "btn btn-secondary py-0 mb-0" %></h6>
+          <h6>ToDo&nbsp;&nbsp;<a href="/todos/new" class="badge badge-secondary">追加</a></h6>
           
           <div class="border border-dark">
             <div class="overflow-auto" style="height:300px;">
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-        <h6>ToDo一覧（期限超過）</h6>
+        <h6>ToDo（期限超過）</h6>
           <div class="border border-dark">
             <div class="overflow-auto" style="height:250px;">
             <% @over_todos.each do |todo| %>
