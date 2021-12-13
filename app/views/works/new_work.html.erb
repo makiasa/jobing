@@ -41,7 +41,7 @@
     <% if current_user.position == 4 %> <!-- 課室長級の場合 -->
       <div class="col-3">
         <%= f.label "・担当者" %>
-        <%= f.collection_select :user_id, @staffs_in_department,:id, :name, {include_blank: "職員を選択してください"} %>
+        <%= f.collection_select :user_id, @staffs_in_department,:id, :full_name, {include_blank: "職員を選択してください"} %>
       </div>
     <% end %>
   </div>

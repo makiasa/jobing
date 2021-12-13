@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  #パスワード変更機能が未実装
   def new
     @user = User.new
   end

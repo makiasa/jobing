@@ -21,9 +21,26 @@
 
 <div class="form-group">
   <div class="row">
-    <div class="col-4">
-      <%= f.label :name, "氏名" %>
-      <%= f.text_field :name , class: "form-control" %>
+    <div class="col-2">
+      <%= f.label :furigana_lastname, "ふりがな（姓）" %>
+      <%= f.text_field :furigana_lastname , class: "form-control" %>
+    </div>
+    <div class="col-2">
+      <%= f.label :furigana_firstname, "ふりがな（名）" %>
+      <%= f.text_field :furigana_firstname , class: "form-control" %>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="row">
+    <div class="col-2">
+      <%= f.label :lastname, "姓" %>
+      <%= f.text_field :lastname , class: "form-control" %>
+    </div>
+    <div class="col-2">
+      <%= f.label :firstname, "名" %>
+      <%= f.text_field :firstname , class: "form-control" %>
     </div>
   </div>
 </div>

@@ -7,8 +7,12 @@
       <td><%= @user.number %></td>
     </tr>
     <tr>
-      <th><%= User.human_attribute_name(:name) %></th>
-      <td><%= @user.name %></td>
+      <th>氏名（ふりがな）</th>
+      <td><%= @user.furigana_lastname + "　" + @user.furigana_firstname %></td>
+    </tr>
+    <tr>
+      <th>氏名</th>
+      <td><%= @user.full_name %></td>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:email) %></th>
@@ -38,4 +42,4 @@
 </table>
 
 <%= link_to "編集" , edit_admin_user_path, class: "btn btn-primary-mr-3" %>
-<%= link_to "削除" , [:admin, @user], method: :delete, data: { confirm: "ユーザー「#{@user.name}」を削除します。よろしいですか？" },class: "btn btn-danger" %>
+<%= link_to "削除" , [:admin, @user], method: :delete, data: { confirm: "ユーザー「#{@user.full_name}」を削除します。よろしいですか？" },class: "btn btn-danger" %>

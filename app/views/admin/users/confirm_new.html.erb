@@ -11,9 +11,16 @@
       <%= f.hidden_field :number %>
     </tr>
     <tr>
-      <th><%= User.human_attribute_name(:name) %></th>
-      <td><%= @user.name %></td>
-      <%= f.hidden_field :name %>
+      <th>氏名（ふりがな）</th>
+      <td><%= @user.furigana_lastname + "　" + @user.furigana_firstname %></td>
+      <%= f.hidden_field :furigana_lastname %>
+      <%= f.hidden_field :furigana_firstname %>
+    </tr>
+    <tr>
+      <th>氏名</th>
+      <td><%= @user.full_name %></td>
+      <%= f.hidden_field :lastname %>
+      <%= f.hidden_field :firstname %>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:email) %></th>

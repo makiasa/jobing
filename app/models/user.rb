@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
   
-  validates :name, presence: true
+  validates :firstname, presence: true
+  validates :lastname, presence: true
   validates :number, presence: true, uniqueness: true
   validates :email, length: { maximum: 300 }, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, allow_blank: true
 
@@ -13,6 +14,15 @@ class User < ApplicationRecord
   
   def position_change
     POSITION_LIST[self.position]
+  end
+  
+  def full_name
+    self.lastname + "　" + self.firstname
+  end
+  
+  def self.search(keyword) #職員情報の検索機能
+  where(["furigana_lastname like? OR furigana_firstname like? OR lastname like? OR firstname like?",
+        "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"])
   end
   
 end

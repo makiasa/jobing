@@ -11,6 +11,7 @@ class Admin::DepartmentsController < ApplicationController
   
   def new
     @department = Department.new
+    @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
   end
   
   def confirm_new
