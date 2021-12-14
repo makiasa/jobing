@@ -11,7 +11,7 @@
           <!-- border最上部を合わせるため、以下のh6タグでstyle="display:inline"とした -->
           <h6>ToDo&nbsp;&nbsp;<a href="/todos/new" class="badge badge-secondary">追加</a></h6>
           
-          <div class="border border-dark">
+          <div class="border border-dark bg-white">
             <div class="overflow-auto" style="height:300px;">
             <% @todos.each do |todo| %>
               <% if todo.status == 0 || todo.status == 1 %>
@@ -26,7 +26,7 @@
         </div>
       </div>
         <h6>ToDo（期限超過）</h6>
-          <div class="border border-dark">
+          <div class="border border-dark bg-white">
             <div class="overflow-auto" style="height:250px;">
             <% @over_todos.each do |todo| %>
               <% if todo.status == 0 || todo.status == 1 %>
@@ -48,7 +48,7 @@
               <% 1.upto(12) do |month| %>
               <div>
                 <h6>スケジュール（<%= month %>月）</h6>
-                  <div class="border border-dark pl-0">
+                  <div class="border border-dark bg-white pl-0">
                     <div class="overflow-auto" style="height:300px;">
                     <% @works.where(period: month).each do |work| %>
                       <p><%= link_to work.name ,work_path(work.id) %></p>
@@ -62,7 +62,7 @@
         </div>
         <div class="col-5 pr-4">
           <h6>不定期業務</h6>
-            <div class="border border-dark">
+            <div class="border border-dark bg-white">
               <div class="overflow-auto" style="height:300px;">
                 <% @irregular_works.each do |irregular_work| %>
                   <p><%= link_to irregular_work.name ,work_path(irregular_work.id) %></p>
@@ -74,7 +74,7 @@
       
         <div class="pl-5 pr-3 mb-3">
           <h6>担当業務一覧</h6>
-            <div class="border border-dark">
+            <div class="border border-dark bg-white">
             <div class="overflow-auto" style="height:250px;">
                 <% @works.each do |work| %>
                   <p><%= link_to work.name ,work_path(work.id) %></p>

@@ -67,6 +67,11 @@ class WorksController < ApplicationController
     
     @works = Work.where(firstid: @work.firstid).order(fiscalyear: "DESC")
     @fiscalyears = @works.map{|work| [FISCAL_YEARS[work.fiscalyear] , work.fiscalyear] }
+    
+    respond_to do |format|
+      format.html
+      format.csv { send_data @workflows.generate_csv, filename: "workflows-#{Time.zone.now.strftime("%Y%m%d%S")}.csv" }
+    end
   end
   
   def move_show
