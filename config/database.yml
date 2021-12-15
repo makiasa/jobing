@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: jobing_production
-  username: jobing
-  password: <%= ENV['JOBING_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
