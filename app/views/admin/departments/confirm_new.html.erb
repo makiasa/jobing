@@ -16,6 +16,11 @@
       <%= f.hidden_field :name %>
     </tr>
     <tr>
+      <th><%= Department.human_attribute_name(:ancestry) %></th>
+      <td><%= @parent_department.name %></td>
+      <%= f.hidden_field :ancestry %>
+    </tr>
+    <tr>
       <th><%= Department.human_attribute_name(:startdate) %></th>
       <td><%= @department.startdate %></td>
       <%= f.hidden_field :startdate %>

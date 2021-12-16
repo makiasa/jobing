@@ -5,9 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Budget.create(
-  fiscalyear: 2021,
-  subject: nil,
-  amount: nil,
-  department_id:2
+User.create(
+  number: 1,
+  admin: true,
+  firstname: "admin",
+  lastname: "admin",
+  password_digest: "1111"
   )
