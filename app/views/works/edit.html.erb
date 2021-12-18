@@ -79,7 +79,7 @@
 
   <% if current_user.position == 4 %> <!-- 課室長級の場合 -->
     <div class="row justify-content-end mt-5 mr-3 mb-3">
-      <%= link_to "業務の削除", work_path(@work.id), method: :delete, data: { confirm: "#{@work.name}を削除します。本当によろしいですか？" }, class: "btn btn-danger" %>
+      <%= link_to "業務の削除", work_path(@work.id), method: :delete, data: { confirm: "#{@work.name}を削除します。本業務に関するToDoも全て削除されます。本当によろしいですか？" }, class: "btn btn-danger" %>
     </div>
   <% end %>
   
