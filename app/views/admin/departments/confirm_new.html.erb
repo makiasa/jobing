@@ -17,17 +17,17 @@
     </tr>
     <tr>
       <th><%= Department.human_attribute_name(:ancestry) %></th>
-      <td><%= @parent_department.name %></td>
+      <td><%= @parent_department&.name %></td>
       <%= f.hidden_field :ancestry %>
     </tr>
     <tr>
       <th><%= Department.human_attribute_name(:startdate) %></th>
-      <td><%= @department.startdate %></td>
+      <td><%= @department&.startdate %></td>
       <%= f.hidden_field :startdate %>
     </tr>
     <tr>
       <th><%= Department.human_attribute_name(:enddate) %></th>
-      <td><%= @department.enddate %></td>
+      <td><%= @department&.enddate %></td>
       <%= f.hidden_field :enddate %>
     </tr>
   </tbody>

@@ -9,11 +9,11 @@ class Department < ApplicationRecord
   # validates :number, presence: true, uniqueness: true
   
   def startdate_time(startdate)
-    startdate&.strftime("%Y年%m月%d日")
+    startdate.strftime("%Y年%m月%d日")
   end
   
   def enddate_time(enddate)
-    enddate&.strftime("%Y年%m月%d日")
+    enddate.strftime("%Y年%m月%d日")
   end
   
 end

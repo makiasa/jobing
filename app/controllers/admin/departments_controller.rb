@@ -11,12 +11,17 @@ class Admin::DepartmentsController < ApplicationController
   
   def new
     @department = Department.new
-    @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
+    @departments = Department.where(Department.where("ancestry not like?", "%/%")).order(:number)
   end
   
   def confirm_new
     @department = Department.new(department_params)
-    @parent_department = Department.find(params[:department][:ancestry]) 
+    @departments = Department.where(Department.where("ancestry not like?", "%/%")).order(:number)
+    if params[:department][:ancestry].present?
+      @parent_department = Department.find(params[:department][:ancestry]) 
+    else
+      @department.ancestry = nil
+    end
     render :new unless @department.valid?
   end
 
