@@ -1,5 +1,5 @@
 class RenameAnnualyearColumnOfWorks < ActiveRecord::Migration[5.2]
   def change
-    rename_column :works, :annual_year, :fiscalyear
+    rename_column :works, :annualyear, :fiscalyear
   end
 end
