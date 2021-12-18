@@ -7,13 +7,19 @@ class Department < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :number, uniqueness: true
   # validates :number, presence: true, uniqueness: true
-  
+
+=begin  ※以下、herokuのみでエラーのためコメントアウト
   def startdate_time(startdate)
-    startdate.strftime("%Y年%m月%d日")
+    if startdate
+      startdate.strftime("%Y年%m月%d日")
+    end
   end
   
   def enddate_time(enddate)
-    enddate.strftime("%Y年%m月%d日")
+    if enddate
+      enddate.strftime("%Y年%m月%d日")
+    end
   end
+=end
   
 end

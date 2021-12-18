@@ -16,7 +16,8 @@ ja:
     attributes:
       user:
         id: ID
-        name: 名前
+        lastname: 姓
+        firstname: 名
         number: 職員番号
         email: メールアドレス
         department_id: 所属部署
@@ -31,8 +32,8 @@ ja:
       department:
         name: 部署名
         number: 部署番号
-        startdate: 発足日
-        enddate: 廃止日
+        startdate: 発足年月日
+        enddate: 廃止年月日
         ancestry: 親部署
         firstid: 先祖部署
       todo:
@@ -81,6 +82,7 @@ ja:
     formats:
       default: "%Y/%m/%d"
       long: "%Y年%m月%d日(%a)"
+      long2: "%Y年%m月%d日"
       short: "%m/%d"
     month_names:
     - 

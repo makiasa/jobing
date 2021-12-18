@@ -11,12 +11,12 @@ class Admin::DepartmentsController < ApplicationController
   
   def new
     @department = Department.new
-    @departments = Department.where(Department.where("ancestry not like?", "%/%")).order(:number)
+    @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
   end
   
   def confirm_new
     @department = Department.new(department_params)
-    @departments = Department.where(Department.where("ancestry not like?", "%/%")).order(:number)
+    @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
     if params[:department][:ancestry].present?
       @parent_department = Department.find(params[:department][:ancestry]) 
     else
@@ -33,15 +33,20 @@ class Admin::DepartmentsController < ApplicationController
   
   def create
     @department = Department.new(department_params)
+    @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
+    if params[:department][:ancestry].blank?
+      @department.ancestry = nil
+    end
     
     if params[:back].present?
-      @departments = Department.where(Department.where("ancestry not like?", "%/%")).order(:number)
       render :new
       return
     end
     
     if @department.save
-      if params[:department][:ancestry].present?
+      if params[:department][:ancestry].present? && Department.find(params[:department][:ancestry]).root?
+        @department.update(ancestry: "#{params[:department][:ancestry]}")
+      elsif params[:department][:ancestry].present? && Department.find(params[:department][:ancestry]).has_parent?
         @department.update(ancestry: "#{Department.find(params[:department][:ancestry]).parent.id}/#{params[:department][:ancestry]}")
       end
       redirect_to admin_department_path(@department), notice: "部署「#{@department.name}」を登録しました"
@@ -52,14 +57,23 @@ class Admin::DepartmentsController < ApplicationController
   
   def update
     @department = Department.find(params[:id])
+    @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
     
     if @department.update(department_params)
-      if params[:department][:ancestry].present?
+      if params[:department][:ancestry].present? && Department.find(params[:department][:ancestry]).root?
+        @department.update(ancestry: "#{params[:department][:ancestry]}")
+      elsif params[:department][:ancestry].present? && Department.find(params[:department][:ancestry]).has_parent?
         @department.update(ancestry: "#{Department.find(params[:department][:ancestry]).parent.id}/#{params[:department][:ancestry]}")
       end
       redirect_to admin_department_path(@department), notice: "部署「#{@department.name}」を更新しました"
     else
-      render :edit
+      if params[:department][:ancestry].blank?
+        @department.ancestry = nil
+        @department.update(department_params_except_column_ancestry)
+        redirect_to admin_department_path(@department), notice: "部署「#{@department.name}」を更新しました"
+      else
+        render :edit
+      end
     end
   end
   
@@ -72,6 +86,10 @@ class Admin::DepartmentsController < ApplicationController
   private
   def department_params
     params.require(:department).permit(:name, :number, :ancestry , :startdate, :enddate, :firstid)
+  end
+  
+  def department_params_except_column_ancestry
+    params.require(:department).permit(:name, :number, :startdate, :enddate, :firstid)
   end
   
   def require_admin
