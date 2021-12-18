@@ -35,6 +35,7 @@ class Admin::DepartmentsController < ApplicationController
     @department = Department.new(department_params)
     
     if params[:back].present?
+      @departments = Department.where(Department.where("ancestry not like?", "%/%")).order(:number)
       render :new
       return
     end
