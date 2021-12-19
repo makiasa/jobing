@@ -34,14 +34,9 @@ class Admin::DepartmentsController < ApplicationController
   def create
     @department = Department.new(department_params)
     @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
-    if params[:department][:ancestry].blank?
-      @department.ancestry = nil
-    end
+    @department.ancestry = nil  if params[:department][:ancestry].blank?
     
-    if params[:back].present?
-      render :new
-      return
-    end
+    render(:new) and return if params[:back].present?
     
     if @department.save
       if params[:department][:ancestry].present? && Department.find(params[:department][:ancestry]).root?
@@ -55,7 +50,7 @@ class Admin::DepartmentsController < ApplicationController
     end
   end
   
-  def update
+  def update #ここをcreateと同じ論理で修正
     @department = Department.find(params[:id])
     @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
     
