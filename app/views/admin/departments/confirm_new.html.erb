@@ -22,12 +22,12 @@
     </tr>
     <tr>
       <th><%= Department.human_attribute_name(:startdate) %></th>
-      <td><%= @department&.startdate_time(@department.startdate) %></td>
+      <td><%= @department.startdate %></td>
       <%= f.hidden_field :startdate %>
     </tr>
     <tr>
       <th><%= Department.human_attribute_name(:enddate) %></th>
-      <td><%= @department&.enddate_time(@department.enddate) %></td>
+      <td><%= @department.enddate %></td>
       <%= f.hidden_field :enddate %>
     </tr>
   </tbody>
