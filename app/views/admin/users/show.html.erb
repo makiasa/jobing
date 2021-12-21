@@ -32,11 +32,11 @@
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:created_at) %></th>
-      <td><%= @user.created_at %></td>
+      <td><%= create_time(@user.created_at) %></td>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:updated_at) %></th>
-      <td><%= @user.updated_at %></td>
+      <td><%= update_time(@user.updated_at) %></td>
     </tr>
   </tbody>
 </table>

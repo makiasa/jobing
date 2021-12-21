@@ -17,29 +17,30 @@
   
   <div class="row">
     <div class="col-auto ml-3"> 
-      ・年度：<%= Constant::FISCAL_YEARS[@fiscalyear] %>
+      <%= f.label "・年度" %>：<%= Constant::FISCAL_YEARS[@fiscalyear] %>
       <%= f.hidden_field :fiscalyear, :value => @fiscalyear %>
     </div>
   </div>
     
   <div class="row mt-3">  
     <div class="col-auto ml-3">
-      ・担当部署：<%= current_user.department.name %>
-        <%= f.hidden_field :department_id, :value => current_user.department.id %>
+      <%= f.label "・担当部署" %>
+      <%= f.select :department_id, {current_user.department.name => current_user.department.id} %>
     </div>
     
     <div class="col-auto"> 
-      ・業務名：<%= f.text_field :name %>
+       <%= f.label "・業務名" %>
+       <%= f.text_field :name, :size=>"40", placeholder: "記載例：●●●に関する業務"  %>
     </div>
 
-    <div class="col-2">
+    <div class="col-auto">
     <%= f.label "・業務時期" %>
-    <%= f.select :period, {1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12,"不定期"=>nil} %>
+    <%= f.select :period, {1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12, "毎月"=>13, "不定期"=>nil} %>
     月
     </div>
   
     <% if current_user.position == 4 %> <!-- 課室長級の場合 -->
-      <div class="col-3">
+      <div class="col-auto">
         <%= f.label "・担当者" %>
         <%= f.collection_select :user_id, @staffs_in_department,:id, :full_name, {include_blank: "職員を選択してください"} %>
       </div>

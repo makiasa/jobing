@@ -167,3 +167,35 @@ h1, h2 {
 .slick-track{
   height: auto; /*スケジュールのborderが消える問題を"auto"にすることで解決*/
 }
+
+/*以下、simple_calendar関係*/
+
+.simple-calendar {
+  .day {}
+
+  .wday-0 {
+    color: red;
+    background: #FFF0F5;
+  }
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {
+    color: blue;
+    background: #F0F8FF;
+  }
+
+  .today {}
+  .past {}
+  .future {}
+
+  .start-date {}
+
+  .prev-month {}
+  .next-month { }
+  .current-month {}
+
+  .has-events {}
+}

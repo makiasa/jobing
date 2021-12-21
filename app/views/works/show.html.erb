@@ -22,8 +22,10 @@
   </div>
   <div class="col-3"> 
     ・業務時期：
-    <% if @work.period %>
+    <% if @work.period && @work.period != 13 %>
       <%= @work.period %>月
+    <% elsif @work.period == 13 %>
+      毎月
     <% else %>
       不定期
     <% end %>

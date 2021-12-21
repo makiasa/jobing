@@ -45,6 +45,10 @@ class TodosController < ApplicationController
     end
   end
   
+  def show
+    @todo = Todo.find(params[:id])
+  end
+  
   def edit
     @todo = Todo.find(params[:id])
     @myworks = current_user.works.where(department_id: current_user.department_id)

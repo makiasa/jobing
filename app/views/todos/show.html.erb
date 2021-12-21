@@ -1,0 +1,31 @@
+<h4>ToDo情報</h4>
+
+<div class="row">
+  <div class="col-auto ml-5 mt-3">
+    業務名：<%= @todo.work.name %>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-auto ml-5">
+    内容：<%= @todo.content %>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-auto ml-5">
+    作業期限：<%= @todo.datechange %>
+  </div>
+</div>
+  
+<div class="row mt-5">
+  <div class="col-auto ml-5">
+    作業状況：<%= @todo.statuschange(@todo.status) %>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-auto ml-5">
+<%= link_to '編集', edit_todo_path(@todo.id) , class: "btn btn-light btn-sm" %>
+  </div>
+</div>

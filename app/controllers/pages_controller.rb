@@ -16,6 +16,8 @@ class PagesController < ApplicationController
     @todos = current_user.todos.where("deadline >= ?", Date.today).order(:deadline)
     @over_todos = current_user.todos.where("deadline < ?", Date.today).order(:deadline)
     @irregular_works = @works.where(period: nil)
+    
+    @events = Event.all
   end
   
   def index

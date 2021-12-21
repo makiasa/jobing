@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   post 'todos/new',  to: 'todos#new_todo_create'
   post 'todos/move_index'
   get 'todos/index/:status',  to: 'todos#move_index'
+  
+  resources :events
  
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

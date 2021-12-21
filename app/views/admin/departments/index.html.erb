@@ -33,8 +33,8 @@
           <td><%= link_to department.name, [:admin,department] %></td>
         <% end %>
           
-          <td><%= department&.startdate %></td>
-          <td><%= department&.enddate %></td>
+          <td><%= department.startdate_time(department.startdate) %></td>
+          <td><%= department.enddate_time(department.enddate) %></td>
           <td>
             <%= link_to "編集" , edit_admin_department_path(department), class: "btn btn-primary-mr-3" %>
             <%= link_to "削除" , [:admin, department], method: :delete, data: { confirm: "ユーザー「#{department.name}」を削除します。よろしいですか？" },
