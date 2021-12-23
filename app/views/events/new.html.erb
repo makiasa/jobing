@@ -1,9 +1,17 @@
-<h1>テスト</h1>
+<% if @event.errors.present? %>
+  <ul id="error_explanation">
+    <% @event.errors.full_messages.each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1>イベント作成</h1>
 
 <%= form_with(model: @event, local: true) do |f| %>
 
   <div class="title">
-    <div class="form-tag">タイトル</div>
+    <div class="form-tag">件名</div>
     <%= f.text_field :title %>
   </div>
 
@@ -13,9 +21,14 @@
     <%= f.text_field :content %>
   </div>
 
-    <div class="time">
-    <div class="form-tag">時間</div>
+  <div class="time">
+    <div class="form-tag">開始時間</div>
     <%= f.datetime_select :start_time %>
+  </div>
+  
+  <div class="time">
+    <div class="form-tag">終了時間</div>
+    <%= f.datetime_select :end_time %>
   </div>
 
  <div class="submit">

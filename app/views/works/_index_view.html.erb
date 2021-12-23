@@ -16,9 +16,19 @@
   </div>
 </div>
 
-
 <div class="row mt-3">
-  <div class="col-10 ml-5">
+  <div class="col-5 ml-5">
+    担当業務
+    <div class="border border-dark">
+      <div class="overflow-auto" style="height:300px;">
+        <% @myworks.each do |mywork| %>
+          <p><%= link_to mywork.name ,work_path(mywork.id) %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-5 ml-5">
     所属部署全体の業務&nbsp;&nbsp;&nbsp;&nbsp;
       <% if current_user.position == 4 %> <!-- 課室長級の場合 -->
         <%= link_to "/works/new/#{@current_fiscalyear}" do %>
@@ -29,19 +39,6 @@
       <div class="overflow-auto" style="height:300px;">
         <% @works_in_department.each do |work_in_department| %>
           <p><%= link_to work_in_department.name ,work_path(work_in_department.id) %></p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row mt-3">
-  <div class="col-10 ml-5">
-    担当業務
-    <div class="border border-dark">
-      <div class="overflow-auto" style="height:300px;">
-        <% @myworks.each do |mywork| %>
-          <p><%= link_to mywork.name ,work_path(mywork.id) %></p>
         <% end %>
       </div>
     </div>

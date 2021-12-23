@@ -1,102 +1,98 @@
-  <div class="row">
-    <div class="col-4">
-      <p>年度：<%= Constant::FISCAL_YEARS[@current_fiscalyear] %>　　氏名：<%= @user.full_name %>　　所属：<%= @department.name %></p>
-    </div>
+<div class="row justify-content-end">
+  <div class="col-auto">
+    <h6 class="text-right">年度：<%= Constant::FISCAL_YEARS[@current_fiscalyear] %>　　氏名：<%= @user.full_name %>　　所属：<%= @department.name %></h6>
   </div>
-  
-  <div class="row">
-    <div class="col-4">
-      <div class="row" style="height:350px;">
-        <div class="col-12">
-          <!-- border最上部を合わせるため、以下のh6タグでstyle="display:inline"とした -->
-          <h6>ToDo&nbsp;&nbsp;<a href="/todos/new" class="badge badge-secondary">追加</a></h6>
-          
-          <div class="border border-dark bg-white">
-            <div class="overflow-auto" style="height:300px;">
-            <% @todos.each do |todo| %>
-              <% if todo.status == 0 || todo.status == 1 %>
-                <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
-                <%= "業務名：" + todo.work.name %><br>
-                <%= "作業内容：" + todo.content %><br>
-                <%= "作業状況：" + todo.statuschange(todo.status) %><br><br>
-              <% end %>
-            <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-        <h6>ToDo（期限超過）</h6>
-          <div class="border border-dark bg-white">
-            <div class="overflow-auto" style="height:250px;">
-            <% @over_todos.each do |todo| %>
-              <% if todo.status == 0 || todo.status == 1 %>
-                <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
-                <%= "業務名：" + todo.work.name %><br>
-                <%= "作業内容：" + todo.content %><br>
-                <%= "作業状況：" + todo.statuschange(todo.status) %><br><br>
-              <% end %>
-            <% end %>
-            </div>
-          </div>
-    </div>
-    
-    <div class="col-8">
-      <div class="row" style="height:350px;">
-        <div class="col-7 pl-5" >
-            <div class="slider">
-              
-              <% 1.upto(12) do |month| %>
-              <div>
-                <h6>スケジュール（<%= month %>月）</h6>
-                  <div class="border border-dark bg-white pl-0">
-                    <div class="overflow-auto" style="height:300px;">
-                      <% @works.where(period: 13).each do |work| %>
-                        <p><%= link_to work.name ,work_path(work.id) %></p>
-                      <% end %>
-                      <% @works.where(period: month).each do |work| %>
-                        <p><%= link_to work.name ,work_path(work.id) %></p>
-                      <% end %>
-                    </div>
-                  </div>
-              </div>
-              <% end %>
-              
-            </div>
-        </div>
-        <div class="col-5 pr-4">
-          <h6>不定期業務</h6>
-            <div class="border border-dark bg-white">
-              <div class="overflow-auto" style="height:300px;">
-                <% @irregular_works.each do |irregular_work| %>
-                  <p><%= link_to irregular_work.name ,work_path(irregular_work.id) %></p>
-                <% end %>
-              </div>
-            </div>
-        </div>
-      </div>
-      
-        <div class="pl-5 pr-3 mb-3">
-          <h6>担当業務一覧</h6>
-            <div class="border border-dark bg-white">
-            <div class="overflow-auto" style="height:250px;">
-                <% @works.each do |work| %>
-                  <p><%= link_to work.name ,work_path(work.id) %></p>
-                <% end %>
-              </div>
-            </div>
-        </div>
-    </div>
-  </div>
-
-  <script>
-  $(function() {
-    $('.slider').slick({
-      slidesToShow:1,
-      initialSlide: <%= @current_month %> - 1,
-      prevArrow: '<i class="fas fa-arrow-alt-circle-left"></i>',
-      nextArrow: '<i class="fas fa-arrow-alt-circle-right"></i>'
-    })
-  });
-  </script>
-  
 </div>
+
+<%= render "events/calendar" %>
+
+<div class="row mt-5">
+  <div class="col-4">
+    <h5>＜ToDo＞&nbsp;&nbsp;<a href="/todos/new" class="badge badge-secondary">追加</a></h5>
+      <div class="border border-dark bg-white" style="height:500px;">
+        <div class="overflow-auto">
+          <% @todos.each do |todo| %>
+            <% if todo.status == 0 || todo.status == 1 %>
+              <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><%= "(" + todo.statuschange(todo.status) + ")" %><br>
+              <%= "業務名：" + todo.work.name %><br>
+              <%= "作業内容：" + todo.content %><br><br>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+  </div>
+  <div class="col-4">
+    <h5>＜ToDo（期限超過）＞</h5>
+      <div class="border border-dark bg-white" style="height:500px;">
+        <div class="overflow-auto">
+        <% @over_todos.each do |todo| %>
+          <% if todo.status == 0 || todo.status == 1 %>
+            <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
+            <%= "業務名：" + todo.work.name %><br>
+            <%= "作業内容：" + todo.content %><br>
+            <%= "作業状況：" + todo.statuschange(todo.status) %><br><br>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+  </div>
+  
+  
+  <div class="col-4">
+    <div class="row">
+      <div class="col-12 pl-3" >
+        <div class="slider">
+            
+            <% 1.upto(12) do |month| %>
+            <div>
+              <h5>＜業務スケジュール（<%= month %>月）＞</h5>
+                <div class="border border-dark bg-white" style="height:220px;">
+                  <div class="overflow-auto">
+                    <% @works.where(period: 13).each do |work| %>
+                      <p><%= link_to work.name ,work_path(work.id) %></p>
+                    <% end %>
+                    <% @works.where(period: month).each do |work| %>
+                      <p><%= link_to work.name ,work_path(work.id) %></p>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+            <% end %>
+            
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 ml-3">
+        <h5>＜不定期業務＞</h5>
+          <div class="border border-dark bg-white" style="height:227px; width:390px;">
+            <div class="overflow-auto">
+              <% @irregular_works.each do |irregular_work| %>
+                <p><%= link_to irregular_work.name ,work_path(irregular_work.id) %></p>
+              <% end %>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<br>
+
+<div class="row justify-content-end mt-3">
+  Jobing Copyright 2021 
+</div>
+
+<div class="row" style="height:10px;">
+</div>
+
+<script>
+$(function() {
+  $('.slider').slick({
+    slidesToShow:1,
+    initialSlide: <%= @current_month %> - 1,
+    prevArrow: '<i class="fas fa-arrow-alt-circle-left"></i>',
+    nextArrow: '<i class="fas fa-arrow-alt-circle-right"></i>'
+  })
+});
+</script>

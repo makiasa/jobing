@@ -18,6 +18,7 @@ class PagesController < ApplicationController
     @irregular_works = @works.where(period: nil)
     
     @events = Event.all
+    @todos_in_calender = current_user.todos.where("status = ? or status = ?" , 0 , 1 )
   end
   
   def index

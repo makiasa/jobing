@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def index
     @events = Event.all
-    @todos = current_user.todos.where("status = ? or status = ?" , 0 , 1 )
+    @todos_in_calender = current_user.todos.where("status = ? or status = ?" , 0 , 1 )
   end
   
   def new
@@ -9,9 +9,13 @@ class EventsController < ApplicationController
   end
   
   def create
-    Event.create(event_parameter)
-    redirect_to events_path
-    flash[:success] = "スケジュールを登録しました"
+    @event = Event.new(event_parameter)
+    if @event.save
+      redirect_to events_path
+      flash[:success] = "スケジュールを登録しました"
+    else
+      render :new
+    end
   end
   
   def edit
