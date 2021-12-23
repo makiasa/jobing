@@ -6,6 +6,30 @@
 
 <%= render "events/calendar" %>
 
+<div class="row justify-content-center">
+  <div class="col-11" >
+        <div class="slider">
+            
+            <% 1.upto(12) do |month| %>
+            <div>
+              <h5>＜業務スケジュール（<%= month %>月）＞</h5>
+                <div class="border border-dark bg-white" style="height:150px;">
+                  <div class="overflow-auto">
+                    <% @works.where(period: 13).each do |work| %>
+                      <p><%= link_to work.name ,work_path(work.id) %></p>
+                    <% end %>
+                    <% @works.where(period: month).each do |work| %>
+                      <p><%= link_to work.name ,work_path(work.id) %></p>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+            <% end %>
+            
+        </div>
+      </div>
+</div>
+
 <div class="row mt-5">
   <div class="col-4">
     <h5>＜ToDo＞&nbsp;&nbsp;<a href="/todos/new" class="badge badge-secondary">追加</a></h5>
@@ -40,29 +64,6 @@
   
   <div class="col-4">
     <div class="row">
-      <div class="col-12 pl-3" >
-        <div class="slider">
-            
-            <% 1.upto(12) do |month| %>
-            <div>
-              <h5>＜業務スケジュール（<%= month %>月）＞</h5>
-                <div class="border border-dark bg-white" style="height:220px;">
-                  <div class="overflow-auto">
-                    <% @works.where(period: 13).each do |work| %>
-                      <p><%= link_to work.name ,work_path(work.id) %></p>
-                    <% end %>
-                    <% @works.where(period: month).each do |work| %>
-                      <p><%= link_to work.name ,work_path(work.id) %></p>
-                    <% end %>
-                  </div>
-                </div>
-            </div>
-            <% end %>
-            
-        </div>
-      </div>
-    </div>
-    <div class="row mt-4">
       <div class="col-12 ml-3">
         <h5>＜不定期業務＞</h5>
           <div class="border border-dark bg-white" style="height:227px; width:390px;">
@@ -89,7 +90,7 @@
 <script>
 $(function() {
   $('.slider').slick({
-    slidesToShow:1,
+    slidesToShow:3,
     initialSlide: <%= @current_month %> - 1,
     prevArrow: '<i class="fas fa-arrow-alt-circle-left"></i>',
     nextArrow: '<i class="fas fa-arrow-alt-circle-right"></i>'
