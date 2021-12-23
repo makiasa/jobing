@@ -13,7 +13,7 @@
             <% 1.upto(12) do |month| %>
             <div>
               <h5>＜業務スケジュール（<%= month %>月）＞</h5>
-                <div class="border border-dark bg-white" style="height:150px;">
+                <div class="border border-dark bg-white" style="height:170px;">
                   <div class="overflow-auto">
                     <% @works.where(period: 13).each do |work| %>
                       <p><%= link_to work.name ,work_path(work.id) %></p>
@@ -91,7 +91,7 @@
 $(function() {
   $('.slider').slick({
     slidesToShow:3,
-    initialSlide: <%= @current_month %> - 1,
+    initialSlide: <%= @current_month %> - 2,
     prevArrow: '<i class="fas fa-arrow-alt-circle-left"></i>',
     nextArrow: '<i class="fas fa-arrow-alt-circle-right"></i>'
   })
