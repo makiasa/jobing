@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'pages/home'
     get 'users/search',  to: 'users#search'
+    get 'departments/search',  to: 'departments#search'
     resources :works
     
     resources :departments do

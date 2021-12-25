@@ -6,7 +6,6 @@ class Department < ApplicationRecord
   
   validates :name, presence: true, uniqueness: true
   validates :number, uniqueness: true
-  # validates :number, presence: true, uniqueness: true
 
   def startdate_time(startdate)
     if startdate
@@ -18,6 +17,10 @@ class Department < ApplicationRecord
     if enddate
       enddate.strftime("%Y年%m月%d日")
     end
+  end
+  
+  def self.search(keyword) #部署情報の検索機能
+  where(["name like?", "%#{keyword}%"])
   end
   
 end

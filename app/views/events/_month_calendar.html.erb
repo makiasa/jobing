@@ -1,4 +1,4 @@
-<h5>＜スケジュール＞&nbsp;&nbsp;<%= link_to 'イベント追加', new_event_path , class: "btn btn-info btn-sm" %></h5>
+<h5>スケジュール（月間）</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'イベント追加', new_event_path , class: "btn btn-info btn-sm" %>
 
 <%= month_calendar events: @events do |date, events| %>
   <%= date.day %>

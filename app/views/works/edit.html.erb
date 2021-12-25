@@ -1,11 +1,11 @@
+<div class="row mb-1">
+  <div class="col-auto">
+    <h5>業務編集</h5>
+  </div>
+</div>
+
 <div class="work-post">
   <%= form_with(model: @work, local: true) do |f| %>
-  
-  <div class="row justify-content-end">
-    <div class="col-1">
-      <%= f.submit "更新" %>
-    </div>
-  </div>
   
   <div class="row">
     <div class="col-auto ml-3"> 
@@ -44,6 +44,12 @@
     <div class="col-5 ml-5">
       <%= f.label "・本業務の課題" %>
       <%= f.text_area :task, :cols => 60, :rows => 5 %>
+    </div>
+  </div>
+  
+  <div class="row justify-content-end">
+    <div class="col-1">
+      <%= f.submit "更新" %>
     </div>
   </div>
 

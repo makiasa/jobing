@@ -1,4 +1,4 @@
-<H4>業務コピー</H4>
+<h5>業務コピー</h5>
 
 <%= form_with(url: works_copied_path, local: true) do |f| %>
 <div class="row mt-5">
@@ -28,7 +28,7 @@
 <div class="form-group">
   <div class="row mt-3">
     <div class="col-4 ml-5">
-      <%= f.submit "コピーする" , data: { confirm: "業務をコピーします。本当によろしいですか？" }, class: "btn btn-primary" %>
+      <%= f.submit "コピーする" , data: { confirm: "業務をコピーします。本当によろしいですか？" }, class: "btn btn-warning" %>
     </div>
   </div>
 </div>

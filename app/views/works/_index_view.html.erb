@@ -1,4 +1,4 @@
-<h4>業務一覧</h4>
+<h5>業務一覧</h5>
 
 <div class="row mt-3">
   <div class="col-3">
@@ -16,13 +16,13 @@
   </div>
 </div>
 
-<div class="row mt-3">
-  <div class="col-5 ml-5">
+<div class="row justify-content-center mt-3">
+  <div class="col-5">
     担当業務
-    <div class="border border-dark">
+    <div class="box11">
       <div class="overflow-auto" style="height:300px;">
         <% @myworks.each do |mywork| %>
-          <p><%= link_to mywork.name ,work_path(mywork.id) %></p>
+          <p>・<%= link_to mywork.name ,work_path(mywork.id) %></p>
         <% end %>
       </div>
     </div>
@@ -32,13 +32,13 @@
     所属部署全体の業務&nbsp;&nbsp;&nbsp;&nbsp;
       <% if current_user.position == 4 %> <!-- 課室長級の場合 -->
         <%= link_to "/works/new/#{@current_fiscalyear}" do %>
-          <button type="button" class="btn btn-secondary btn-sm py-0 mb-0">業務追加</button>
+          <button type="button" class="btn btn-info btn-sm py-0 mb-0">業務追加</button>
         <% end %>
       <% end %>
-    <div class="border border-dark">
+    <div class="box13">
       <div class="overflow-auto" style="height:300px;">
         <% @works_in_department.each do |work_in_department| %>
-          <p><%= link_to work_in_department.name ,work_path(work_in_department.id) %></p>
+          <p>・<%= link_to work_in_department.name ,work_path(work_in_department.id) %></p>
         <% end %>
       </div>
     </div>
@@ -46,9 +46,9 @@
 </div>
 
 <% if current_user.position == 4 %> <!-- 課室長級の場合 -->
-<div class="row mt-5 mr-5 mb-3">
-  <div class="col-4">
-    <a href="/works/copy" class="btn btn-secondary btn" role="button">業務をコピーする</a>
+<div class="row justify-content-end mt-5 mb-3">
+  <div class="col-auto mr-5">
+    <a href="/works/copy" class="btn btn-warning btn" role="button">業務をコピーする</a>
   </div>
 </div>
 <% end %>

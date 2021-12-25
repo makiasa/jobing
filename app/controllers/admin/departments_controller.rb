@@ -5,6 +5,12 @@ class Admin::DepartmentsController < ApplicationController
     @departments = Department.all.order(:number)
   end
   
+  def search
+    @departments = Department.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
+  end
+  
   def show
     @department = Department.find(params[:id])
   end
@@ -12,6 +18,8 @@ class Admin::DepartmentsController < ApplicationController
   def new
     @department = Department.new
     @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
+    
+    @reference_departments = Department.all.order(:number)
   end
   
   def confirm_new
@@ -29,6 +37,8 @@ class Admin::DepartmentsController < ApplicationController
     @department = Department.find(params[:id])
     @parent_department = @department.parent
     @departments = Department.where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
+    
+    @reference_departments = Department.all.order(:number)
   end
   
   def create

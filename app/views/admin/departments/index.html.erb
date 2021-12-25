@@ -1,4 +1,11 @@
-<h4>部署一覧</h4>
+<h5>部署一覧</h5>
+
+<div class="search-form mb-3">
+  <%= form_with url: admin_departments_search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
 
 <%= link_to "新規登録", new_admin_department_path, class: "btn btn-primary" %>
 
@@ -20,25 +27,25 @@
           <td><%= department.number %></td>
           
         <% if department.ancestry == nil %> <!-- 親部署の場合 -->
-          <td><%= link_to department.name, [:admin,department] %></td>
+          <td class="font-weight-bold"><%= link_to department.name, [:admin,department] %></td>
           <td></td>
           <td></td>
         <% elsif department.ancestry != nil && department.ancestry.exclude?("/") %> <!-- 子部署の場合 -->
-          <td><p class="text-black-50">(<%= department.parent.name %>)</p></td>
-          <td><%= link_to department.name, [:admin,department] %></td>
+          <td><div class="text-black-50">(<%= department.parent.name %>)</div></td>
+          <td class="font-weight-bold"><%= link_to department.name, [:admin,department] %></td>
           <td></td>
         <% elsif department.ancestry != nil && department.ancestry.include?("/") %> <!-- 孫部署の場合 -->
-          <td><p class="text-black-50">(<%= department.root.name %>)</p></td>
-          <td><p class="text-black-50">(<%= department.parent.name %>)</p></td>
-          <td><%= link_to department.name, [:admin,department] %></td>
+          <td><div class="text-black-50">(<%= department.root.name %>)</div></td>
+          <td><div class="text-black-50">(<%= department.parent.name %>)</div></td>
+          <td class="font-weight-bold"><%= link_to department.name, [:admin,department] %></td>
         <% end %>
           
           <td><%= department.startdate_time(department.startdate) %></td>
           <td><%= department.enddate_time(department.enddate) %></td>
           <td>
-            <%= link_to "編集" , edit_admin_department_path(department), class: "btn btn-primary-mr-3" %>
+            <%= link_to "編集" , edit_admin_department_path(department), class: "btn btn-primary mr-3 btn-sm" %>
             <%= link_to "削除" , [:admin, department], method: :delete, data: { confirm: "ユーザー「#{department.name}」を削除します。よろしいですか？" },
-                class: "btn btn-danger" %>
+                class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
         <% end %>

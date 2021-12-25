@@ -1,4 +1,4 @@
-<h4>部署情報の編集</h4>
+<h5>部署情報の編集</h5>
 
 <% if @department.errors.present? %>
   <ul id="error_explanation">
@@ -9,57 +9,102 @@
 <% end %>
 <%= form_with model: [:admin, @department], local: true do |f|  %>
 
-<div class="form-group">
-  <div class="row">
-    <div class="col-4">
-      <%= f.label :number, "部署番号" %>
-      <%= f.text_field :number , class: "form-control" %>
+<div class="row mt-5">
+  
+  <div class="col-6 ml-5">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-4">
+          <%= f.label :number, "部署番号" %>
+          <%= f.text_field :number , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="row">
+        <div class="col-8">
+          <%= f.label :name, "部署名" %>
+          <%= f.text_field :name , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="row">
+        <div class="col-4">
+          <%= f.label :ancestry, "上位(親)部署" %>
+          <%= f.collection_select :ancestry, @departments,:id, :name, { include_blank: "なし", selected: @parent_department&.id } %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="row mt-5">
+        <div class="col-auto">
+          <%= f.label :startdate, "発足日" %>
+          <%= f.date_field :startdate, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="row">
+        <div class="col-auto">
+          <%= f.label :enddate, "終了日" %>
+          <%= f.date_field :enddate, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="row">
+        <div class="col-4">
+          <%= f.submit "更新" , class: "btn btn-primary" %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="form-group">
-  <div class="row">
-    <div class="col-4">
-      <%= f.label :name, "部署名" %>
-      <%= f.text_field :name , class: "form-control" %>
+  
+  <div class="col-5">
+    <div class="row mb-3">
+      参考：部署一覧
+    </div>
+    
+    <div class="row mb-3">
+      <table class="table table-hover">
+        <thead class="thead-default">
+          <tr>
+            <th><%= Department.human_attribute_name(:number) %></th>
+            <th>部署名１(部局)</th>
+            <th>部署名２(課室)</th>
+            <th>部署名３(係)</th>
+          </tr> 
+          <tbody>
+            <% @reference_departments.each do |department| %>
+              <tr>
+                <td><%= department.number %></td>
+              <% if department.ancestry == nil %> <!-- 親部署の場合 -->
+                <td><%= link_to department.name, [:admin,department] %></td>
+                <td></td>
+                <td></td>
+              <% elsif department.ancestry != nil && department.ancestry.exclude?("/") %> <!-- 子部署の場合 -->
+                <td><div class="text-black-50">(<%= department.parent.name %>)</div></td>
+                <td><%= link_to department.name, [:admin,department] %></td>
+                <td></td>
+              <% elsif department.ancestry != nil && department.ancestry.include?("/") %> <!-- 孫部署の場合 -->
+                <td><div class="text-black-50">(<%= department.root.name %>)</div></td>
+                <td><div class="text-black-50">(<%= department.parent.name %>)</div></td>
+                <td><%= link_to department.name, [:admin,department] %></td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </thead>
+      </table>
     </div>
   </div>
-</div>
-
-<div class="form-group">
-  <div class="row">
-    <div class="col-4">
-      <%= f.label :ancestry, "上位(親)部署" %>
-      <%= f.collection_select :ancestry, @departments,:id, :name, { include_blank: "なし", selected: @parent_department&.id } %>
-    </div>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="row">
-    <div class="col-auto">
-      <%= f.label :startdate, "発足日時" %>
-      <%= f.date_field :startdate, class: "form-control" %>
-    </div>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="row">
-    <div class="col-auto">
-      <%= f.label :enddate, "終了日時" %>
-      <%= f.date_field :enddate, class: "form-control" %>
-    </div>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="row">
-    <div class="col-4">
-      <%= f.submit "更新" , class: "btn btn-primary" %>
-    </div>
-  </div>
-</div>
+  
+</div>    
 
 <% end %>

@@ -133,6 +133,8 @@ h1, h2 {
 
 */
 
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+
 /*以下、bootstrap関係*/
 
 /*以下、fontawesome関係*/
@@ -142,7 +144,7 @@ h1, h2 {
   position: absolute;
   z-index: 100;
   left: -10px;
-  top: 100px;
+  top: 120px;
 }
 
 .fa-arrow-alt-circle-right {
@@ -150,7 +152,7 @@ h1, h2 {
   position: absolute;
   z-index: 100;
   right: -10px;
-  top: 100px
+  top: 120px
 }
 
 /*以下、slick関係*/
@@ -171,6 +173,8 @@ h1, h2 {
 /*以下、simple_calendar関係*/
 
 .simple-calendar {
+  margin-bottom: -15px;
+  
   .day {}
 
   .wday-0 {
@@ -200,4 +204,181 @@ h1, h2 {
   .has-events {}
 }
 
-/*以下、その他見た目関係*/
+/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+
+/*以下、その他見た目関係等*/
+h5 {
+  position: relative;
+  display: inline-block;
+  padding: 0 40px;
+}
+
+h5:before, h5:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  display: inline-block;
+  width: 30px;
+  height: 1px;
+  background-color: black;
+}
+
+h5:before {
+  left: 0;
+}
+h5:after {
+  right: 0;
+}
+
+.profile{
+  position: relative;
+  padding: 0.25em 0;
+}
+
+.profile:after{
+  content: "";
+  display: block;
+  height: 4px;
+  background: -webkit-linear-gradient(to right, rgb(230, 90, 90), transparent);
+  background: linear-gradient(to right, rgb(230, 90, 90), transparent);
+}
+
+/*リンクジャンプ（主に同一ページ内）*/
+p.anchor{
+    display: block;
+    padding-top: 30px;
+    margin-top: -30px;
+}
+
+/*スライダー（業務スケジュール）及び担当業務一覧*/
+.box11{
+    padding: 0.5em 1em;
+    margin: 0 0 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.box11 p {
+    margin: 0; 
+    padding: 0;
+}
+
+/*不定期業務*/
+.box12{
+    padding: 0.5em 1em;
+    margin: 0 0 0 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 3px #232323;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.box12 p {
+    margin: 0; 
+    padding: 0;
+}
+
+/*所属部署全体の業務*/
+.box13{
+    padding: 0.5em 1em;
+    margin: 0 0 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #FF0000;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.box13 p {
+    margin: 0; 
+    padding: 0;
+}
+
+/*業務概要*/
+.box1 {
+    padding: 0.5em 1em;
+    margin: 0 0;
+    border: solid 3px #62c1ce;
+}
+.box1 p {
+    margin: 0; 
+    padding: 0;
+}
+
+/*本業務の課題*/
+.box2 {
+    padding: 0.5em 1em;
+    margin: 0 0;
+    border: solid 3px #ff7d6e;
+}
+.box2 p {
+    margin: 0; 
+    padding: 0;
+}
+
+/*ToDo*/
+.box8 {
+    padding: 0.5em 1em;
+    margin: 0 0;
+    color: #232323;
+    background: #fff8e8;
+    border-left: solid 10px #ffc06e;
+}
+.box8 p {
+    margin: 0; 
+    padding: 0;
+}
+
+/*ToDo(期限超過)*/
+.box9 {
+    padding: 0.5em 1em;
+    margin: 0 0;
+    color: #232323;
+    background: #ffebe9;
+    border-left: solid 10px #ff7d6e;
+}
+.box9 p {
+    margin: 0; 
+    padding: 0;
+}
+
+
+/*アプリケーション背景*/
+
+/*=============
+.bg_pattern
+==============*/
+
+.bg_pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  z-index: -1;
+}
+.Paper_v2 {
+  background-image:
+    repeating-linear-gradient(to bottom,
+      transparent 25px,
+      rgba(0, 0, 0, 0.04) 26px,  rgba(0, 0, 0, 0.04) 26px,
+      transparent 27px,  transparent 51px, 
+      rgba(0, 0, 0, 0.04) 52px,  rgba(0, 0, 0, 0.04) 52px,
+      transparent 53px,  transparent 77px, 
+      rgba(0, 0, 0, 0.04) 78px,  rgba(0, 0, 0, 0.04) 78px,
+      transparent 79px,  transparent 103px, 
+      rgba(0, 0, 0, 0.04) 104px,  rgba(0, 0, 0, 0.04) 104px,
+      transparent 105px,  transparent 129px, 
+      rgba(0, 0, 0, 0.04) 130px,  rgba(0, 0, 0, 0.04) 130px),
+
+    repeating-linear-gradient(to right,
+      transparent 25px,
+      rgba(0, 0, 0, 0.04) 26px,  rgba(0, 0, 0, 0.04) 26px,
+      transparent 27px,  transparent 51px, 
+      rgba(0, 0, 0, 0.04) 52px,  rgba(0, 0, 0, 0.04) 52px,
+      transparent 53px,  transparent 77px, 
+      rgba(0, 0, 0, 0.04) 78px,  rgba(0, 0, 0, 0.04) 78px,
+      transparent 79px,  transparent 103px, 
+      rgba(0, 0, 0, 0.04) 104px,  rgba(0, 0, 0, 0.04) 104px,
+      transparent 105px,  transparent 129px, 
+      rgba(0, 0, 0, 0.04) 130px,  rgba(0, 0, 0, 0.04) 130px);
+}
