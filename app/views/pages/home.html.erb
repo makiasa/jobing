@@ -15,7 +15,7 @@
             <div>
               <h5>業務スケジュール（<%= month %>月）</h5>
                 <div class="box11 col-12 overflow-auto" style="height:200px;">
-                  <% @works[13].each do |work| %>
+                  <% @works[13]&.each do |work| %>
                     <p>・<%= link_to work.name ,work_path(work.id) %></p>
                   <% end %>
                   <% @works[month]&.each do |work| %>
