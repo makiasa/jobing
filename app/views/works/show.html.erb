@@ -49,14 +49,14 @@
 <div class="row justify-content-center mt-3 mb-5">
   <div class="col-5">
     業務概要
-    <div class="box1 overflow-auto" style="height:150px;">
+    <div class="box1 bg-white overflow-auto" style="height:150px;">
       <p><%= @work.summary %></p>
     </div>
   </div>
   
   <div class="col-5 ml-5">
     本業務の課題
-    <div class="box2 overflow-auto" style="height:150px;">
+    <div class="box2 bg-white overflow-auto" style="height:150px;">
       <p><%= @work.task %></p>
     </div>
   </div>
@@ -98,9 +98,13 @@
 </div>
 
 <div class="row justify-content-center mt-5">
-  <div class="col-auto">
-    <p class="text-center anchor" id="workflow">業務フロー&nbsp;&nbsp;<%= link_to "CSV出力", work_path(format: :csv),
-                                                                      data: { confirm: "CSV出力してよろしいですか？" },class: "btn btn-success btn-sm" %></p>
+  <div class="col-1 offset-5">
+    <p class="text-center anchor" id="workflow">業務フロー</p>
+  </div>
+  <div class="col-5">
+    <%= link_to "CSV出力", work_path(format: :csv), data: { confirm: "CSV出力してよろしいですか？" },class: "btn btn-success btn-sm" %>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "編集", edit_work_path(@work.id) , class: "btn btn-secondary btn-sm" %>
   </div>
 </div>
 
@@ -114,10 +118,8 @@
   
   <div class="row">
       <div class="col-5 ml-5">
-          <div class="border border-dark">
-            <div class="overflow-auto" style="height:100px;">
-              <%= workflow.content %>
-            </div>
+          <div class="border border-dark bg-white overflow-auto" style="height:100px;">
+            <%= workflow.content %>
           </div>
       </div>
       <div class="col-6 mr-5">

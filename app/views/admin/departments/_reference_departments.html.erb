@@ -1,0 +1,30 @@
+<table class="table table-hover bg-white">
+  <thead class="thead-default">
+    <tr>
+      <th><%= Department.human_attribute_name(:number) %></th>
+      <th>部署名１(部局)</th>
+      <th>部署名２(課室)</th>
+      <th>部署名３(係)</th>
+    </tr> 
+    <tbody>
+      <% @reference_departments.each do |department| %>
+        <tr>
+          <td><%= department.number %></td>
+        <% if department.ancestry == nil %> <!-- 親部署の場合 -->
+          <td><%= link_to department.name, [:admin,department] %></td>
+          <td></td>
+          <td></td>
+        <% elsif department.ancestry != nil && department.ancestry.exclude?("/") %> <!-- 子部署の場合 -->
+          <td><div class="text-black-50">(<%= department.parent.name %>)</div></td>
+          <td><%= link_to department.name, [:admin,department] %></td>
+          <td></td>
+        <% elsif department.ancestry != nil && department.ancestry.include?("/") %> <!-- 孫部署の場合 -->
+          <td><div class="text-black-50">(<%= department.root.name %>)</div></td>
+          <td><div class="text-black-50">(<%= department.parent.name %>)</div></td>
+          <td><%= link_to department.name, [:admin,department] %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </thead>
+</table>
