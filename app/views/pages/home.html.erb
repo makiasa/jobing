@@ -15,10 +15,10 @@
             <div>
               <h5>業務スケジュール（<%= month %>月）</h5>
                 <div class="box11 col-12 overflow-auto" style="height:200px;">
-                  <% @works.where(period: 13).each do |work| %>
+                  <% @works[13].each do |work| %>
                     <p>・<%= link_to work.name ,work_path(work.id) %></p>
                   <% end %>
-                  <% @works.where(period: month).each do |work| %>
+                  <% @works[month]&.each do |work| %>
                     <p>・<%= link_to work.name ,work_path(work.id) %></p>
                   <% end %>
                 </div>
@@ -65,7 +65,7 @@
   <div class="col-3">
     <h5>不定期業務</h5>
       <div class="box12 overflow-auto" style="height:227px;">
-        <% @irregular_works.each do |irregular_work| %>
+        <% @irregular_works&.each do |irregular_work| %>
           <p><%= link_to irregular_work.name ,work_path(irregular_work.id) %></p>
         <% end %>
       </div>

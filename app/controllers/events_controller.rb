@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def index
     @events = Event.all
-    @todos_in_calender = current_user.todos.where("status = ? or status = ?" , 0 , 1 )
+    @todos_in_calender = current_user.todos.where("status = ? or status = ?" , 0 , 1 ).group_by{|todo| todo.deadline}
   end
   
   def new

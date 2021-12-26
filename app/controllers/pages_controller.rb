@@ -6,19 +6,20 @@ class PagesController < ApplicationController
       @current_fiscalyear = Date.today.year - 1
     end
     
-    @user = User.find(current_user.id)
-    @department = current_user.department
-    @works = current_user.works.where(fiscalyear: @current_fiscalyear)
-    
     @current_month = Date.today.month
-    @current_month_works = @works.where(period: @current_month)
+    
+    @user = User.find(current_user.id)
+    
+    @department = current_user.department
+    
+    @works = current_user.works.where(fiscalyear: @current_fiscalyear).group_by{|work| work.period}
+    @irregular_works = @works[nil]
     
     @todos = current_user.todos.where("deadline >= ?", Date.today).order(:deadline)
     @over_todos = current_user.todos.where("deadline < ?", Date.today).order(:deadline)
-    @irregular_works = @works.where(period: nil)
-    
+   
     @events = Event.all
-    @todos_in_calender = current_user.todos.where("status = ? or status = ?" , 0 , 1 )
+    @todos_in_calender = current_user.todos.where("status = ? or status = ?" , 0 , 1 ).group_by{|todo| todo.deadline}
   end
   
   def index

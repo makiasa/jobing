@@ -15,11 +15,11 @@
     </div>
   <% end %>
   
-  <% if @todos_in_calender.where(deadline: date) != [] %>
+  <% if @todos_in_calender[date] != nil %>
   　<div class="text-danger small">!!以下、ToDo作業期限!!</div>
   <% end %>
   
-  <% @todos_in_calender.where(deadline: date).each do |todo_in_calender| %>
+  <% @todos_in_calender[date]&.each do |todo_in_calender| %>
     <p class="small">・<%= link_to todo_in_calender.work.name, todo_path(todo_in_calender.id) %> <%= "(" + todo_in_calender.content + ")" %></p>
   <% end %>
 <% end %>
