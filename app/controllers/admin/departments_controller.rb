@@ -71,9 +71,9 @@ class Admin::DepartmentsController < ApplicationController
       end
       redirect_to admin_department_path(@department), notice: "部署「#{@department.name}」を更新しました"
     else
-        @departments = Department.where.not(id: params[:id]).where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
-        @reference_departments = Department.all.order(:number)
-        render :edit
+      @departments = Department.where.not(id: params[:id]).where(ancestry: nil).or(Department.where("ancestry not like?", "%/%")).order(:number)
+      @reference_departments = Department.all.order(:number)
+      render :edit
     end
   end
   

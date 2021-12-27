@@ -9,6 +9,7 @@ class User < ApplicationRecord
   belongs_to :department, optional: true
   has_many :works
   has_many :todos
+  has_many :events
   
   POSITION_LIST = {0 =>"市長", 1 =>"副市長", 2 =>"部長", 3 =>"部次長", 4 =>"課室長", 5 =>"係長", 6 =>"係員"}
   

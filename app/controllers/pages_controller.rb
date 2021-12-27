@@ -18,7 +18,7 @@ class PagesController < ApplicationController
     @todos = current_user.todos.where("deadline >= ?", Date.today).order(:deadline)
     @over_todos = current_user.todos.where("deadline < ?", Date.today).order(:deadline)
    
-    @events = Event.all
+    @events = current_user.events
     @todos_in_calender = current_user.todos.where("status = ? or status = ?" , 0 , 1 ).group_by{|todo| todo.deadline}
   end
   
