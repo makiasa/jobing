@@ -1,29 +1,38 @@
 <%= form_with(model: @event, local: true) do |f| %>
 
-  <div class="title">
-  <div class="title">
+<div class="row mb-3">
+  <div class="col-4 ml-5">
     <div class="form-tag">件名</div>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
+</div>
 
 
-  <div class="content">
+<div class="row mb-3">
+  <div class="col-4 ml-5">
     <div class="form-tag">内容</div>
-    <%= f.text_field :content %>
+    <%= f.text_area :content, :cols => 70, :rows => 5, class: "form-control" %>
   </div>
+</div>
 
-  <div class="time">
+<div class="row mb-3">
+  <div class="col-4 ml-5">
     <div class="form-tag">開始時間</div>
     <%= f.datetime_field :start_time %>
   </div>
+</div>
   
-  <div class="time">
+<div class="row mb-3">
+  <div class="col-4 ml-5">
     <div class="form-tag">終了時間</div>
     <%= f.datetime_field :end_time %>
   </div>
+</div>
 
- <div class="submit">
+<div class="row mt-5 mb-3">
+  <div class="col-4 ml-5">
     <%= f.submit %>
- </div>
+  </div>
+</div>
 
 <% end %>

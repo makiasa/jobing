@@ -5,7 +5,7 @@
 </div>
 
 <div class="row">
-  <div class="col-2">
+  <div class="col-auto">
     <%= form_with(url: works_move_show_path, local: true) do |f| %>
       <%= f.hidden_field :id, :value => @work.id %>
       <%= f.select :fiscalyear, @fiscalyears, {include_blank: "年度を選択"} %>
@@ -14,36 +14,35 @@
     <a href="#workflow">↓業務フローへ移動↓</a>
   </div>
 
-  <div class="col-2"> 
+  <div class="col-auto"> 
     ・年度：<%= Constant::FISCAL_YEARS[@work.fiscalyear] %>
+    <div> 
+      ・業務時期：
+      <% if @work.period && @work.period != 13 %>
+        <%= @work.period %>月
+      <% elsif @work.period == 13 %>
+        毎月
+      <% else %>
+        不定期
+      <% end %>
+    </div>
   </div>
 
-  <div class="col-4"> 
+  <div class="col-auto"> 
     ・業務名：<%= link_to @work.name, work_path(@work.id) %>
-  </div>
-  <div class="col-3"> 
-    ・業務時期：
-    <% if @work.period && @work.period != 13 %>
-      <%= @work.period %>月
-    <% elsif @work.period == 13 %>
-      毎月
-    <% else %>
-      不定期
+    
+    <% if current_user.position == 4 %> <!-- 課室長級の場合 -->
+    <div> 
+      ・担当者：
+      <%= @work.user&.full_name %>
+    </div>
     <% end %>
   </div>
-  <div class="col-1"> 
+  
+  <div class="col-1 ml-auto"> 
     <%= link_to "編集", edit_work_path(@work.id) , class: "btn btn-secondary btn-sm" %>
   </div>
 </div>
-
-<% if current_user.position == 4 %> <!-- 課室長級の場合 -->
-<div class="row">
-  <div class="col-auto offset-2"> 
-    ・担当者：
-    <%= @work.user&.full_name %>
-  </div>
-</div>
-<% end %>
 
 
 <div class="row justify-content-center mt-3 mb-5">
@@ -61,6 +60,8 @@
     </div>
   </div>
 </div>
+
+<hr>
 
 <div class="row justify-content-center mt-3">
   <div class="col-5">
@@ -97,8 +98,10 @@
   </div>
 </div>
 
+<hr>
+
 <div class="row justify-content-center mt-5">
-  <div class="col-1 offset-5">
+  <div class="col-auto offset-5">
     <p class="text-center anchor" id="workflow">業務フロー</p>
   </div>
   <div class="col-5">
@@ -117,18 +120,18 @@
   </div>
   
   <div class="row">
-      <div class="col-5 ml-5">
-          <div class="border border-dark bg-white overflow-auto" style="height:100px;">
-            <%= workflow.content %>
-          </div>
+    <div class="col-5 ml-5">
+      <div class="border border-dark bg-white overflow-auto" style="height:100px;">
+        <%= workflow.content %>
       </div>
-      <div class="col-6 mr-5">
-        <p>備考：<%= workflow.note %></p>
-        <p>ファイルパス：<%= link_to workflow.filepath, "file:///#{workflow.filepath}" %></p>
-        <% if workflow.file.attached? %>
-        <p>添付ファイル：<%= link_to workflow.file.filename ,rails_blob_path(workflow.file) %></p>
-        <% end %>
-      </div>
+    </div>
+    <div class="col-5 ml-1 mr-3">
+      <p>備考：<%= workflow.note %></p>
+      <p>ファイルパス：<%= link_to workflow.filepath, "file:///#{workflow.filepath}" %></p>
+      <% if workflow.file.attached? %>
+      <p>添付ファイル：<%= link_to workflow.file.filename ,rails_blob_path(workflow.file) %></p>
+      <% end %>
+    </div>
   </div>
   
   <div class="row justify-content-center offset-1">
@@ -139,6 +142,10 @@
     </div>
   </div>
 <% end %>
+
+<div class="row mt-5 ml-1">
+<a href="#top">↑先頭へ移動↑</a>
+</div>
 
 <div class="row mt-5">
 </div>

@@ -1,26 +1,37 @@
-<p id="notice"><%= notice %></p>
-<div class="show">
-<p>
-  <strong>タイトル</strong>
-  <%= @event.title %>
-</p>
+<h4>イベント情報</h4>
 
-<p>
-  <strong>内容</strong>
-  <%= @event.content %>
-</p>
+<div class="row">
+  <div class="col-auto ml-5 mt-3">
+    <strong>タイトル：</strong>
+    <%= @event.title %>
+  </div>
+</div>
 
-<p>
-  <strong>開始時間</strong>
-  <%= @event.start_time.strftime("%Y-%m-%d %H:%M") %>
-</p>
+<div class="row">
+  <div class="col-auto ml-5 mt-3">
+    <strong>内容：</strong>
+    <%= @event.content %>
+  </div>
+</div>
 
-<p>
-  <strong>終了時間</strong>
-  <%= @event.end_time.strftime("%Y-%m-%d %H:%M") %>
-</p>
+<div class="row">
+  <div class="col-auto ml-5 mt-3">
+    <strong>開始時間</strong>
+    <%= @event.start_time.strftime("%Y-%m-%d %H:%M") %>
+  </div>
+</div>
 
-<%= link_to '編集', edit_event_path(@event.id) %>
-<%= link_to '消去', event_path(@event.id), method: :delete, data: { confirm: "本当に削除してよろしいですか?" } %>
-<%= link_to '戻る', events_path %>
+<div class="row">
+  <div class="col-auto ml-5 mt-3">
+    <strong>終了時間</strong>
+    <%= @event.end_time.strftime("%Y-%m-%d %H:%M") %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-auto ml-5 mt-3">
+    <%= link_to '編集', edit_event_path(@event.id) ,class: "badge badge-primary" %>
+    <%= link_to '消去', event_path(@event.id), method: :delete, class: "badge badge-danger", data: { confirm: "本当に削除してよろしいですか?" } %>
+    <%= link_to '戻る', events_path, class: "badge badge-secondary" %>
+  </div>
 </div>
