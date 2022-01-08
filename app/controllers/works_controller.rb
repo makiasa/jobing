@@ -91,9 +91,12 @@ class WorksController < ApplicationController
   def update
     if params[:commit] == "更新"
       @work = Work.find(params[:id])
-      @work.update(work_params)
-      @staffs_in_department = User.where(department_id: current_user.department.id)
-      redirect_to  work_path(params[:id])
+      if @work.update(work_params)
+        redirect_to  work_path(params[:id])
+      else
+        @staffs_in_department = User.where(department_id: current_user.department.id)
+        render :edit
+      end
     elsif params[:commit].include?("フロー追加")
       number = params[:commit].gsub(/[^\d]/, "").to_i
       @work = Work.find(params[:id])
@@ -168,7 +171,7 @@ class WorksController < ApplicationController
   private
   def work_params
     params.require(:work).permit(:name,:period,:summary,:task,:user_id,:fiscalyear,:department_id,:firstid,
-                                workflows_attributes: [:id,:number,:content,:note,:filepath,:file,:_destroy])
+                                workflows_attributes: [:id,:work_id,:number,:content,:note,:filepath,:file,:_destroy])
   end
   
   def new_work_params

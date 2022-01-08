@@ -147,12 +147,22 @@ h1, h2 {
   top: 120px;
 }
 
+.fa-arrow-alt-circle-left:hover {
+  color: #888888;
+  cursor: pointer;
+}
+
 .fa-arrow-alt-circle-right {
   font-size: 25px;
   position: absolute;
   z-index: 100;
   right: -10px;
   top: 120px
+}
+
+.fa-arrow-alt-circle-right:hover {
+  color: #888888;
+  cursor: pointer;
 }
 
 /*以下、slick関係*/

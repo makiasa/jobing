@@ -48,6 +48,8 @@ ja:
         fiscalyear: 年度
       workflow:
         file: ファイル
+      workflows:
+        number: 手順番号
       event:
         title: 件名
         content: 内容

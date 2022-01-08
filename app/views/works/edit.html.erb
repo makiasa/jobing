@@ -1,3 +1,11 @@
+<% if @work.errors.present? %>
+  <ul id="error_explanation">
+    <% @work.errors.full_messages.each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div class="row mb-1">
   <div class="col-auto">
     <h5>業務編集</h5>
