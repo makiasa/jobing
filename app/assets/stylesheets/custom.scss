@@ -182,7 +182,7 @@ h1, h2 {
 
 /*以下、simple_calendar関係*/
 
-.simple-calendar {
+  .simple-calendar {
   margin-bottom: -15px;
   
   .day {}
@@ -207,13 +207,30 @@ h1, h2 {
 
   .start-date {}
 
-  .prev-month {}
-  .next-month { }
+  .prev-month {
+    background: #DDD;
+  }
+  .next-month {
+    background: #DDD;
+  }
   .current-month {}
 
   .has-events {}
 }
-
+.weekly{
+  .wday-0 {
+    color: red;
+    background: #FFF0F5;
+  }
+  .wday-1 { background: #EEE;}
+  .wday-2 { background: #EEE;}
+  .wday-3 { background: #EEE;}
+  .wday-4 { background: #EEE;}
+  .wday-5 { background: #EEE;}
+  .wday-6 {
+    color: blue;
+    background: #F0F8FF;
+  }}
 /*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
 
 /*以下、その他見た目関係等*/
