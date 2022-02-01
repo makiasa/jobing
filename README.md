@@ -1,4 +1,4 @@
-# README
+# 業務管理システム Jobing について
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
