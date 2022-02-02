@@ -1,7 +1,6 @@
 # 業務管理システム Jobing について
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+◆概要：市役所等をはじめ、役所における業務管理を行うためのシステム
 
 Things you may want to cover:
 
