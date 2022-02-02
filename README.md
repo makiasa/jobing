@@ -18,6 +18,7 @@
 **↓↓↓↓①機能の使い方（選択した業務だけを年度で切り替える場合）↓↓↓↓** 
 
 <img src="https://user-images.githubusercontent.com/85377385/152172468-2d9e1bbc-8354-49ef-8373-67f788aa67b8.png" width="530px" height="380px">
+<img src="https://user-images.githubusercontent.com/85377385/152175740-f27a5aa4-51b2-429b-8e03-cc80215f3bac.png" width="530px" height="380px">
 <img src="https://user-images.githubusercontent.com/85377385/152162166-43ae4da7-3a97-472c-9412-422962e85b1f.png" width="500px" height="300px">
   
 ## ◆特に工夫した３つの機能（2/3）→業務コピー機能
@@ -41,10 +42,9 @@
 
 **↓↓↓↓③機能の使い方↓↓↓↓** 
 
-<img src="https://user-images.githubusercontent.com/85377385/152159737-fcbfbf6c-3bcb-43c1-9d14-5be0f92f646a.png" width="500px" height="330px"><img src="https://user-images.githubusercontent.com/85377385/152161902-df132cbb-ea25-4582-8fa9-4e7fa55a8b4a.png" width="510px" height="310px">  
-  
-<img src="https://user-images.githubusercontent.com/85377385/152171482-4ff35557-f960-40b3-ac5a-41681c7f7af6.png" width="1000px" height="280px">   
-
+<img src="https://user-images.githubusercontent.com/85377385/152172468-2d9e1bbc-8354-49ef-8373-67f788aa67b8.png" width="530px" height="380px">
+<img src="https://user-images.githubusercontent.com/85377385/152175740-f27a5aa4-51b2-429b-8e03-cc80215f3bac.png" width="510px" height="310px">   
+<img src="https://user-images.githubusercontent.com/85377385/152176381-63c2804e-093a-4c4f-8885-8ef0eef17379.png" width="1000px" height="300px">
 <img src="https://user-images.githubusercontent.com/85377385/152171595-3be227f2-b549-4882-a557-66536468037d.png" width="950px" height="530px">
 <img src="https://user-images.githubusercontent.com/85377385/152171659-e729d35f-8a6b-44d5-b682-7af786e933f6.png" width="950px" height="460px">
 <img src="https://user-images.githubusercontent.com/85377385/152171709-7e491528-1c18-4c80-b695-c8f1f59fbe8f.png" width="950px" height="430px">
