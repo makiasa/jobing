@@ -2,7 +2,7 @@
 
 <div class="row mt-3">
   <div class="col-3">
-    <%= form_with(url: works_move_index_path, local: true) do |f| %>
+    <%= form_with(url: works_switch_index_path, local: true) do |f| %>
       <%= f.select :fiscalyear, Constant::FISCAL_YEARS.invert, {include_blank: "年度を選択"} %>
       <%= f.submit "選択" %>
     <% end %>

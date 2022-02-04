@@ -3,7 +3,7 @@ class TodosController < ApplicationController
   def index
   end
   
-  def move_index
+  def switch_index #作業状況別での一覧の切替
     if request.post? && params[:status] != ""
       redirect_to "/todos/index/#{params[:status]}"
     elsif request.post? && params[:status] == ""
@@ -20,19 +20,9 @@ class TodosController < ApplicationController
     @myworks = current_user.works.where(department_id: current_user.department_id)
   end
   
-  def new_todo
+  def new_from_work_show_page #業務詳細画面からのtodo作成
     @todo = Todo.new(work_id: params[:id])
     @work = Work.find(params[:id])
-  end
-  
-  def new_todo_create
-    @todo = current_user.todos.new(new_todo_params)
-    @work = Work.find(params[:work_id])
-    if @todo.save
-      redirect_to  work_path(params[:work_id])
-    else
-      render :new_todo
-    end
   end
   
   def create
@@ -42,6 +32,16 @@ class TodosController < ApplicationController
       redirect_to  pages_home_path
     else
       render :new
+    end
+  end
+  
+  def create_from_work_show_page #業務詳細画面からのtodo作成
+    @todo = current_user.todos.new(new_todo_params)
+    @work = Work.find(params[:work_id])
+    if @todo.save
+      redirect_to  work_path(params[:work_id])
+    else
+      render :new_from_work_show_page
     end
   end
   

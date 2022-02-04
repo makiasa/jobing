@@ -6,7 +6,7 @@
 
 <div class="row mb-3">
   <div class="col-3">
-    <%= form_with(url: todos_move_index_path, local: true) do |f| %>
+    <%= form_with(url: todos_switch_index_path, local: true) do |f| %>
       <%= f.select :status, {"未着手": 0, "対応中": 1, "完了": 2}, {include_blank: "作業状況を選択"} %>
       <%= f.submit "選択" %>
     <% end %>

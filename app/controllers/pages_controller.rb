@@ -8,17 +8,17 @@ class PagesController < ApplicationController
     
     @current_month = Date.today.month
     
-    @user = User.find(current_user.id)
+    @login_user = User.find(current_user.id)
     
-    @department = current_user.department
+    @my_belonging_department = current_user.department
     
-    @works = current_user.works.where(fiscalyear: @current_fiscalyear).group_by{|work| work.period}
-    @irregular_works = @works[nil]
+    @myworks = current_user.works.where(fiscalyear: @current_fiscalyear).group_by{|work| work.period}
+    @irregular_myworks = @myworks[nil]
     
-    @todos = current_user.todos.where("deadline >= ?", Date.today).order(:deadline)
-    @over_todos = current_user.todos.where("deadline < ?", Date.today).order(:deadline)
+    @within_the_deadline_todos = current_user.todos.where("deadline >= ?", Date.today).order(:deadline)
+    @overdue_todos = current_user.todos.where("deadline < ?", Date.today).order(:deadline)
    
-    @events = current_user.events
+    @my_events = current_user.events
     @todos_in_calender = current_user.todos.where("status = ? or status = ?" , 0 , 1 ).group_by{|todo| todo.deadline}
   end
   

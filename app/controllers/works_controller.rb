@@ -8,11 +8,11 @@ class WorksController < ApplicationController
       @current_fiscalyear = Date.today.year - 1
     end
     
-    @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: @current_fiscalyear)
-    @myworks = @works_in_department.where(user_id: current_user.id)
+    @works_in_department = Work.where(department_id: current_user.department.id, fiscalyear: @current_fiscalyear) #部署全体の業務
+    @myworks = @works_in_department.where(user_id: current_user.id) #自分の担当業務
   end
   
-  def move_index
+  def switch_index #年度別の一覧切替
     if request.post? && params[:fiscalyear] != ""
       redirect_to "/works/index/#{params[:fiscalyear]}"
     elsif request.post? && params[:fiscalyear] == ""
@@ -40,10 +40,10 @@ class WorksController < ApplicationController
     end
   end
   
-  def new_work # 業務年度を紐づけるため（params[:fiscalyear]を与えるため）newアクションではなく、new_workアクションを定義
+  def new_work #業務年度を紐づけるため（params[:fiscalyear]を与えるため）newアクションではなく、new_workアクションを定義
     @work = Work.new
     @fiscalyear = params[:fiscalyear].to_i
-    @staffs_in_department = User.where(department_id: current_user.department.id)
+    @staffs_in_department = User.where(department_id: current_user.department.id) 
   end
   
   def new_work_create
@@ -58,23 +58,22 @@ class WorksController < ApplicationController
     end
   end
   
-  
   def show
     @work = Work.find(params[:id])
     @workflows = @work.workflows.order(:number)
-    @todos = @work.todos.where(user_id: current_user.id).where("deadline >= ?", Date.today).order(:deadline)
-    @over_todos = @work.todos.where(user_id: current_user.id).where("deadline < ?", Date.today).order(:deadline)
+    @within_the_deadline_todos = @work.todos.where(user_id: current_user.id).where("deadline >= ?", Date.today).order(:deadline)
+    @overdue_todos = @work.todos.where(user_id: current_user.id).where("deadline < ?", Date.today).order(:deadline)
     
-    @works = Work.where(firstid: @work.firstid).order(fiscalyear: "DESC")
+    @works = Work.where(firstid: @work.firstid).order(fiscalyear: "DESC") #過去分も含めた同じ業務
     @fiscalyears = @works.map{|work| [FISCAL_YEARS[work.fiscalyear] , work.fiscalyear] }
     
-    respond_to do |format|
+    respond_to do |format|  #CSV用
       format.html
       format.csv { send_data @workflows.generate_csv, filename: "workflows-#{Time.zone.now.strftime("%Y%m%d%S")}.csv" }
     end
   end
   
-  def move_show
+  def switch_show
     if params[:fiscalyear].blank?
       @work = Work.find(params[:id])
     else
@@ -131,7 +130,7 @@ class WorksController < ApplicationController
     @department = current_user.department
   end
   
-  def copied #業務フローのコピーが未実装
+  def copied 
     @department = current_user.department
     @works_in_department = Work.where(department_id: @department.id, fiscalyear: params[:copied_fiscalyear])
     
@@ -160,6 +159,7 @@ class WorksController < ApplicationController
       end
     end
   end
+  #業務コピーはここまで
   
   def destroy
     @work = Work.find(params[:id])

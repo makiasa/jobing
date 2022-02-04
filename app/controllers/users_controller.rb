@@ -1,22 +1,15 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
   end
   
   def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to pages_home_path
-    else
-      render :new
-    end
   end
   
   def edit
     @user = User.find(params[:id])
   end
   
-  def update
+  def update #パスワード変更用
     @user = User.find(params[:id])
     if @user&.authenticate(params[:user][:current_password]) && @user.update(user_params)
       redirect_to pages_home_path

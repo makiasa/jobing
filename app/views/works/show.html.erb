@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-auto">
-    <%= form_with(url: works_move_show_path, local: true) do |f| %>
+    <%= form_with(url: works_switch_show_path, local: true) do |f| %>
       <%= f.hidden_field :id, :value => @work.id %>
       <%= f.select :fiscalyear, @fiscalyears, {include_blank: "年度を選択"} %>
       <%= f.submit "選択" %>
@@ -66,11 +66,9 @@
 <div class="row justify-content-center mt-3">
   <div class="col-5">
     ToDo
-      <%= link_to "/todos/new/#{@work.id}" do %>
-      <a href="/todos/new" class="badge badge-secondary">追加</a>
-      <% end %>
+      <%= link_to "追加", "/todos/new/#{@work.id}" , class: "badge badge-secondary" %>
     <div class="box8 overflow-auto" style="height:300px;">
-      <% @todos.each do |todo| %>
+      <% @within_the_deadline_todos.each do |todo| %>
         <% if todo.status == 0 || todo.status == 1 %>
           <p class="small">
           <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
@@ -85,7 +83,7 @@
   <div class="col-5 ml-5">
     ToDo(期限超過)
     <div class="box9 overflow-auto" style="height:300px;">
-      <% @over_todos.each do |todo| %>
+      <% @overdue_todos.each do |todo| %>
         <% if todo.status == 0 || todo.status == 1 %>
           <p class="small">
           <%= link_to "作業期限：" + todo.datechange, edit_todo_path(todo.id) %><br>
