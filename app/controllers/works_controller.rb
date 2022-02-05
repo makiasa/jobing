@@ -89,41 +89,44 @@ class WorksController < ApplicationController
   end
   
   def update
-    if params[:commit] == "更新"
-      @work = Work.find(params[:id])
-      if @work.update(work_params)
-        redirect_to  work_path(params[:id])
-      else
-        @staffs_in_department = User.where(department_id: current_user.department.id)
-        render :edit
+    @work = Work.find(params[:id])
+      if params[:commit] == "更新"
+        if @work.update(work_params)
+          redirect_to  work_path(params[:id])
+        else
+          @staffs_in_department = User.where(department_id: current_user.department.id)
+          render :edit
+        end
+      elsif params[:commit].include?("フロー追加")
+        number = params[:commit].gsub(/[^\d]/, "").to_i
+        @work.update(work_params)
+        @workflows = @work.workflows.order(number)
+        
+        @workflows.where("number >= ?", number).each do |workflow|
+          workflow.number += 1
+          workflow.save
+        end
+        
+        Workflow.create(work_id: @work.id, number: number)
+        redirect_to edit_work_path(@work.id)
+      elsif params[:commit].include?("ﾌﾛｰ削除") #フローの削除
+        number = params[:commit].gsub(/[^\d]/, "").to_i
+        @work.update(work_params)
+        @workflow = @work.workflows.find_by(number: number)
+        @workflow.destroy
+        @workflows = @work.workflows.order(number)
+        
+        @workflows.where("number >= ?", number).each do |workflow|
+          workflow.number -= 1
+          workflow.save
+        end
+        redirect_to edit_work_path(@work.id)
+      elsif params[:commit].include?("添付削除")  #添付ファイルの削除
+        number = params[:commit].gsub(/[^\d]/, "").to_i
+        @work.update(work_params)
+        @work.workflows.find_by(number: number).file.purge
+        redirect_to edit_work_path(@work.id)
       end
-    elsif params[:commit].include?("フロー追加")
-      number = params[:commit].gsub(/[^\d]/, "").to_i
-      @work = Work.find(params[:id])
-      @work.update(work_params)
-      @workflows = @work.workflows.order(number)
-      
-      @workflows.where("number >= ?", number).each do |workflow|
-        workflow.number += 1
-        workflow.save
-      end
-      Workflow.create(work_id: @work.id, number: number)
-      redirect_to edit_work_path(@work.id)
-    elsif params[:commit].include?("削除")
-      number = params[:commit].gsub(/[^\d]/, "").to_i
-      @work = Work.find(params[:id])
-      @work.update(work_params)
-      @workflow = @work.workflows.find_by(number: number)
-      @workflow.destroy
-      
-      @workflows = @work.workflows.order(number)
-      
-      @workflows.where("number >= ?", number).each do |workflow|
-        workflow.number -= 1
-        workflow.save
-      end
-      redirect_to edit_work_path(@work.id)
-    end
   end
   
   #以下、業務のコピー
