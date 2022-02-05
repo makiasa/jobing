@@ -4,7 +4,7 @@
     <div class="col-6"><%= f.text_area :content, class: "form-control", placeholder: "内容" %></div>
     <div class="col-4"><%= f.text_area :note, class: "form-control", placeholder: "備考" %></div>
     <div class="col-1 mt-4">
-      <%= f.submit "削除#{i - 1}" ,
+      <%= f.submit "ﾌﾛｰ削除 #{i - 1}" ,
           data: { confirm: "削除したものは戻せません。フローを削除してよろしいですか？" },
           class: "btn btn-danger btn-sm" %>
     </div>
@@ -13,6 +13,15 @@
   <div class="row mt-1 ml-2">
     <div class="offset-1 col-6"><%= f.text_field :filepath, class: "form-control", placeholder: "ファイルパス" %></div>
     <div class="col-4"><%= f.file_field :file, class: "form-control" %></div>
+  </div>
+  
+  <div class="row mt-1 ml-2">
+    <div class="offset-1 col-6">
+      <% if @work.workflows.find_by(number: i - 1).file.attached? %>
+        ・現在の添付ファイル：<%= link_to @work.workflows.find_by(number: i - 1).file.filename , rails_blob_path(@work.workflows.find_by(number: i - 1).file) %>
+        <%= f.submit "添付削除 #{i - 1}" , data: { confirm: "削除したものは戻せません。添付ファイルを削除してよろしいですか？" }, class: "btn btn-light btn-sm" %>
+      <% end %>
+    </div>
   </div>
 </div>
 

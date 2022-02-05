@@ -88,55 +88,58 @@ class WorksController < ApplicationController
   end
   
   def update
-    if params[:commit] == "更新"
-      @work = Work.find(params[:id])
-      if @work.update(work_params)
-        redirect_to  work_path(params[:id])
-      else
-        @staffs_in_department = User.where(department_id: current_user.department.id)
-        render :edit
+    @work = Work.find(params[:id])
+      if params[:commit] == "更新"
+        if @work.update(work_params)
+          redirect_to  work_path(params[:id])
+        else
+          @staffs_in_department = User.where(department_id: current_user.department.id)
+          render :edit
+        end
+      elsif params[:commit].include?("フロー追加")
+        number = params[:commit].gsub(/[^\d]/, "").to_i
+        @work.update(work_params)
+        @workflows = @work.workflows.order(number)
+        
+        @workflows.where("number >= ?", number).each do |workflow|
+          workflow.number += 1
+          workflow.save
+        end
+        
+        Workflow.create(work_id: @work.id, number: number)
+        redirect_to edit_work_path(@work.id)
+      elsif params[:commit].include?("ﾌﾛｰ削除")  #フローの削除
+        number = params[:commit].gsub(/[^\d]/, "").to_i
+        @work.update(work_params)
+        @workflow = @work.workflows.find_by(number: number)
+        @workflow.destroy
+        @workflows = @work.workflows.order(number)
+        
+        @workflows.where("number >= ?", number).each do |workflow|
+          workflow.number -= 1
+          workflow.save
+        end
+        redirect_to edit_work_path(@work.id)
+      elsif params[:commit].include?("添付削除")  #添付ファイルの削除
+        number = params[:commit].gsub(/[^\d]/, "").to_i
+        @work.update(work_params)
+        @work.workflows.find_by(number: number).file.purge
+        redirect_to edit_work_path(@work.id)
       end
-    elsif params[:commit].include?("フロー追加")
-      number = params[:commit].gsub(/[^\d]/, "").to_i
-      @work = Work.find(params[:id])
-      @work.update(work_params)
-      @workflows = @work.workflows.order(number)
-      
-      @workflows.where("number >= ?", number).each do |workflow|
-        workflow.number += 1
-        workflow.save
-      end
-      Workflow.create(work_id: @work.id, number: number)
-      redirect_to edit_work_path(@work.id)
-    elsif params[:commit].include?("削除")
-      number = params[:commit].gsub(/[^\d]/, "").to_i
-      @work = Work.find(params[:id])
-      @work.update(work_params)
-      @workflow = @work.workflows.find_by(number: number)
-      @workflow.destroy
-      
-      @workflows = @work.workflows.order(number)
-      
-      @workflows.where("number >= ?", number).each do |workflow|
-        workflow.number -= 1
-        workflow.save
-      end
-      redirect_to edit_work_path(@work.id)
-    end
   end
   
   #以下、業務のコピー
-  def copy
+  def copy_view #コピーを実行するための画面
     @department = current_user.department
   end
   
-  def copied 
+  def copy_exe  #コピー実行
     @department = current_user.department
     @works_in_department = Work.where(department_id: @department.id, fiscalyear: params[:copied_fiscalyear])
     
     if params[:copied_fiscalyear].blank? || params[:new_copy_fiscalyear].blank?
       flash.now[:danger] = "「コピー元の年度」及び「コピー先の年度」を全て選択してください"
-      render :copy
+      render :copy_view
     else
       begin
         ActiveRecord::Base.transaction do
@@ -155,7 +158,7 @@ class WorksController < ApplicationController
           redirect_to "/works/index/#{params[:new_copy_fiscalyear]}"
         rescue ActiveRecord::RecordInvalid => e
           flash.now[:danger] = "コピーに失敗しました。理由：#{e.message}"
-          render :copy
+          render :copy_view
       end
     end
   end

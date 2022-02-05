@@ -18,12 +18,11 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'pages/test'
   
-  post 'works/switch_show'
   post 'works/switch_index'
+  post 'works/switch_show'
   get 'works/index/:id',  to: 'works#switch_index'
-  get 'works/none'
-  get 'works/copy'
-  post 'works/copied'
+  get 'works/copy_view'
+  post 'works/copy_exe'
   post 'works/add_flow'
   post 'works/remove_flow'
   
@@ -36,10 +35,9 @@ Rails.application.routes.draw do
   resources :workflows
   
   resources :budgets
-  
   resources :todos
-  get 'todos/new/:id',  to: 'todos#new_from_work_show_page'
-  post 'todos/new',  to: 'todos#create_from_work_show_page'
+  get 'todos/new/:id',  to: 'todos#new_todo'
+  post 'todos/new',  to: 'todos#new_todo_create'
   post 'todos/switch_index'
   get 'todos/index/:status',  to: 'todos#switch_index'
   
